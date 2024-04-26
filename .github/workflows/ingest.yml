@@ -1,4 +1,4 @@
-name: 02. Ingest
+name: 01. Ingest
 
 on:
   workflow_dispatch:
