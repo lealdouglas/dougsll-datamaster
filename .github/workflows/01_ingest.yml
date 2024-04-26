@@ -1,8 +1,0 @@
-name: 01. Ingest
-
-on:
-  workflow_dispatch:
-
-jobs:
-  call-workflow:
-    uses: lealdouglas/dtmaster-workflows-douglasleal/.github/workflows/01_ingest.yml@main
