@@ -1,4 +1,4 @@
-name: Call a reusable workflow
+name: Hello, World!
 
 on:
   workflow_dispatch:
