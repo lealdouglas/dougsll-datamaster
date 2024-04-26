@@ -1,0 +1,8 @@
+name: 03. Prep
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-workflow:
+    uses: lealdouglas/dtmaster-workflows-douglasleal/.github/workflows/03_Prep.yml@main
