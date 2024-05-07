@@ -21,11 +21,6 @@ jobs:
 
     steps:
 
-      - name: Check out my other private repo
-        uses: actions/checkout@v4
-        with:
-          repository: lealdouglas/strife
-
       - uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
