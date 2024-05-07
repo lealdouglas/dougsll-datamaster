@@ -10,7 +10,7 @@
 
 # This is a basic workflow to help you get started with Actions
 
-name: Setup Create Lakehouse
+name: Setup Lakehouse
 
 # Controls when the workflow will run
 on:
@@ -41,8 +41,8 @@ jobs:
           name: lakehouse
           path: ${{ github.workspace }}//azsetup/lakehouse
 
-  deploy-dev-infra:
-    name: Strife Deploy infra-dev
+  setup-lakehouse:
+    name: Strife Setup Lakehouse
     runs-on: ubuntu-latest
 
     defaults:
