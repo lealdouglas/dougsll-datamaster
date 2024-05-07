@@ -6,4 +6,4 @@ on:
 
 jobs:
   call-workflow:
-    uses: lealdouglas/dtmaster-workflows-douglasleal/.github/workflows/01_setup.yml@main
+    uses: lealdouglas/strife/.github/workflows/setup_lakehouse.yml@main
