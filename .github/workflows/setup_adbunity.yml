@@ -85,7 +85,7 @@ jobs:
         continue-on-error: true
 
       - name: Terraform Apply
-        run: terraform apply -target='module.metastore_and_users' -auto-approve -var "account_id=${{vars.ADB_ACCOUNT_ID}}" -var "envv=${{vars.ENVV}}"
+        run: terraform apply -target='module.metastore_and_users' -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "envv=${{vars.ENVV}}"
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var "account_id=${{vars.ADB_ACCOUNT_ID}}" -var "envv=${{vars.ENVV}}"
+        run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "envv=${{vars.ENVV}}"
