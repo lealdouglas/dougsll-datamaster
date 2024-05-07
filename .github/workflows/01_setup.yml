@@ -28,7 +28,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Check out my other private repo
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
         with:
           repository: lealdouglas/strife
           
