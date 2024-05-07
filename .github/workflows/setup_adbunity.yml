@@ -65,7 +65,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: lakehouse
-          path: ${{ github.workspace }}//azsetup/laklakehouse-adbucehouse
+          path: ${{ github.workspace }}//azsetup/lakehouse-adbuc
 
       - uses: hashicorp/setup-terraform@v2
         with:
