@@ -39,11 +39,6 @@ jobs:
 
     needs: build
     steps:
-      - name: Download Terraform
-        uses: actions/download-artifact@v2
-        with:
-          name: lakehouse
-          path: ${{ github.workspace }}//azsetup/lakehouse
 
       - uses: hashicorp/setup-terraform@v2
         with:
