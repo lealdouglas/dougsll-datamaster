@@ -13,18 +13,11 @@ jobs:
     name: Strife Deploy infra-dev
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}//azsetup/lakehouse
-
     env:
       ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
-
-    environment:
-      name: dev
 
     steps:
 
@@ -45,6 +38,12 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
+      - name: Show Destroy plan
+        id: plan
+        run: terraform plan -destroy
+        continue-on-error: true
+
       - name: Terraform destroy
-        run: terraform destroy
+        id: destroy
+        run: terraform destroy -auto-approve
         continue-on-error: true
