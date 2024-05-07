@@ -1,8 +1,0 @@
-name: 04. Model
-
-on:
-  workflow_dispatch:
-
-jobs:
-  call-workflow:
-    uses: lealdouglas/dtmaster-workflows-douglasleal/.github/workflows/04_model.yml@main
