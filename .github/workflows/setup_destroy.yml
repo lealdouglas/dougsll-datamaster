@@ -1,4 +1,4 @@
-name: Setup Destroy
+name: Setup Destroy Lakehouse
 
 # Controls when the workflow will run
 on:
