@@ -84,50 +84,8 @@ jobs:
         run: terraform plan -no-color -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
         continue-on-error: true
 
-      - name: Terraform Apply
+      - name: Terraform Apply Target Module
         run: terraform apply -target='module.metastore_and_users' -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
-
-  setup-grants-unity:
-    name: Strife Setup Grants Unity
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}//azsetup/lakehouse-adbuc
-
-    env:
-      ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
-
-    environment:
-      name: dev
-
-    needs: setup-unity-catalog
-    steps:
-      - name: Download Terraform
-        uses: actions/download-artifact@v2
-        with:
-          name: lakehouse
-          path: ${{ github.workspace }}//azsetup/lakehouse-adbuc
-
-      - uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_wrapper: false
-
-      - name: Terraform Init
-        id: init
-        run: terraform init
-
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
-
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan -no-color -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
-        continue-on-error: true
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
