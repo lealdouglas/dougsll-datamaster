@@ -84,4 +84,4 @@ jobs:
         continue-on-error: true
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var "envv=${{vars.ENVV}}"
+        run: terraform apply -auto-approve -var "envv=${{vars.ENVV}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}"
