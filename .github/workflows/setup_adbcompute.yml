@@ -43,12 +43,12 @@ jobs:
           path: ${{ github.workspace }}//azsetup/lakehouse-adbuc
 
   setup-unity-catalog:
-    name: Strife Setup Unity Catalog
+    name: Strife Setup ADB Compute
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: ${{ github.workspace }}//azsetup/lakehouse-adbuc
+        working-directory: ${{ github.workspace }}//azsetup/lakehouse-adbcompute
 
     env:
       ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
