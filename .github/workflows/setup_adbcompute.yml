@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: lakehouse
-          path: ${{ github.workspace }}//azsetup/lakehouse-adbuc
+          path: ${{ github.workspace }}//azsetup/lakehouse-adbcompute
 
   setup-unity-catalog:
     name: Strife Setup ADB Compute
