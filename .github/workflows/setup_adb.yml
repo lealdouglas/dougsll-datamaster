@@ -39,13 +39,13 @@ jobs:
       - name: Upload Artifact unity
         uses: actions/upload-artifact@v1
         with:
-          name: lakehouse
+          name: lakehouseuc
           path: ${{ github.workspace }}//azsetup/lakehouse-adbuc
 
       - name: Upload Artifact Compute
         uses: actions/upload-artifact@v1
         with:
-          name: lakehouse
+          name: lakehousecp
           path: ${{ github.workspace }}//azsetup/lakehouse-adbcompute
 
   setup-unity-catalog:
@@ -70,7 +70,7 @@ jobs:
       - name: Download Terraform
         uses: actions/download-artifact@v2
         with:
-          name: lakehouse
+          name: lakehouseuc
           path: ${{ github.workspace }}//azsetup/lakehouse-adbuc
 
       - uses: hashicorp/setup-terraform@v2
@@ -118,7 +118,7 @@ jobs:
       - name: Download Terraform
         uses: actions/download-artifact@v2
         with:
-          name: lakehouse
+          name: lakehousecp
           path: ${{ github.workspace }}//azsetup/lakehouse-adbcompute
 
       - uses: hashicorp/setup-terraform@v2
