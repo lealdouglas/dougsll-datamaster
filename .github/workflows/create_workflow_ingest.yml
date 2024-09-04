@@ -31,19 +31,17 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Instalar Poetry
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Instalar Poetry
-        run: pip install poetry
-
-      # Instala as dependências do Poetry
       - name: listar
         run: |
-          cd jarvis-repo/jarvis
           echo ${{ github.action_path }}
+
+      # - name: Instalar Poetry
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.10'
+
+      # - name: Instalar Poetry
+      #   run: pip install poetry
 
       # Instala as dependências do Poetry
       # - name: Install dependencies
