@@ -39,6 +39,10 @@ jobs:
 
     needs: build
     steps:
+      # Faz o checkout do repositório principal
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
       - name: Download Terraform
         uses: actions/download-artifact@v2
         with:
@@ -48,7 +52,6 @@ jobs:
       - name: listar
         run: |
           cd ${{ github.workspace }}
-          cd ..
           ls -la
 
       - name: listardnv
