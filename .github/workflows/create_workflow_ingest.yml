@@ -33,7 +33,7 @@ jobs:
 
       - name: listar
         run: |
-          echo ${{ github.action_path }}
+          echo ${{ github.workflow }}
 
       # - name: Instalar Poetry
       #   uses: actions/setup-python@v4
