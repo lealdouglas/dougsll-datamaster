@@ -1,0 +1,50 @@
+name: Run Python Script with Poetry
+
+on:
+  workflow_dispatch:
+
+jobs:
+  checkout-and-run:
+    runs-on: ubuntu-latest
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
+
+    steps:
+      # Faz o checkout do repositório principal
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
+      # Faz o checkout de outro repositório privado
+      - name: Check out my other private repo
+        uses: actions/checkout@v4
+        with:
+          repository: lealdouglas/jarvis
+          path: jarvis-repo
+
+      # Configura o Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # Instala o Poetry
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo 'export PATH="$HOME/.local/bin:$PATH"' >> $GITHUB_ENV
+
+      # Instala as dependências do Poetry
+      - name: Install dependencies
+        run: |
+          cd jarvis-repo
+          poetry install
+
+      # Executa o script Python, passando o caminho do arquivo config.yaml
+      - name: Run Python script
+        run: |
+          cd jarvis-repo
+          poetry run python main.py

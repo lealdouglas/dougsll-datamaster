@@ -1,0 +1,87 @@
+
+# name: 01. Lake Setup
+
+# on:
+#   workflow_dispatch:
+
+# jobs:
+#   call-workflow:
+#     uses: lealdouglas/strife/.github/workflows/setup_lakehouse.yml@main
+
+# This is a basic workflow to help you get started with Actions
+
+name: Setup Lakehouse
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    name: Strife Build
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Check out my other private repo
+        uses: actions/checkout@v4
+        with:
+          repository: lealdouglas/strife
+          
+      # # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # - uses: actions/checkout@v3
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: lakehouse
+          path: ${{ github.workspace }}//azsetup/lakehouse
+
+  setup-lakehouse:
+    name: Strife Setup Lakehouse
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}//azsetup/lakehouse
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
+
+    environment:
+      name: dev
+
+    needs: build
+    steps:
+      - name: Download Terraform
+        uses: actions/download-artifact@v2
+        with:
+          name: lakehouse
+          path: ${{ github.workspace }}//azsetup/lakehouse
+
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -var "envv=${{vars.ENVV}}"
+        continue-on-error: true
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -var "envv=${{vars.ENVV}}"
