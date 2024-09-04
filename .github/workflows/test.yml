@@ -52,7 +52,7 @@ jobs:
 
       - name: listar
         run: |
-          ls ${{ github.workflow }}
+          ls ${{ github.workflow }}/
 
       - name: Install PyYAML
         run: pip install pyyaml
