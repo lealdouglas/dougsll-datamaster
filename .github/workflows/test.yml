@@ -51,6 +51,11 @@ jobs:
           cd ..
           ls -la
 
+      - name: listardnv
+        run: |
+          cd ../../
+          ls -la
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
