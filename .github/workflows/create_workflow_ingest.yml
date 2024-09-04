@@ -1,4 +1,4 @@
-name: Run Python Script with Poetry
+name: Create Workflow Ingest
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       # Faz o checkout de outro repositório privado
-      - name: Check out my other private repo
+      - name: Check Jarvis repository
         uses: actions/checkout@v4
         with:
           repository: lealdouglas/jarvis
@@ -50,7 +50,7 @@ jobs:
           poetry install --without doc
 
       # Executa o script Python, passando o caminho do arquivo config.yaml
-      - name: Run Python script
+      - name: Run Python script - Jarvis Ingest
         run: |
           cd jarvis-repo/jarvis
-          poetry run python main.py ../../ingest_datacontract/datacontract.yaml
+          poetry run python main.py ingest ../../ingest_datacontract/datacontract.yaml
