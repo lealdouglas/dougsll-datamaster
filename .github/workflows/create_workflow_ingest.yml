@@ -43,17 +43,16 @@ jobs:
       - name: listar
         run: |
           cd jarvis-repo/jarvis
-          ls -la
           echo ${{ github.action_path }}
 
       # Instala as dependências do Poetry
-      - name: Install dependencies
-        run: |
-          cd jarvis-repo/jarvis
-          poetry install --without doc
+      # - name: Install dependencies
+      #   run: |
+      #     cd jarvis-repo/jarvis
+      #     poetry install --without doc
 
-      # Executa o script Python, passando o caminho do arquivo config.yaml
-      - name: Run Python script
-        run: |
-          cd jarvis-repo/jarvis
-          poetry run python main.py ${{ github.action_path }}/ingest_datacontract/datacontract.yaml
+      # # Executa o script Python, passando o caminho do arquivo config.yaml
+      # - name: Run Python script
+      #   run: |
+      #     cd jarvis-repo/jarvis
+      #     poetry run python main.py ${{ github.action_path }}/ingest_datacontract/datacontract.yaml
