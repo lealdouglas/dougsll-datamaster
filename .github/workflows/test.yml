@@ -53,7 +53,7 @@ jobs:
 
       - name: listardnv
         run: |
-          cd ../../
+          cd ../../../
           ls -la
 
       - name: Set up Python
