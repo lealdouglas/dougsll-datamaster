@@ -56,6 +56,7 @@ jobs:
       - name: Read YAML file
         id: read_yaml
         run: |
+          #!/usr/bin/env python
           import yaml
           with open("${{ github.workspace }}/strife_env/strife_config.yaml", 'r') as stream:
               config = yaml.safe_load(stream)
