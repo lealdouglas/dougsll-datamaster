@@ -45,6 +45,10 @@ jobs:
           name: teste
           path: ${{ github.workspace }}/azsetup/teste
 
+      - name: listar
+        run: |
+          ls -la
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
