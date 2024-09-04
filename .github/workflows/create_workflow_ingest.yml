@@ -31,17 +31,19 @@ jobs:
         with:
           python-version: '3.9'
 
-      # Instala o Poetry
-      - name: Install Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          echo 'export PATH="$HOME/.local/bin:$PATH"' >> $GITHUB_ENV
+      - name: Instalar Poetry
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Instalar Poetry
+        run: pip install poetry
 
       # Instala as dependências do Poetry
       - name: Install dependencies
         run: |
           cd jarvis-repo
-          poetry install
+          poetry install --without doc
 
       # Executa o script Python, passando o caminho do arquivo config.yaml
       - name: Run Python script
