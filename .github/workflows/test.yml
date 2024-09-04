@@ -50,16 +50,12 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: listar
-        run: |
-          ls ${{ github.workflow }}/
-
       - name: Install PyYAML
         run: pip install pyyaml
 
       - name: Check if YAML file exists
         run: |
-          if [ ! -f "../../strife_env/strife_config.yaml" ]; then
+          if [ ! -f "${{ github.workspace }}/strife_env/strife_config.yaml" ]; then
             echo "YAML file not found!"
             exit 1
           fi
