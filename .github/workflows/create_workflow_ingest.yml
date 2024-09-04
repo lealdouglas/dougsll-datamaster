@@ -47,7 +47,8 @@ jobs:
       - name: Install dependencies
         run: |
           cd jarvis-repo/jarvis
-          poetry install --without doc
+          poetry install
+        #--without doc
 
       # Executa o script Python, passando o caminho do arquivo config.yaml
       - name: Run Python script - Jarvis Ingest
