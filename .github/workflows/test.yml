@@ -48,6 +48,7 @@ jobs:
       - name: listar
         run: |
           cd ${{ github.workspace }}
+          cd ..
           ls -la
 
       - name: Set up Python
