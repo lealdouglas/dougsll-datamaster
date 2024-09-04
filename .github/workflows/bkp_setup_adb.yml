@@ -1,4 +1,4 @@
-name: Setup Azure adb
+name: BKP Setup Azure adb
 
 # Este arquivo de workflow do GitHub Actions é utilizado para configurar e implantar
 # recursos no Azure Databricks (ADB) e no Unity Catalog. Ele é composto por dois jobs principais:
