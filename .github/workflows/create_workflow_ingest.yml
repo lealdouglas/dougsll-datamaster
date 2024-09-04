@@ -35,22 +35,22 @@ jobs:
         run: |
           echo ${{ github.workflow }}
 
-      # - name: Instalar Poetry
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: '3.10'
+      - name: Instalar Poetry
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-      # - name: Instalar Poetry
-      #   run: pip install poetry
+      - name: Instalar Poetry
+        run: pip install poetry
 
       # Instala as dependências do Poetry
-      # - name: Install dependencies
-      #   run: |
-      #     cd jarvis-repo/jarvis
-      #     poetry install --without doc
+      - name: Install dependencies
+        run: |
+          cd jarvis-repo/jarvis
+          poetry install --without doc
 
-      # # Executa o script Python, passando o caminho do arquivo config.yaml
-      # - name: Run Python script
-      #   run: |
-      #     cd jarvis-repo/jarvis
-      #     poetry run python main.py ${{ github.action_path }}/ingest_datacontract/datacontract.yaml
+      # Executa o script Python, passando o caminho do arquivo config.yaml
+      - name: Run Python script
+        run: |
+          cd jarvis-repo/jarvis
+          poetry run python main.py /ingest_datacontract/datacontract.yaml
