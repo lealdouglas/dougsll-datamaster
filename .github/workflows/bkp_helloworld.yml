@@ -1,8 +1,0 @@
-name: BKP Hello, World!
-
-on:
-  workflow_dispatch:
-
-jobs:
-  call-workflow:
-    uses: lealdouglas/dtmaster-workflows-douglasleal/.github/workflows/helloworld.yml@main
