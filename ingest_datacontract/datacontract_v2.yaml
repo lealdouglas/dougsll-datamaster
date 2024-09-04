@@ -1,0 +1,99 @@
+dataContractSpecification: 0.9.3
+id: urn:datacontract:datamaster:jarvis:ingest:account
+info:
+  title: Jarvis Ingest Account
+  version: 1.0.0
+  description: |
+    descricao do contrato.
+  owner: Jarvis Ingest
+  domain: 'strife'
+  contact:
+    name: Douglas Leal
+    url: https://www.linkedin.com/in/douglasleall/
+servers:
+  development:
+    type: databricks
+    host: dbc-abcdefgh-1234.cloud.databricks.com
+    catalog: dtmaster-catalog
+    schema: bronze
+terms:
+  usage: >
+    Data can be used for reports, analytics and machine learning use cases.
+  limitations: >
+    Not suitable for real-time use cases.
+  billing: free
+models:
+  account:
+    description: 'Delta table for account risk data in the risks domain.'
+    type: table
+    fields:
+      account_id:
+        type: 'string'
+        primary: true
+        description: 'Unique identifier for each account.'
+        format: 'uuid'
+        required: true
+      risk_score:
+        type: 'float'
+        description: 'Risk score associated with the account.'
+        minimum: 0
+        maximum: 100
+      risk_level:
+        type: 'string'
+        description: 'Categorical risk level of the account.'
+        enum:
+          - 'low'
+          - 'medium'
+          - 'high'
+      assessment_date:
+        type: 'date'
+        description: 'Date when the risk was last assessed.'
+servicelevels:
+  availability:
+    percentage: 99.9%
+  retention:
+    period: 1 year
+  frequency:
+    description: Data is updated once a day
+    type: batch
+    cron: 49 1 0/2 * * ? #cron schedule
+examples:
+  - type: 'csv'
+    model: 'accounts'
+    data: |
+      account_id,risk_score,risk_level,assessment_date
+      e5f6g7h8-i9j0-1234-ab56-cd78901234lm,85.3,high,2023-09-01
+      f6g7h8i9-j0k1-2345-ab67-cd89012345no,45.8,medium,2023-09-05
+      g7h8i9j0-k1l2-3456-ab78-cd90123456pq,72.1,high,2023-09-10
+      h8i9j0k1-l2m3-4567-ab89-cd01234567rs,38.9,medium,2023-09-12
+      i9j0k1l2-m3n4-5678-ab90-cd12345678tu,12.5,low,2023-09-15
+      j0k1l2m3-n4o5-6789-ab01-cd23456789vw,95.0,high,2023-09-20
+      k1l2m3n4-o5p6-7890-ab12-cd34567890xy,60.5,medium,2023-09-22
+      l2m3n4o5-p6q7-8901-ab23-cd45678901yz,23.4,low,2023-09-25
+      m3n4o5p6-q7r8-9012-ab34-cd56789012ab,78.0,high,2023-09-28
+      n4o5p6q7-r8s9-0123-ab45-cd67890123cd,50.7,medium,2023-10-01
+      o5p6q7r8-s9t0-1234-ab56-cd78901234ef,31.2,low,2023-10-03
+      p6q7r8s9-t0u1-2345-ab67-cd89012345gh,84.6,high,2023-10-05
+      q7r8s9t0-u1v2-3456-ab78-cd90123456ij,47.3,medium,2023-10-07
+      r8s9t0u1-v2w3-4567-ab89-cd01234567kl,20.8,low,2023-10-10
+      s9t0u1v2-w3x4-5678-ab90-cd12345678mn,92.7,high,2023-10-12
+      t0u1v2w3-x4y5-6789-ab01-cd23456789op,55.5,medium,2023-10-15
+      u1v2w3x4-y5z6-7890-ab12-cd34567890qr,18.4,low,2023-10-17
+      v2w3x4y5-z6a7-8901-ab23-cd45678901st,76.2,high,2023-10-20
+      w3x4y5z6-a7b8-9012-ab34-cd56789012uv,42.0,medium,2023-10-22
+      x4y5z6a7-b8c9-0123-ab45-cd67890123wx,25.6,low,2023-10-25
+quality:
+  type: SodaCL
+  specification:
+    checks for accounts:
+      - row_count > 25
+      - risk_score between 0 and 100
+ingest_workflow:
+  model: 'account'
+  email_notifications:
+    on_start: ['douglas.sleal@outlook.com']
+    on_success: ['douglas.sleal@outlook.com']
+    on_failure: ['douglas.sleal@outlook.com']
+  source:
+    type: 'adls'
+    format: 'csv'
