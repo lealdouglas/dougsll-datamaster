@@ -53,6 +53,13 @@ jobs:
       - name: Install PyYAML
         run: pip install pyyaml
 
+      - name: Check if YAML file exists
+        run: |
+          if [ ! -f "${{ github.workspace }}/strife_env/strife_config.yaml" ]; then
+            echo "YAML file not found!"
+            exit 1
+          fi
+
       - name: Read YAML file
         id: read_yaml
         run: |
