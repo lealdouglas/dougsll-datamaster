@@ -1,4 +1,4 @@
-name: Setup Lakehouse Data Master
+name: Strife - Setup Infra Lakehouse
 
 # Este arquivo de workflow do GitHub Actions é utilizado para configurar e implantar
 # um ambiente de Lakehouse no Azure utilizando Terraform. Ele é composto por quatro jobs principais:
@@ -50,7 +50,7 @@ jobs:
           path: ${{ github.workspace }}/azsetup/lakehouse-adbcompute
 
   # Job para configurar o ambiente de Lakehouse
-  setup-lakehouse:
+  strife-setup-lakehouse:
     name: Strife Setup Lakehouse
     runs-on: ubuntu-latest
 
@@ -95,7 +95,7 @@ jobs:
         run: terraform apply -auto-approve -var "envv=${{vars.ENVV}}"
 
   # Job para configurar o Unity Catalog
-  setup-unity-catalog:
+  strife-setup-unity-catalog:
     name: Strife Setup Unity Catalog
     runs-on: ubuntu-latest
 
@@ -112,7 +112,7 @@ jobs:
     environment:
       name: dev
 
-    needs: setup-lakehouse
+    needs: strife-setup-lakehouse
     steps:
       # Baixa o artefato do Terraform
       - name: Download Terraform
@@ -142,7 +142,7 @@ jobs:
         run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
 
   # Job para configurar os recursos de computação do ADB
-  setup-adb-compute:
+  strife-setup-adb-compute:
     name: Strife Setup ADB Compute
     runs-on: ubuntu-latest
 
@@ -159,7 +159,7 @@ jobs:
     environment:
       name: dev
 
-    needs: setup-unity-catalog
+    needs: strife-setup-unity-catalog
     steps:
       # Baixa o artefato do Terraform
       - name: Download Terraform

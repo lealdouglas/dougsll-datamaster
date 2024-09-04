@@ -1,10 +1,10 @@
-name: Create Workflow Ingest
+name: Jarvis - Create Workflow Ingest
 
 on:
   workflow_dispatch:
 
 jobs:
-  checkout-and-run:
+  jarvis-create-workflow-inget:
     runs-on: ubuntu-latest
 
     env:
