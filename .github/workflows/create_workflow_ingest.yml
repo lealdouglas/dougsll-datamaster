@@ -40,6 +40,12 @@ jobs:
         run: pip install poetry
 
       # Instala as dependências do Poetry
+      - name: listar
+        run: |
+          cd jarvis-repo
+          ls -la
+
+      # Instala as dependências do Poetry
       - name: Install dependencies
         run: |
           cd jarvis-repo
