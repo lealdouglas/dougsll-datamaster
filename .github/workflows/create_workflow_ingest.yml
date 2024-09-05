@@ -1,5 +1,23 @@
 name: Jarvis - Create Workflow Ingest
 
+# Este workflow do GitHub Actions é utilizado para configurar e executar um script Python
+# que realiza a ingestão de dados utilizando o Jarvis. Ele é composto por várias etapas:
+# 1. Faz o checkout do repositório principal.
+# 2. Faz o checkout de um repositório privado adicional.
+# 3. Configura o ambiente Python.
+# 4. Instala o Poetry, uma ferramenta de gerenciamento de dependências.
+# 5. Instala as dependências do projeto usando o Poetry.
+# 6. Executa o script Python de ingestão de dados, passando o caminho para o arquivo de configuração YAML.
+
+# This GitHub Actions workflow is used to set up and run a Python script
+# that performs data ingestion using Jarvis. It consists of several steps:
+# 1. Check out the main repository.
+# 2. Check out an additional private repository.
+# 3. Set up the Python environment.
+# 4. Install Poetry, a dependency management tool.
+# 5. Install project dependencies using Poetry.
+# 6. Run the Python data ingestion script, passing the path to the YAML configuration file.
+
 on:
   workflow_dispatch:
 
@@ -15,10 +33,12 @@ jobs:
 
     steps:
       # Faz o checkout do repositório principal
+      # Checkout the current repository
       - name: Checkout current repository
         uses: actions/checkout@v4
 
       # Faz o checkout de outro repositório privado
+      # Checkout another private repository
       - name: Check Jarvis repository
         uses: actions/checkout@v4
         with:
@@ -26,26 +46,33 @@ jobs:
           path: jarvis-repo
 
       # Configura o Python
+      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
+      # Instala o Poetry
+      # Install Poetry
       - name: Instalar Poetry
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
+      # Instala o Poetry
+      # Install Poetry
       - name: Instalar Poetry
         run: pip install poetry
 
       # Instala as dependências do Poetry
+      # Install Poetry dependencies
       - name: Install dependencies
         run: |
           cd jarvis-repo/jarvis
           poetry install --without doc
 
       # Executa o script Python, passando o caminho do arquivo config.yaml
+      # Run the Python script, passing the path to the config.yaml file
       - name: Run Python script - Jarvis Ingest
         run: |
           cd jarvis-repo/jarvis
