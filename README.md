@@ -8,7 +8,9 @@ Este projeto visa desenvolver uma solução de engenharia de dados com o princip
 
 Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
 
-<img src="assets/img/ideacao.PNG" width="200">
+<p align="center">
+  <img src="resources/img/ideacao.PNG" width="800" alt="ideacao do projeto">
+</p>
 
 ## 2. Arquitetura de Solução
 
