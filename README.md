@@ -8,7 +8,13 @@ Este projeto visa desenvolver uma solução de engenharia de dados com o princip
 
 ### 2.1 Visão Geral
 
-A solução é projetada para monitorar transações financeiras em tempo real e detectar fraudes de maneira eficiente. Ela utiliza o Azure Event Hub para ingestão de dados, o Databricks para processamento e análise, e o Azure Storage para armazenamento seguro.
+A solução é projetada para preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. Ela utiliza Azure como provedora de nuvem, Active Directory para gestao de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o contrato de dados, estão incorporadas nessa solução, que visa simplificar a relação dos servicos com a plataforma e dos dados.
+
+##### Ambição (AVALIAR DEPOIS):
+
+- Relatório no cost analysis
+- Lifecycle já implementado
+- Bundles Databricks
 
 ### 2.2 Descrição dos Componentes
 
@@ -27,7 +33,9 @@ A solução é projetada para monitorar transações financeiras em tempo real e
 
 ### 2.4 Diagrama de Arquitetura de Solução
 
-![Diagrama de Arquitetura](path/to/diagrama.png)
+<p align="center">
+  <img src="resources/img/diagrama_tc.PNG" width="800" alt="Diagrama de Arquitetura">
+</p>
 
 ### 2.5 Características Essenciais
 
