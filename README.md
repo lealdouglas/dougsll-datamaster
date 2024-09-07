@@ -1,9 +1,11 @@
 # Data Master - Douglas Leal (Git template)
 
 1. [Objetivo do Projeto](#1-objetivo-do-case)
-2. [Arquitetura de Solução](#arquitetura-de-solucao)
-   - [Visão Geral](#visao-geral)
-   - [Diagrama de Arquitetura](#diagrama-de-arquitetura)
+2. [Arquitetura de Solução](#2-arquitetura-de-solução)
+   - [Visão Geral](#21visao-geral)
+   - [Visão Geral](#21visao-geral)
+   - #22-descrição-dos-componentes
+   - [Diagrama de Arquitetura](#22diagrama-de-arquitetura)
 3. [Arquitetura Técnica](#arquitetura-tecnica)
    - [Visão Geral](#visao-geral-1)
    - [Componentes e Tecnologias](#componentes-e-tecnologias)
