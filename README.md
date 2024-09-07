@@ -6,9 +6,11 @@ Este projeto visa desenvolver uma solução de engenharia de dados com o princip
 
 ## 2. Ideação do Projeto
 
-Este projeto foi idealizado para que quem o utilize tenha um ambiente mínimo para explorar dados. Tres repositorios foram criados para que com este, template, seja possivel replicar, ajustar as configuracoes base e preparar o ambiente. A ideacao está organizada da seguinte forma,
+Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
 
-    ![Ideação do Projeto](path/to/ideacao.png)
+![Ideação do Projeto](recursos/image/ideacao.png)
+
+
 
 ## 2. Arquitetura de Solução
 
