@@ -12,6 +12,7 @@ Este projeto foi idealizado para que os usuários tenham um ambiente mínimo par
   <img src="resources/img/ideacao.PNG" width="800" alt="ideacao do projeto">
 </p>
 
+<a href="https://github.com/lealdouglas/strife" target="_blank">lealdouglas/strife</a>, setup de infraestrutura (recursos)
 - [lealdouglas/strife](https://github.com/lealdouglas/strife), setup de infraestrutura (recursos)
 - [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), delivery do pipeline de dados
 - [lealdouglas/carlton](https://github.com/lealdouglas/carlton), framework e acelerador.
