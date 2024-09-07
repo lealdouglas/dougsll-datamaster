@@ -34,7 +34,7 @@ A solução é projetada para preparar um ambiente para estudo e exploração de
 ### 2.4 Diagrama de Arquitetura de Solução
 
 <p align="center">
-  <img src="resources/img/diagrama_tc.PNG" width="800" alt="Diagrama de Arquitetura">
+  <img src="resources/img/diagrama_tc.PNG" width="500" alt="Diagrama de Arquitetura">
 </p>
 
 ### 2.5 Características Essenciais
@@ -120,7 +120,7 @@ Critérios de Alerta: Thresholds configurados para latência e falhas de ingest�
 Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
 
 <p align="center">
-  <img src="resources/img/ideacao.PNG" width="800" alt="ideacao do projeto">
+  <img src="resources/img/ideacao.PNG" width="500" alt="ideacao do projeto">
 </p>
 
 - [lealdouglas/strife](https://github.com/lealdouglas/strife), setup de infraestrutura (recursos)
