@@ -4,19 +4,6 @@
 
 Este projeto visa desenvolver uma solução de engenharia de dados com o principal objetivo de preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos, com foco no monitoramento de transações financeiras em tempo real.
 
-## 2. Ideação do Projeto
-
-Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
-
-<p align="center">
-  <img src="resources/img/ideacao.PNG" width="800" alt="ideacao do projeto">
-</p>
-
-<a href="https://github.com/lealdouglas/strife" target="_blank">lealdouglas/strife</a>, setup de infraestrutura (recursos)
-- [lealdouglas/strife](https://github.com/lealdouglas/strife), setup de infraestrutura (recursos)
-- [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), delivery do pipeline de dados
-- [lealdouglas/carlton](https://github.com/lealdouglas/carlton), framework e acelerador.
-
 ## 2. Arquitetura de Solução
 
 ### 2.1 Visão Geral
@@ -120,14 +107,26 @@ Critérios de Alerta: Thresholds configurados para latência e falhas de ingest�
 
 ## 4. Explicação sobre o Case Desenvolvido
 
-### 4.1 Descrição do Fluxo de Dados
+### 4.1 Ideação do Projeto
+
+Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
+
+<p align="center">
+  <img src="resources/img/ideacao.PNG" width="800" alt="ideacao do projeto">
+</p>
+
+- [lealdouglas/strife](https://github.com/lealdouglas/strife), setup de infraestrutura (recursos)
+- [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), delivery do pipeline de dados
+- [lealdouglas/carlton](https://github.com/lealdouglas/carlton), framework e acelerador.
+
+### 4.2 Descrição do Fluxo de Dados
 
 - **Extração de Dados**: Dados de transações são capturados em tempo real através do Event Hub.
 - **Ingestão de Dados**: Dados são processados no Databricks e armazenados no Data Lake.
 - **Observabilidade**: Monitoramento contínuo para garantir a integridade do fluxo de dados e detectar anomalias.
 - **Segurança e Mascaramento**: Dados sensíveis são mascarados durante o processamento para cumprir regulamentações de segurança.
 
-### 4.2 Tecnologias Utilizadas
+### 4.3 Tecnologias Utilizadas
 
 - **Azure Event Hub**: Para captura de eventos.
 - **Azure Databricks**: Para processamento de dados em escala.
