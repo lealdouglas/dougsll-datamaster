@@ -2,14 +2,22 @@
 
 ## 1. Objetivo do Case
 
-Este projeto visa desenvolver uma solução de engenharia de dados para monitoramento de transações financeiras em tempo real. A plataforma utiliza Azure e GitHub Actions para criar e gerenciar recursos, com processamento de dados realizado no Databricks.
+Este projeto visa desenvolver uma solução de engenharia de dados com o principal objetivo de preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos, com foco no monitoramento de transações financeiras em tempo real.
+
+## 2. Ideação do Projeto
+
+Este projeto foi idealizado para que quem o utilize tenha um ambiente mínimo para explorar dados. Tres repositorios foram criados para que com este, template, seja possivel replicar, ajustar as configuracoes base e preparar o ambiente. A ideacao está organizada da seguinte forma,
+
+    ![Ideação do Projeto](path/to/ideacao.png)
 
 ## 2. Arquitetura de Solução
 
 ### 2.1 Visão Geral
+
 A solução é projetada para monitorar transações financeiras em tempo real e detectar fraudes de maneira eficiente. Ela utiliza o Azure Event Hub para ingestão de dados, o Databricks para processamento e análise, e o Azure Storage para armazenamento seguro.
 
 ### 2.2 Descrição dos Componentes
+
 - **Event Hub**: Captura dados de transações em tempo real de várias fontes, como sistemas de pagamento e bancos.
 - **Azure Databricks**: Processa os dados capturados, executa algoritmos de detecção de fraudes e prepara os dados para armazenamento.
 - **Azure Storage Account**: Armazena dados brutos e processados em camadas organizadas, conforme a arquitetura de medalhão (bronze, silver, gold).
@@ -17,45 +25,54 @@ A solução é projetada para monitorar transações financeiras em tempo real e
 - **Observabilidade**: Utiliza monitoramento contínuo para garantir o funcionamento correto do sistema, com alertas configurados para falhas e anomalias.
 
 ### 2.3 Fluxo de Dados
+
 1. **Ingestão de Dados**: As transações financeiras são capturadas em tempo real pelo Event Hub.
 2. **Processamento e Análise**: Os dados são enviados para o Databricks, onde são analisados e processados para identificar possíveis fraudes.
 3. **Armazenamento**: Os dados processados são armazenados no Data Lake, organizados em diferentes camadas (bronze, silver, gold).
 4. **Monitoramento e Alertas**: O sistema é monitorado continuamente, e alertas são gerados em caso de detecção de fraudes ou falhas no pipeline.
 
 ### 2.4 Diagrama de Arquitetura de Solução
+
 ![Diagrama de Arquitetura](path/to/diagrama.png)
 
 ### 2.5 Características Essenciais
+
 - **Escalabilidade**: A solução é capaz de processar um grande volume de transações simultaneamente, com capacidade de escalonamento horizontal no Event Hub e Databricks.
 - **Resiliência**: O sistema tem tolerância a falhas com mecanismos de failover no Event Hub e recuperação automática no Databricks.
 - **Segurança**: A proteção de dados sensíveis é garantida através de criptografia e mascaramento.
 - **Desempenho**: O pipeline de dados é otimizado para garantir processamento em tempo real, com baixa latência.
 
-
 ## 3. Arquitetura Técnica
 
 ### 3.1 Visão Geral
+
 A arquitetura técnica é baseada em uma infraestrutura provisionada via Terraform, com pipelines automatizados usando GitHub Actions, processamento em tempo real no Azure Databricks, e armazenamento seguro de dados no Azure Storage Account.
 
 ### 3.2 Infraestrutura
+
 #### Provisionamento de Recursos (Terraform)
+
 - **Scripts Terraform**: Utilizamos scripts Terraform para criar recursos como Event Hub, Databricks e Storage Account.
   - **Event Hub**: Configurado com throughput adequado para suportar o volume de eventos.
   - **Databricks**: Configurado com clusters de autoescalabilidade para processamento eficiente.
   - **Storage Account**: Configurado para armazenar dados brutos e processados com redundância geográfica.
-  
+
 #### Automação CI/CD (GitHub Actions)
+
 - **Workflows**: O GitHub Actions é configurado para automatizar o deploy da infraestrutura e a execução de jobs no Databricks.
   - **Build**: Executa scripts de criação de recursos.
   - **Deploy**: Configura e executa jobs no Databricks.
   - **Monitoramento**: Configura alertas e captura logs de execução.
 
 ### 3.3 Processamento de Dados
+
 #### Ingestão de Dados (Event Hub)
+
 - **Configuração**: O Event Hub captura eventos em tempo real, configurado com partitions para garantir alta disponibilidade.
   - **Consumers**: Configurados para alimentar o pipeline de dados no Databricks.
 
 #### Processamento de Dados (Databricks)
+
 - **Configuração de Clusters**: Clusters autoescaláveis configurados para otimizar o processamento de grandes volumes de dados.
 - **Scripts de Processamento**: Utilizamos PySpark para ler dados do Event Hub, processá-los, e armazená-los no Data Lake.
   ```python
@@ -63,9 +80,12 @@ A arquitetura técnica é baseada em uma infraestrutura provisionada via Terrafo
   df = spark.readStream.format("eventhubs").load()
   processed_df = process_data(df)
   processed_df.write.mode("append").parquet("path/to/datalake")
+  ```
 
 ### 3.4 Armazenamento de Dados
+
 #### Data Lake (Storage Account)
+
 Estrutura: Dados organizados em camadas de bronze, silver e gold, seguindo a arquitetura de medalhão.
 Bronze: Dados brutos.
 Silver: Dados processados.
@@ -73,14 +93,18 @@ Gold: Dados prontos para análise.
 Segurança: Criptografia em repouso e controle de acesso via IAM configurados.
 
 ### 3.5 Segurança
+
 #### Políticas de Acesso e Mascaramento de Dados
+
 IAM: Políticas configuradas para controlar o acesso a diferentes serviços e dados sensíveis.
 Mascaramento de Dados: Dados confidenciais mascarados durante o processamento e armazenamento, usando ferramentas de criptografia nativas.
 Autenticação e Autorização
 Azure AD: Integrado para gerenciar autenticação e autorização de usuários.
 
 ### 3.6 Observabilidade e Monitoramento
+
 #### Monitoramento de Logs
+
 Azure Monitor: Configurado para capturar logs de todos os componentes, com dashboards para visualização de métricas.
 Log Analytics: Utilizado para consultas e diagnósticos de problemas.
 Alertas e Notificações
@@ -147,4 +171,3 @@ Este projeto demonstra uma solução escalável e segura para monitoramento de t
 - [Azure Event Hub Documentation](https://learn.microsoft.com/en-us/azure/event-hubs/)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [Poetry Documentation](https://python-poetry.org/docs/)
-
