@@ -8,7 +8,7 @@ Este projeto visa desenvolver uma solução de engenharia de dados com o princip
 
 ### 2.1 Visão Geral
 
-A solução é projetada para preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. Ela utiliza Azure como provedora de nuvem, Active Directory para gestao de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o contrato de dados, estão incorporadas nessa solução, que visa simplificar a relação dos servicos com a plataforma e dos dados.
+A solução é projetada para preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. Ela utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o contrato de dados, estão incorporadas nessa solução, que visa simplificar a relação dos servicos com a plataforma e dos dados.
 
 ##### Ambição (AVALIAR DEPOIS):
 
@@ -24,20 +24,32 @@ A solução é projetada para preparar um ambiente para estudo e exploração de
 - **Segurança**: Implementa políticas de mascaramento de dados e criptografia para proteger informações sensíveis.
 - **Observabilidade**: Utiliza monitoramento contínuo para garantir o funcionamento correto do sistema, com alertas configurados para falhas e anomalias.
 
-### 2.3 Fluxo de Dados
-
-1. **Ingestão de Dados**: As transações financeiras são capturadas em tempo real pelo Event Hub.
-2. **Processamento e Análise**: Os dados são enviados para o Databricks, onde são analisados e processados para identificar possíveis fraudes.
-3. **Armazenamento**: Os dados processados são armazenados no Data Lake, organizados em diferentes camadas (bronze, silver, gold).
-4. **Monitoramento e Alertas**: O sistema é monitorado continuamente, e alertas são gerados em caso de detecção de fraudes ou falhas no pipeline.
-
-### 2.4 Diagrama de Arquitetura de Solução
-
 <p align="center">
   <img src="resources/img/diagrama_tc.PNG" width="650" alt="Diagrama de Arquitetura">
 </p>
 
-### 2.5 Características Essenciais
+### 2.3 Diagrama de Arquitetura de Solução
+
+Detalhado
+<p align="center">
+  <img src="resources/img/diagrama_tc.PNG" width="650" alt="Diagrama de Arquitetura">
+</p>
+
+### 2.4 Pipeline de dados
+
+descrever a jornada
+
+exemplo:
+Step1: Deploy Azure databricks managed identity connector to be used by the metastore to access its root storage.
+Step2: Deploy ADLS Gen2 storage account to be used by the metastore as root storage.
+Step3: Deploy the unity catalog metastore.
+Step4: Attached the existing databricks workspace to metastore to enable unity catalog for the workspace.
+Step5: Sync AAD groups to Databricks account. For this steps groups (and their member users, service principals) should have already been created beforehand in AAD.
+Note that in our example account_unity_admin group b
+
+### 2.5 Características Essenciais (Case)
+
+- Incluir detalhes da solucao, como metastore e outros
 
 - **Escalabilidade**: A solução é capaz de processar um grande volume de transações simultaneamente, com capacidade de escalonamento horizontal no Event Hub e Databricks.
 - **Resiliência**: O sistema tem tolerância a falhas com mecanismos de failover no Event Hub e recuperação automática no Databricks.
@@ -120,8 +132,10 @@ Critérios de Alerta: Thresholds configurados para latência e falhas de ingest�
 Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
 
 <p align="center">
-  <img src="resources/img/ideacao.PNG" width="650" alt="ideacao do projeto">
+  <img src="resources/img/ideacao.PNG" width="900" alt="ideacao do projeto">
 </p>
+
+Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o framework.
 
 - [lealdouglas/strife](https://github.com/lealdouglas/strife), setup de infraestrutura (recursos)
 - [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), delivery do pipeline de dados
@@ -185,3 +199,4 @@ Este projeto demonstra uma solução escalável e segura para monitoramento de t
 - [Azure Event Hub Documentation](https://learn.microsoft.com/en-us/azure/event-hubs/)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [Poetry Documentation](https://python-poetry.org/docs/)
+- [Data Contract](https://datacontract.com/)
