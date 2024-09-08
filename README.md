@@ -37,7 +37,7 @@ A solução é projetada para preparar um ambiente para estudo e exploração de
 
 ### 2.2 Descrição dos Componentes
 
-- **Event Hub**: Captura dados de transações em tempo real de várias fontes, como sistemas de pagamento e bancos.
+- **Event Hub (opcional)**: Captura dados de transações em tempo real de várias fontes, como sistemas de pagamento e bancos.
 - **Azure Databricks**: Processa os dados capturados, executa algoritmos de detecção de fraudes e prepara os dados para armazenamento.
 - **Azure Storage Account**: Armazena dados brutos e processados em camadas organizadas, conforme a arquitetura de medalhão (bronze, silver, gold).
 - **Segurança**: Implementa políticas de mascaramento de dados e criptografia para proteger informações sensíveis.
