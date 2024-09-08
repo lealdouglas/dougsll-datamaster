@@ -21,13 +21,13 @@
 
 ## 1. Objetivo do Case
 
-Este projeto visa desenvolver uma solução de engenharia de dados com o principal objetivo de preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos, com foco no monitoramento de transações financeiras em tempo real.
+Este projeto visa desenvolver uma solução de engenharia de dados com o principal objetivo de preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. O projeto simula a criação de um conceitual ambiente de dados para uma data domain, configurando ambiente, pipeline de ingestão e exploração do dados.
 
 ## 2. Arquitetura de Solução
 
 ### 2.1 Visão Geral
 
-A solução é projetada para preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. Ela utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o contrato de dados, estão incorporadas nessa solução, que visa simplificar a relação dos servicos com a plataforma e dos dados.
+A solução é projetada para preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. Ela utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o setup via terraform, gerenciamento das automações via contrato de dados, que visa simplificar a relação dos serviços com a plataforma e dos dados, estão incorporadas nessa solução.
 
 ##### Ambição (AVALIAR DEPOIS):
 
