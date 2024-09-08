@@ -10,7 +10,7 @@
    - [Visão Geral](#31-visão-geral)
 4. [Configuração e Execução](#4-explicação-sobre-o-case-desenvolvido)
    - [Ideação do projeto](#41-ideação-do-projeto)
-5. [Melhorias e Considerações Finais](#5-instruções-para-configuração-e-execução-do-projeto)
+5. [Instruções para configuração e execução do projeto](#5-instruções-para-configuração-e-execução-do-projeto)
    - [Ideação do projeto](#51-pré-requisitos)
    - [Passos de configuração](#52-passos-de-configuração)
 6. [Melhorias e Considerações Finais](#6-melhorias-e-considerações-finais)
