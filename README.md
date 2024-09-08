@@ -9,11 +9,14 @@
 3. [Arquitetura Técnica](#3-arquitetura-técnica)
    - [Visão Geral](#31-visão-geral)
 4. [Configuração e Execução](#4-explicação-sobre-o-case-desenvolvido)
-   - [Pré-requisitos](#pre-requisitos)
-   - [Passos para Configuração](#passos-para-configuracao)
-   - [Execução do Projeto](#execucao-do-projeto)
-5. [Melhorias e Considerações Finais](#melhorias-e-consideracoes-finais)
-6. [Referências](#referencias)
+   - [Ideação do projeto](#41-ideação-do-projeto)
+5. [Melhorias e Considerações Finais](#5-instruções-para-configuração-e-execução-do-projeto)
+   - [Ideação do projeto](#51-pré-requisitos)
+   - [Passos de configuração](#52-passos-de-configuração)
+6. [Melhorias e Considerações Finais](#6-melhorias-e-considerações-finais)
+   - [Melhorias futuras](#61-melhorias-futuras)
+   - [Considerações finais](#62-considerações-finais)
+6. [Referências](#7-referências) 
 
 
 ## 1. Objetivo do Case
