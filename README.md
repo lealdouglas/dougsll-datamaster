@@ -43,13 +43,8 @@ A solução é projetada para preparar um ambiente para estudo e exploração de
 - **Segurança**: Implementa políticas de mascaramento de dados e criptografia para proteger informações sensíveis.
 - **Observabilidade**: Utiliza monitoramento contínuo para garantir o funcionamento correto do sistema, com alertas configurados para falhas e anomalias.
 
-<p align="center">
-  <img src="resources/img/diagrama_tc.PNG" width="650" alt="Diagrama de Arquitetura">
-</p>
-
 ### 2.3 Diagrama de Arquitetura de Solução
 
-Detalhado
 <p align="center">
   <img src="resources/img/diagrama_tc.PNG" width="650" alt="Diagrama de Arquitetura">
 </p>
