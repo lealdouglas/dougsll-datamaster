@@ -2,7 +2,7 @@
 
 ## Descrição
 
-O projeto "dougsll-datamaster" é uma solução para o programa Data Master elaborado pela F1rst Santander. Solucao proposta e produzida por Douglas Leal.
+O projeto "dougsll-datamaster" é uma solução para o programa Data Master elaborado pela F1rst Santander. Solução proposta e produzida por Douglas Leal.
 
 1. [Objetivo do Case](#1-objetivo-do-case)
 2. [Arquitetura de Solução](#2-arquitetura-de-solução)
@@ -209,18 +209,21 @@ Critérios de Alerta: Thresholds configurados para latência e falhas de ingest�
 
 ### 5.1 Melhorias Futuras
 
-Abaixo, compartilho algumas melhorias consideradas para essa solucao, considerando que o cenário desenvolvido é apenas um prototipo de uma necessidade maior:
+Abaixo, compartilho algumas melhorias consideradas para essa solução e ambições de uma visão completa, considerando que o cenário desenvolvido é apenas um protótipo de uma necessidade maior:
 
-- Nível solucao:
-  - UI e API Services, com serviços integrados e uma interface web configurada, as validações e etapas podem ser orquestradas a partir da interação do usuário com o formulário, onde, a partir das opções, um serviço pode ser acionado ou um repositório/actions pode ser configurado.
-  - Configurar um cluster para uso conforme etapas do pipeline.
-  - Escalabilidade: Melhorar o desempenho da ingestão de dados com particionamento de dados.
-  - Segurança: Implementar autenticação baseada em tokens para APIs de terceiros.
-  - Observabilidade: Adicionar métricas de performance e latência do pipeline.
-- Ajustes de implementacao:
-  - montar .yaml para tf e incluir usuario principal, para vincular aos grupos.
-  - parametros recuperados via API para gerar uma imersao na experiencia poderiam estar configurados em um banco de dados.
-  - Criar classe estruturada para o uso genérico do datacontract, aplicar padroes de SOLID.
+#### Evolução da solução:
+
+- UI e API Services, com serviços integrados e uma interface web configurada, as validações e etapas podem ser orquestradas a partir da interação do usuário com o formulário, onde, a partir das opções, um serviço pode ser acionado ou um repositório/actions pode ser configurado.
+- Configurar um cluster para uso conforme etapas do pipeline.
+- Escalabilidade: Melhorar o desempenho da ingestão de dados com particionamento de dados.
+- Segurança: Implementar autenticação baseada em tokens para APIs de terceiros.
+- Observabilidade: Adicionar métricas de performance e latência do pipeline.
+
+#### Melhorias de implementação:
+
+- montar .yaml para tf e incluir usuario principal, para vincular aos grupos.
+- parametros recuperados via API para gerar uma imersao na experiencia poderiam estar configurados em um banco de dados.
+- Criar classe estruturada para o uso genérico do datacontract, aplicar padroes de SOLID.
 
 ### 5.2 Considerações Finais
 
