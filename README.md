@@ -100,7 +100,7 @@ Este projeto foi idealizado para que os usuários tenham um ambiente mínimo par
   <img src="assets/img/ideacao.PNG" width="900" alt="ideacao do projeto">
 </p>
 
-Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o framework.
+Onde RUN é uma referência às execuções de ingestão de dados ou de quality, que utilizam a biblioteca para o uso de soluções já implementadas
 
 - [lealdouglas/strife](https://github.com/lealdouglas/strife), setup de infraestrutura (recursos)
 - [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), delivery do pipeline de dados
