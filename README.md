@@ -3,21 +3,35 @@
 1. [Objetivo do Projeto](#1-objetivo-do-case)
 2. [Arquitetura de Solução](#2-arquitetura-de-solução)
    - [Visão Geral](#21-visão-geral)
-   - [Descrição dos componentes](#22-descrição-dos-componentes)
-   - [Diagrama de arquitetura de solução](#23-diagrama-de-arquitetura-de-solução)
-   - [Pipeline de dados](#24-pipeline-de-dados)
+   - [Diagrama de Arquitetura de Solução](#22-diagrama-de-arquitetura-de-solução)
+   - [Descrição dos Componentes](#23-descrição-dos-componentes)
+   - [Características Essenciais (Case)](#24-características-essenciais-case)
 3. [Arquitetura Técnica](#3-arquitetura-técnica)
    - [Visão Geral](#31-visão-geral)
-4. [Explicação sobre o case desenvolvido](#4-explicação-sobre-o-case-desenvolvido)
-   - [Ideação do projeto](#41-ideação-do-projeto)
-5. [Instruções para configuração e execução do projeto](#5-instruções-para-configuração-e-execução-do-projeto)
-   - [Pré-requisitos](#51-pré-requisitos)
-   - [Passos de configuração](#52-passos-de-configuração)
-6. [Melhorias e Considerações Finais](#6-melhorias-e-considerações-finais)
-   - [Melhorias futuras](#61-melhorias-futuras)
-   - [Considerações finais](#62-considerações-finais)
-6. [Referências](#7-referências) 
-
+   - [Ideação do Projeto](#32-ideação-do-projeto)
+   - [Descrição do Fluxo de Dados](#33-descrição-do-fluxo-de-dados)
+   - [Tecnologias Utilizadas](#34-tecnologias-utilizadas)
+   - [Infraestrutura](#35-infraestrutura)
+     - [Provisionamento de Recursos (Terraform)](#351-provisionamento-de-recursos-terraform)
+     - [Automação CI/CD (GitHub Actions)](#352-automação-cicd-github-actions)
+   - [Processamento de Dados](#36-processamento-de-dados)
+     - [Ingestão de Dados (Event Hub)](#361-ingestão-de-dados-event-hub)
+     - [Processamento de Dados (Databricks)](#362-processamento-de-dados-databricks)
+   - [Armazenamento de Dados](#37-armazenamento-de-dados)
+     - [Data Lake (Storage Account)](#371-data-lake-storage-account)
+   - [Segurança](#38-segurança)
+     - [Políticas de Acesso e Mascaramento de Dados](#381-políticas-de-acesso-e-mascaramento-de-dados)
+     - [Autenticação e Autorização](#382-autenticação-e-autorização)
+   - [Observabilidade e Monitoramento](#39-observabilidade-e-monitoramento)
+     - [Monitoramento de Logs](#391-monitoramento-de-logs)
+     - [Alertas e Notificações](#392-alertas-e-notificações)
+4. [Instruções para Configuração e Execução do Projeto](#4-instruções-para-configuração-e-execução-do-projeto)
+   - [Pré-requisitos](#41-pré-requisitos)
+   - [Passos de Configuração](#42-passos-de-configuração)
+5. [Melhorias e Considerações Finais](#5-melhorias-e-considerações-finais)
+   - [Melhorias Futuras](#51-melhorias-futuras)
+   - [Considerações Finais](#52-considerações-finais)
+6. [Referências](#6-referências)
 
 ## 1. Objetivo do Case
 
@@ -97,14 +111,14 @@ Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o frame
 
 ### 3.5 Infraestrutura
 
-#### Provisionamento de Recursos (Terraform)
+#### 3.5.1 Provisionamento de Recursos (Terraform)
 
 - **Scripts Terraform**: Utilizamos scripts Terraform para criar recursos como Event Hub, Databricks e Storage Account.
   - **Event Hub**: Configurado com throughput adequado para suportar o volume de eventos.
   - **Databricks**: Configurado com clusters de autoescalabilidade para processamento eficiente.
   - **Storage Account**: Configurado para armazenar dados brutos e processados com redundância geográfica.
 
-#### Automação CI/CD (GitHub Actions)
+#### 3.5.2 Automação CI/CD (GitHub Actions)
 
 - **Workflows**: O GitHub Actions é configurado para automatizar o deploy da infraestrutura e a execução de jobs no Databricks.
   - **Build**: Executa scripts de criação de recursos.
@@ -113,12 +127,12 @@ Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o frame
 
 ### 3.6 Processamento de Dados
 
-#### Ingestão de Dados (Event Hub)
+#### 3.6.1 Ingestão de Dados (Event Hub)
 
 - **Configuração**: O Event Hub captura eventos em tempo real, configurado com partitions para garantir alta disponibilidade.
   - **Consumers**: Configurados para alimentar o pipeline de dados no Databricks.
 
-#### Processamento de Dados (Databricks)
+#### 3.6.2 Processamento de Dados (Databricks)
 
 - **Configuração de Clusters**: Clusters autoescaláveis configurados para otimizar o processamento de grandes volumes de dados.
 - **Scripts de Processamento**: Utilizamos PySpark para ler dados do Event Hub, processá-los, e armazená-los no Data Lake.
@@ -128,77 +142,3 @@ Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o frame
   processed_df = process_data(df)
   processed_df.write.mode("append").parquet("path/to/datalake")
   ```
-
-### 3.7 Armazenamento de Dados
-
-#### Data Lake (Storage Account)
-
-Estrutura: Dados organizados em camadas de bronze, silver e gold, seguindo a arquitetura de medalhão.
-Bronze: Dados brutos.
-Silver: Dados processados.
-Gold: Dados prontos para análise.
-Segurança: Criptografia em repouso e controle de acesso via IAM configurados.
-
-### 3.8 Segurança
-
-#### Políticas de Acesso e Mascaramento de Dados
-
-IAM: Políticas configuradas para controlar o acesso a diferentes serviços e dados sensíveis.
-Mascaramento de Dados: Dados confidenciais mascarados durante o processamento e armazenamento, usando ferramentas de criptografia nativas.
-Autenticação e Autorização
-Azure AD: Integrado para gerenciar autenticação e autorização de usuários.
-
-### 3.9 Observabilidade e Monitoramento
-
-#### Monitoramento de Logs
-
-Azure Monitor: Configurado para capturar logs de todos os componentes, com dashboards para visualização de métricas.
-Log Analytics: Utilizado para consultas e diagnósticos de problemas.
-Alertas e Notificações
-Alertas: Configurados para monitorar falhas no pipeline e enviar notificações para a equipe.
-Critérios de Alerta: Thresholds configurados para latência e falhas de ingestão/processamento.
-
-## 4. Instruções para Configuração e Execução do Projeto
-
-### 4.1 Pré-requisitos
-
-- Conta na Azure
-- Configuração do GitHub Actions
-- Instalação do Terraform
-- Instalação do Python 3.10 e Poetry
-
-### 4.2 Passos de Configuração
-
-1. Clone o repositório:
-   ```sh
-   git clone https://github.com/lealdouglas/dougsll-datamaster.git
-   cd dougsll-datamaster
-   ```
-2. Configure suas credenciais da Azure no Terraform.
-3. Execute as actions do repositório para criar os recursos:
-4. Configure o GitHub Actions para automatizar os jobs no Databricks.
-5. Execute o job no Databricks para processar os dados.
-
-## 5. Melhorias e Considerações Finais
-
-### 5.1 Melhorias Futuras
-
-- montar .yaml para tf e incluir usuario principal, para vincular aos grupos.
-- parametros recuperados via API para gerar uma imersao na experiencia poderiam estar configurados em um banco de dados.
-- criar classe abstrata para datacontract ficar ainda mais como uma 'interface'
-  Escalabilidade: Melhorar o desempenho da ingestão de dados com particionamento de dados.
-  Segurança: Implementar autenticação baseada em tokens para APIs de terceiros.
-  Observabilidade: Adicionar métricas de performance e latência do pipeline.
-
-### 5.2 Considerações Finais
-
-Este projeto demonstra uma solução escalável e segura para monitoramento de transações financeiras em tempo real, utilizando ferramentas modernas de processamento de dados e automação de infraestrutura.
-
-## 6. Referências
-
-- [Terraform Documentation](https://www.terraform.io/docs/index.html)
-- [Azure Databricks Documentation](https://learn.microsoft.com/en-us/azure/databricks/)
-- [Azure Event Hub Documentation](https://learn.microsoft.com/en-us/azure/event-hubs/)
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [Poetry Documentation](https://python-poetry.org/docs/)
-- [Data Contract](https://datacontract.com/)
