@@ -27,7 +27,7 @@ Este projeto visa desenvolver uma solução de engenharia de dados com o princip
 
 ### 2.1 Visão Geral
 
-A solução é projetada para preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. Ela utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o setup via terraform, gerenciamento das automações via contrato de dados, que visa simplificar a relação dos serviços com a plataforma e dos dados, estão incorporadas nessa solução.
+A solução é projetada para preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. Ela utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o setup via terraform, gerenciamento das automações via contrato de dados, que visa simplificar a relação dos serviços com a plataforma e dados, estão incorporadas nessa solução.
 
 ##### Ambição (AVALIAR DEPOIS):
 
@@ -76,7 +76,36 @@ Note that in our example account_unity_admin group b
 
 A arquitetura técnica é baseada em uma infraestrutura provisionada via Terraform, com pipelines automatizados usando GitHub Actions, processamento em tempo real no Azure Databricks, e armazenamento seguro de dados no Azure Storage Account.
 
-### 3.2 Infraestrutura
+### 3.2 Ideação do Projeto
+
+Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
+
+<p align="center">
+  <img src="resources/img/ideacao.PNG" width="900" alt="ideacao do projeto">
+</p>
+
+Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o framework.
+
+- [lealdouglas/strife](https://github.com/lealdouglas/strife), setup de infraestrutura (recursos)
+- [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), delivery do pipeline de dados
+- [lealdouglas/carlton](https://github.com/lealdouglas/carlton), framework e acelerador.
+
+### 3.3 Descrição do Fluxo de Dados
+
+- **Extração de Dados**: Dados de transações são capturados em tempo real através do Event Hub.
+- **Ingestão de Dados**: Dados são processados no Databricks e armazenados no Data Lake.
+- **Observabilidade**: Monitoramento contínuo para garantir a integridade do fluxo de dados e detectar anomalias.
+- **Segurança e Mascaramento**: Dados sensíveis são mascarados durante o processamento para cumprir regulamentações de segurança.
+
+### 3.4 Tecnologias Utilizadas
+
+- **Azure Event Hub**: Para captura de eventos.
+- **Azure Databricks**: Para processamento de dados em escala.
+- **Azure Storage Account**: Para armazenamento seguro.
+- **GitHub Actions**: Para automação CI/CD.
+- **Terraform**: Para provisionamento de infraestrutura.
+
+### 3.5 Infraestrutura
 
 #### Provisionamento de Recursos (Terraform)
 
@@ -92,7 +121,7 @@ A arquitetura técnica é baseada em uma infraestrutura provisionada via Terrafo
   - **Deploy**: Configura e executa jobs no Databricks.
   - **Monitoramento**: Configura alertas e captura logs de execução.
 
-### 3.3 Processamento de Dados
+### 3.6 Processamento de Dados
 
 #### Ingestão de Dados (Event Hub)
 
@@ -110,7 +139,7 @@ A arquitetura técnica é baseada em uma infraestrutura provisionada via Terrafo
   processed_df.write.mode("append").parquet("path/to/datalake")
   ```
 
-### 3.4 Armazenamento de Dados
+### 3.7 Armazenamento de Dados
 
 #### Data Lake (Storage Account)
 
@@ -120,7 +149,7 @@ Silver: Dados processados.
 Gold: Dados prontos para análise.
 Segurança: Criptografia em repouso e controle de acesso via IAM configurados.
 
-### 3.5 Segurança
+### 3.8 Segurança
 
 #### Políticas de Acesso e Mascaramento de Dados
 
@@ -129,7 +158,7 @@ Mascaramento de Dados: Dados confidenciais mascarados durante o processamento e 
 Autenticação e Autorização
 Azure AD: Integrado para gerenciar autenticação e autorização de usuários.
 
-### 3.6 Observabilidade e Monitoramento
+### 3.9 Observabilidade e Monitoramento
 
 #### Monitoramento de Logs
 
@@ -139,47 +168,16 @@ Alertas e Notificações
 Alertas: Configurados para monitorar falhas no pipeline e enviar notificações para a equipe.
 Critérios de Alerta: Thresholds configurados para latência e falhas de ingestão/processamento.
 
-## 4. Explicação sobre o Case Desenvolvido
+## 4. Instruções para Configuração e Execução do Projeto
 
-### 4.1 Ideação do Projeto
-
-Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
-
-<p align="center">
-  <img src="resources/img/ideacao.PNG" width="900" alt="ideacao do projeto">
-</p>
-
-Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o framework.
-
-- [lealdouglas/strife](https://github.com/lealdouglas/strife), setup de infraestrutura (recursos)
-- [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), delivery do pipeline de dados
-- [lealdouglas/carlton](https://github.com/lealdouglas/carlton), framework e acelerador.
-
-### 4.2 Descrição do Fluxo de Dados
-
-- **Extração de Dados**: Dados de transações são capturados em tempo real através do Event Hub.
-- **Ingestão de Dados**: Dados são processados no Databricks e armazenados no Data Lake.
-- **Observabilidade**: Monitoramento contínuo para garantir a integridade do fluxo de dados e detectar anomalias.
-- **Segurança e Mascaramento**: Dados sensíveis são mascarados durante o processamento para cumprir regulamentações de segurança.
-
-### 4.3 Tecnologias Utilizadas
-
-- **Azure Event Hub**: Para captura de eventos.
-- **Azure Databricks**: Para processamento de dados em escala.
-- **Azure Storage Account**: Para armazenamento seguro.
-- **GitHub Actions**: Para automação CI/CD.
-- **Terraform**: Para provisionamento de infraestrutura.
-
-## 5. Instruções para Configuração e Execução do Projeto
-
-### 5.1 Pré-requisitos
+### 4.1 Pré-requisitos
 
 - Conta na Azure
 - Configuração do GitHub Actions
 - Instalação do Terraform
 - Instalação do Python 3.10 e Poetry
 
-### 5.2 Passos de Configuração
+### 4.2 Passos de Configuração
 
 1. Clone o repositório:
    ```sh
@@ -191,9 +189,9 @@ Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o frame
 4. Configure o GitHub Actions para automatizar os jobs no Databricks.
 5. Execute o job no Databricks para processar os dados.
 
-## 6. Melhorias e Considerações Finais
+## 5. Melhorias e Considerações Finais
 
-### 6.1 Melhorias Futuras
+### 5.1 Melhorias Futuras
 
 - montar .yaml para tf e incluir usuario principal, para vincular aos grupos.
 - parametros recuperados via API para gerar uma imersao na experiencia poderiam estar configurados em um banco de dados.
@@ -202,11 +200,11 @@ Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o frame
   Segurança: Implementar autenticação baseada em tokens para APIs de terceiros.
   Observabilidade: Adicionar métricas de performance e latência do pipeline.
 
-### 6.2 Considerações Finais
+### 5.2 Considerações Finais
 
 Este projeto demonstra uma solução escalável e segura para monitoramento de transações financeiras em tempo real, utilizando ferramentas modernas de processamento de dados e automação de infraestrutura.
 
-## 7. Referências
+## 6. Referências
 
 - [Terraform Documentation](https://www.terraform.io/docs/index.html)
 - [Azure Databricks Documentation](https://learn.microsoft.com/en-us/azure/databricks/)
