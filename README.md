@@ -111,14 +111,14 @@ Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o frame
 
 ### 3.5 Infraestrutura
 
-#### 3.5.1 Provisionamento de Recursos (Terraform)
+#### Provisionamento de Recursos (Terraform)
 
 - **Scripts Terraform**: Utilizamos scripts Terraform para criar recursos como Event Hub, Databricks e Storage Account.
   - **Event Hub**: Configurado com throughput adequado para suportar o volume de eventos.
   - **Databricks**: Configurado com clusters de autoescalabilidade para processamento eficiente.
   - **Storage Account**: Configurado para armazenar dados brutos e processados com redundância geográfica.
 
-#### 3.5.2 Automação CI/CD (GitHub Actions)
+#### Automação CI/CD (GitHub Actions)
 
 - **Workflows**: O GitHub Actions é configurado para automatizar o deploy da infraestrutura e a execução de jobs no Databricks.
   - **Build**: Executa scripts de criação de recursos.
@@ -127,12 +127,12 @@ Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o frame
 
 ### 3.6 Processamento de Dados
 
-#### 3.6.1 Ingestão de Dados (Event Hub)
+#### Ingestão de Dados (Event Hub)
 
 - **Configuração**: O Event Hub captura eventos em tempo real, configurado com partitions para garantir alta disponibilidade.
   - **Consumers**: Configurados para alimentar o pipeline de dados no Databricks.
 
-#### 3.6.2 Processamento de Dados (Databricks)
+#### Processamento de Dados (Databricks)
 
 - **Configuração de Clusters**: Clusters autoescaláveis configurados para otimizar o processamento de grandes volumes de dados.
 - **Scripts de Processamento**: Utilizamos PySpark para ler dados do Event Hub, processá-los, e armazená-los no Data Lake.
@@ -142,3 +142,77 @@ Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o frame
   processed_df = process_data(df)
   processed_df.write.mode("append").parquet("path/to/datalake")
   ```
+
+### 3.7 Armazenamento de Dados
+
+#### Data Lake (Storage Account)
+
+Estrutura: Dados organizados em camadas de bronze, silver e gold, seguindo a arquitetura de medalhão.
+Bronze: Dados brutos.
+Silver: Dados processados.
+Gold: Dados prontos para análise.
+Segurança: Criptografia em repouso e controle de acesso via IAM configurados.
+
+### 3.8 Segurança
+
+#### Políticas de Acesso e Mascaramento de Dados
+
+IAM: Políticas configuradas para controlar o acesso a diferentes serviços e dados sensíveis.
+Mascaramento de Dados: Dados confidenciais mascarados durante o processamento e armazenamento, usando ferramentas de criptografia nativas.
+Autenticação e Autorização
+Azure AD: Integrado para gerenciar autenticação e autorização de usuários.
+
+### 3.9 Observabilidade e Monitoramento
+
+#### Monitoramento de Logs
+
+Azure Monitor: Configurado para capturar logs de todos os componentes, com dashboards para visualização de métricas.
+Log Analytics: Utilizado para consultas e diagnósticos de problemas.
+Alertas e Notificações
+Alertas: Configurados para monitorar falhas no pipeline e enviar notificações para a equipe.
+Critérios de Alerta: Thresholds configurados para latência e falhas de ingestão/processamento.
+
+## 4. Instruções para Configuração e Execução do Projeto
+
+### 4.1 Pré-requisitos
+
+- Conta na Azure
+- Configuração do GitHub Actions
+- Instalação do Terraform
+- Instalação do Python 3.10 e Poetry
+
+### 4.2 Passos de Configuração
+
+1. Clone o repositório:
+   ```sh
+   git clone https://github.com/lealdouglas/dougsll-datamaster.git
+   cd dougsll-datamaster
+   ```
+2. Configure suas credenciais da Azure no Terraform.
+3. Execute as actions do repositório para criar os recursos:
+4. Configure o GitHub Actions para automatizar os jobs no Databricks.
+5. Execute o job no Databricks para processar os dados.
+
+## 5. Melhorias e Considerações Finais
+
+### 5.1 Melhorias Futuras
+
+- montar .yaml para tf e incluir usuario principal, para vincular aos grupos.
+- parametros recuperados via API para gerar uma imersao na experiencia poderiam estar configurados em um banco de dados.
+- criar classe abstrata para datacontract ficar ainda mais como uma 'interface'
+  Escalabilidade: Melhorar o desempenho da ingestão de dados com particionamento de dados.
+  Segurança: Implementar autenticação baseada em tokens para APIs de terceiros.
+  Observabilidade: Adicionar métricas de performance e latência do pipeline.
+
+### 5.2 Considerações Finais
+
+Este projeto demonstra uma solução escalável e segura para monitoramento de transações financeiras em tempo real, utilizando ferramentas modernas de processamento de dados e automação de infraestrutura.
+
+## 6. Referências
+
+- [Terraform Documentation](https://www.terraform.io/docs/index.html)
+- [Azure Databricks Documentation](https://learn.microsoft.com/en-us/azure/databricks/)
+- [Azure Event Hub Documentation](https://learn.microsoft.com/en-us/azure/event-hubs/)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Poetry Documentation](https://python-poetry.org/docs/)
+- [Data Contract](https://datacontract.com/)
