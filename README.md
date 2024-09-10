@@ -6,8 +6,7 @@
 </p>
 &nbsp;
 
-O projeto "dougsll-datamaster" é uma solução para o programa Data Master elaborado pela F1rst Santander. <p>
-Solução proposta e produzida por Douglas Leal. <p>
+O repositório "dougsll-datamaster" é uma solução para o programa Data Master elaborado pela F1rst Santander. Solução proposta e produzida por Douglas Leal. <p>
 
 &nbsp;
 
