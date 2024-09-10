@@ -1,4 +1,8 @@
-# Data Master - Douglas Leal (Git template)
+# Data Master - Douglas Leal
+
+## Descrição
+
+O projeto "dougsll-datamaster" é uma solução para o programa Data Master elaborado pela F1rst Santander. Solucao proposta e produzida por Douglas Leal.
 
 1. [Objetivo do Projeto](#1-objetivo-do-case)
 2. [Arquitetura de Solução](#2-arquitetura-de-solução)
@@ -36,6 +40,52 @@
 ## 1. Objetivo do Case
 
 Este projeto visa desenvolver uma solução de engenharia de dados com o principal objetivo de preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. O projeto simula a criação de um ambiente conceitual de dados para um domínio de dados, configurando o ambiente para realizar ações como pipelines de ingestão e exploração de dados.
+
+## Tabela de Conteúdos
+
+1. [Descrição](#descrição)
+2. [Instalação](#instalação)
+3. [Uso](#uso)
+4. [Contribuição](#contribuição)
+5. [Licença](#licença)
+6. [Documentação Adicional](#documentação-adicional)
+
+## Instalação
+
+Para instalar e configurar o projeto, siga os passos abaixo:
+
+1. **Clone o repositório:**
+
+   ```bash
+   git clone https://github.com/lealdouglas/dougsll-datamaster.git
+   ```
+
+2. **Navegue até o diretório do projeto:**
+
+   ```bash
+   cd dougsll-datamaster
+   ```
+
+3. **Instale as dependências:**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configure as variáveis de ambiente:**
+
+   Crie um arquivo `.env` no diretório raiz e adicione as seguintes variáveis:
+
+   ```env
+   AZURE_CLIENT_ID=your-client-id
+   AZURE_CLIENT_SECRET=your-client-secret
+   ```
+
+5. **Inicie o serviço:**
+
+   ```bash
+   python app.py
+   ```
 
 ## 2. Arquitetura de Solução
 
