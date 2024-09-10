@@ -4,7 +4,7 @@
 
 O projeto "dougsll-datamaster" é uma solução para o programa Data Master elaborado pela F1rst Santander. Solucao proposta e produzida por Douglas Leal.
 
-1. [Objetivo do Projeto](#1-objetivo-do-case)
+1. [Objetivo do Case](#1-objetivo-do-case)
 2. [Arquitetura de Solução](#2-arquitetura-de-solução)
    - [Visão Geral](#21-visão-geral)
    - [Diagrama de Arquitetura de Solução](#22-diagrama-de-arquitetura-de-solução)
@@ -45,13 +45,7 @@ Este projeto visa desenvolver uma solução de engenharia de dados com o princip
 
 ### 2.1 Visão Geral
 
-A solução é projetada para preparar um ambiente de estudo e exploração de dados baseado em nuvem em poucos minutos. Considere o seguinte cenário: Eu, como engenheiro de dados e/ou ML, a partir de uma subscricao demoninada como "domínio de dados riscos (drisc)" preciso montar o setup do meu ambiente cloud e criar o pipeline de dados, desde a ingestão até a construção de uma smart table. Nesse cenário, preciso considerar a configuração de um ambiente governado, baseado em uma arquitetura de medallion, explorar dados e implantar um motor. A solução deve permitir ao desenvolvedor configurar seu ambiente, simulando uma prateleira de recursos para dados, e, com poucas configurações, definir um fluxo de ingestão e entregar um ambiente para exploração de dados, integrado à jornada de implantação. Toda a jornada apresentada em um só lugar, de maneira básica e bem feita.
-
-##### Ambição (AVALIAR DEPOIS):
-
-- Relatório no cost analysis
-- Lifecycle já implementado
-- Bundles Databricks
+A solução é projetada para preparar um ambiente de estudo e exploração de dados baseado em nuvem em poucos minutos. Considere o seguinte cenário: Eu, como engenheiro de dados e/ou ML, a partir de uma subscrição demoninada como "domínio de dados riscos (drisc)" preciso montar o setup do meu ambiente cloud e criar o pipeline de dados, desde a ingestão até a construção de uma smart table. Nesse cenário, preciso considerar a configuração de um ambiente governado, baseado em uma arquitetura de medallion, explorar dados e implantar um motor. A solução deve permitir ao desenvolvedor configurar seu ambiente, simulando uma prateleira de recursos para dados, e, com poucas configurações, definir um fluxo de ingestão e entregar um ambiente para exploração de dados, integrado à jornada de implantação. Toda a jornada apresentada em um só lugar, de maneira básica e bem feita.
 
 ### 2.2 Diagrama de Arquitetura de Solução
 
@@ -68,6 +62,12 @@ A solução utiliza Azure como provedora de nuvem, Active Directory para gestão
 - **Azure Storage Account**: Armazena dados brutos e processados em camadas organizadas, conforme a arquitetura de medalhão (bronze, silver, gold).
 - **Segurança**: Implementa políticas de mascaramento de dados e criptografia para proteger informações sensíveis.
 - **Observabilidade**: Utiliza monitoramento contínuo para garantir o funcionamento correto do sistema, com alertas configurados para falhas e anomalias.
+
+##### Ambição (AVALIAR DEPOIS):
+
+- Relatório no cost analysis
+- Lifecycle já implementado
+- Bundles Databricks
 
 ### 2.4 Características Essenciais (Case)
 
@@ -209,16 +209,22 @@ Critérios de Alerta: Thresholds configurados para latência e falhas de ingest�
 
 ### 5.1 Melhorias Futuras
 
-- montar .yaml para tf e incluir usuario principal, para vincular aos grupos.
-- parametros recuperados via API para gerar uma imersao na experiencia poderiam estar configurados em um banco de dados.
-- criar classe abstrata para datacontract ficar ainda mais como uma 'interface'
-  Escalabilidade: Melhorar o desempenho da ingestão de dados com particionamento de dados.
-  Segurança: Implementar autenticação baseada em tokens para APIs de terceiros.
-  Observabilidade: Adicionar métricas de performance e latência do pipeline.
+Abaixo, compartilho algumas melhorias consideradas para essa solucao, considerando que o cenário desenvolvido é apenas um prototipo de uma necessidade maior:
+
+- Nível solucao:
+  - UI e API Services, com serviços integrados e uma interface web configurada, as validações e etapas podem ser orquestradas a partir da interação do usuário com o formulário, onde, a partir das opções, um serviço pode ser acionado ou um repositório/actions pode ser configurado.
+  - Configurar um cluster para uso conforme etapas do pipeline.
+  - Escalabilidade: Melhorar o desempenho da ingestão de dados com particionamento de dados.
+  - Segurança: Implementar autenticação baseada em tokens para APIs de terceiros.
+  - Observabilidade: Adicionar métricas de performance e latência do pipeline.
+- Ajustes de implementacao:
+  - montar .yaml para tf e incluir usuario principal, para vincular aos grupos.
+  - parametros recuperados via API para gerar uma imersao na experiencia poderiam estar configurados em um banco de dados.
+  - Criar classe estruturada para o uso genérico do datacontract, aplicar padroes de SOLID.
 
 ### 5.2 Considerações Finais
 
-Este projeto demonstra uma solução escalável e segura para monitoramento de transações financeiras em tempo real, utilizando ferramentas modernas de processamento de dados e automação de infraestrutura.
+Este projeto demonstra uma solução que representa o potencial em definir, configurar ambientes e prepara um pipeline de dados sem levar o desenvolvedor (engenheiro de dados/ml) sair da plataforma do desenv, essa tendo todos os acessos e funcionalidades bem estabalecidas, tem a capacidade/autonomia de servir a jornada completa do desenvolvedor. A solucao tambem aborda uma visao onde, a partir de uma subscricao (exemplo do case dominio drisk) é possivel configurar pequenos projetos (actions com a capacidade de criar resource groups, recursos unitários e cenários pré-moldados) com base na finalidade e configurar ambientes desejados, onde a jornada nasce desde o repositorio. Por fim, uma camada de interface web e algumas API's podem absorver algumas validacoes e steps que via git podem parecer complicadas.
 
 ## 6. Referências
 
