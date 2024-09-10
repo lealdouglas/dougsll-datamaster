@@ -104,7 +104,7 @@ A solução é projetada para preparar um ambiente de estudo e exploração de d
 A solução utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o setup via Terraform e o gerenciamento das automações via contrato de dados, que visam simplificar a relação dos serviços com a plataforma e dados, também estão incorporadas nessa solução.
 
 <p align="center">
-  <img src="resources/img/diagrama_tc.PNG" width="650" alt="Diagrama de Arquitetura">
+  <img src="assets/img/diagrama_tc.PNG" width="650" alt="Diagrama de Arquitetura">
 </p>
 
 ### 2.3 Descrição dos Componentes
@@ -132,10 +132,14 @@ A arquitetura técnica é baseada em uma infraestrutura provisionada via Terrafo
 
 ### 3.2 Ideação do Projeto
 
+<p align="center">
+  <img src="assets/img/esboco.png" width="650" alt="Diagrama de Arquitetura">
+</p>
+
 Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
 
 <p align="center">
-  <img src="resources/img/ideacao.PNG" width="900" alt="ideacao do projeto">
+  <img src="assets/img/ideacao.PNG" width="900" alt="ideacao do projeto">
 </p>
 
 Onde RUN é apenas uma referencias as execuoes que podem ou nao utilizar o framework.
