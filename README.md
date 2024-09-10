@@ -6,7 +6,7 @@
 </p>
 &nbsp;
 
-O repositório "dougsll-datamaster" é uma solução para o programa Data Master elaborado pela F1rst Santander. Solução proposta e desenvolvida por Douglas Leal. <p>
+O repositório "dougsll-datamaster" é uma solução para o programa Data Master elaborado pela F1rst Santander. Solução proposta e desenvolvida por [Douglas Leal](https://www.linkedin.com/in/douglasleall/). <p>
 
 &nbsp;
 
@@ -247,3 +247,6 @@ Este projeto demonstra uma solução que representa o potencial em definir, conf
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [Poetry Documentation](https://python-poetry.org/docs/)
 - [Data Contract](https://datacontract.com/)
+- [Medallion Architecture](https://www.databricks.com/br/glossary/medallion-architecture)
+
+## 6. Referências
