@@ -21,13 +21,13 @@
 
 ## 1. Objetivo do Case
 
-Este projeto visa desenvolver uma solução de engenharia de dados com o principal objetivo de preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. O projeto simula a criação de um conceitual ambiente de dados para uma data domain, configurando ambiente, pipeline de ingestão e exploração do dados.
+Este projeto visa desenvolver uma solução de engenharia de dados com o principal objetivo de preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. O projeto simula a criação de um ambiente conceitual de dados para um domínio de dados, configurando o ambiente para realizar ações como pipelines de ingestão e exploração de dados.
 
 ## 2. Arquitetura de Solução
 
 ### 2.1 Visão Geral
 
-A solução é projetada para preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. Ela utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o setup via terraform, gerenciamento das automações via contrato de dados, que visa simplificar a relação dos serviços com a plataforma e dados, estão incorporadas nessa solução.
+A solução é projetada para preparar um ambiente de estudo e exploração de dados baseado em nuvem em poucos minutos. Considere o seguinte cenário: Eu (como engenheiro de dados e/ou ML) preciso montar o setup do meu ambiente cloud e criar o pipeline de dados, desde a ingestão até a construção de uma smart table. Nesse cenário, preciso considerar a configuração de um ambiente governado, baseado em uma arquitetura de medallion, explorar dados e implantar um motor. A solução deve permitir ao desenvolvedor configurar seu ambiente, simulando uma prateleira de recursos para dados, e, com poucas configurações, definir um fluxo de ingestão e entregar um ambiente para exploração de dados, integrado à jornada de implantação. Toda a jornada apresentada em um só lugar.
 
 ##### Ambição (AVALIAR DEPOIS):
 
@@ -36,6 +36,8 @@ A solução é projetada para preparar um ambiente para estudo e exploração de
 - Bundles Databricks
 
 ### 2.2 Diagrama de Arquitetura de Solução
+
+A solução utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o setup via Terraform e o gerenciamento das automações via contrato de dados, que visam simplificar a relação dos serviços com a plataforma e dados, também estão incorporadas nessa solução.
 
 <p align="center">
   <img src="resources/img/diagrama_tc.PNG" width="650" alt="Diagrama de Arquitetura">
