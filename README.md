@@ -132,9 +132,13 @@ A arquitetura técnica é baseada em uma infraestrutura provisionada via Terrafo
 
 ### 3.2 Ideação do Projeto
 
+Todo projeto inicia com uma ideia...
+
 <p align="center">
   <img src="assets/img/esboco.png" width="900" alt="Diagrama de Arquitetura">
 </p>
+
+...que precisa ser organizada.
 
 Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
 
