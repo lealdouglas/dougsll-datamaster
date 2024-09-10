@@ -35,7 +35,13 @@ A solução é projetada para preparar um ambiente para estudo e exploração de
 - Lifecycle já implementado
 - Bundles Databricks
 
-### 2.2 Descrição dos Componentes
+### 2.2 Diagrama de Arquitetura de Solução
+
+<p align="center">
+  <img src="resources/img/diagrama_tc.PNG" width="650" alt="Diagrama de Arquitetura">
+</p>
+
+### 2.3 Descrição dos Componentes
 
 - **Event Hub (opcional)**: Captura dados de transações em tempo real de várias fontes, como sistemas de pagamento e bancos.
 - **Azure Databricks**: Processa os dados capturados, executa algoritmos de detecção de fraudes e prepara os dados para armazenamento.
@@ -43,25 +49,7 @@ A solução é projetada para preparar um ambiente para estudo e exploração de
 - **Segurança**: Implementa políticas de mascaramento de dados e criptografia para proteger informações sensíveis.
 - **Observabilidade**: Utiliza monitoramento contínuo para garantir o funcionamento correto do sistema, com alertas configurados para falhas e anomalias.
 
-### 2.3 Diagrama de Arquitetura de Solução
-
-<p align="center">
-  <img src="resources/img/diagrama_tc.PNG" width="650" alt="Diagrama de Arquitetura">
-</p>
-
-### 2.4 Pipeline de dados
-
-descrever a jornada
-
-exemplo:
-Step1: Deploy Azure databricks managed identity connector to be used by the metastore to access its root storage.
-Step2: Deploy ADLS Gen2 storage account to be used by the metastore as root storage.
-Step3: Deploy the unity catalog metastore.
-Step4: Attached the existing databricks workspace to metastore to enable unity catalog for the workspace.
-Step5: Sync AAD groups to Databricks account. For this steps groups (and their member users, service principals) should have already been created beforehand in AAD.
-Note that in our example account_unity_admin group b
-
-### 2.5 Características Essenciais (Case)
+### 2.4 Características Essenciais (Case)
 
 - Incluir detalhes da solucao, como metastore e outros
 
