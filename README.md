@@ -108,7 +108,7 @@ Onde RUN é uma referência às execuções de ingestão de dados ou de quality,
 
 ### 3.3 Descrição do Fluxo de Dados
 
-- **Extração de Dados**: Dados de transações são capturados em tempo real através do Event Hub.
+- **Provisionamento de recursos (terraforma)**: A partir da configuracao das variaveis de ambiente, é possível executar a action que faz setup do ambiente.
 - **Ingestão de Dados**: Dados são processados no Databricks e armazenados no Data Lake.
 - **Observabilidade**: Monitoramento contínuo para garantir a integridade do fluxo de dados e detectar anomalias.
 - **Segurança e Mascaramento**: Dados sensíveis são mascarados durante o processamento para cumprir regulamentações de segurança.
