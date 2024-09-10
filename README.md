@@ -1,12 +1,15 @@
 # Data Master - Douglas Leal
 
 <p align="center">
-  <img src="assets/img/logo.png" width="500" alt="ideacao do projeto">
+  <img src="assets/img/logo.png" width="300" alt="ideacao do projeto">
 </p>
 
 ## Descrição
 
-O projeto "dougsll-datamaster" é uma solução para o programa Data Master elaborado pela F1rst Santander. Solução proposta e produzida por Douglas Leal.
+O projeto "dougsll-datamaster" é uma solução para o programa Data Master elaborado pela F1rst Santander. <p>
+Solução proposta e produzida por Douglas Leal. <p>
+
+#### Este repositório contém o seguinte:
 
 1. [Objetivo do Case](#1-objetivo-do-case)
 2. [Arquitetura de Solução](#2-arquitetura-de-solução)
