@@ -9,7 +9,6 @@
 O repositório "dougsll-datamaster" é uma solução para o programa Data Master organizado pela F1rst Santander. Solução proposta e desenvolvida por [Douglas Leal](https://www.linkedin.com/in/douglasleall/). <p>
 
 &nbsp;
-
 Este repositório contém o seguinte:
 
 1. [Objetivo do Case](#1-objetivo-do-case)
