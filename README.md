@@ -78,6 +78,10 @@ A solução utiliza Azure como provedora de nuvem, Active Directory para gestão
 - Lifecycle já implementado
 - Bundles Databricks
 
+<p align="center">
+  <img src="assets/img/diagrama_tc.PNG" width="700" alt="Diagrama de Arquitetura">
+</p>
+
 ### 2.4 Características Essenciais (Case)
 
 - Incluir detalhes da solucao, como metastore e outros
