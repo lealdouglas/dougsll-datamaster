@@ -259,5 +259,3 @@ Este projeto demonstra uma solução que representa o potencial em definir, conf
 - [Poetry Documentation](https://python-poetry.org/docs/)
 - [Data Contract](https://datacontract.com/)
 - [Medallion Architecture](https://www.databricks.com/br/glossary/medallion-architecture)
-
-## 6. Referências
