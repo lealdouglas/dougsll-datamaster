@@ -52,7 +52,7 @@ Este repositório contém o seguinte:
 Este projeto visa desenvolver uma solução de engenharia de dados com o principal objetivo de preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. O projeto simula a criação de um ambiente conceitual de dados para um domínio de dados, configurando o ambiente para realizar ações como pipelines de ingestão e exploração de dados.
 
 <p align="center">
-  <img src="assets/img/solucao_ideia.PNG" width="900" alt="ideacao do projeto">
+  <img src="assets/img/solucao_ideia.PNG" width="700" alt="ideacao do projeto">
 </p>
 
 ## 2. Arquitetura de Solução
@@ -64,7 +64,7 @@ A solução é projetada para preparar um ambiente de estudo e exploração de d
 ### 2.2 Diagrama de Arquitetura de Solução
 
 <p align="center">
-  <img src="assets/img/solucao_v3.png" width="400" alt="Diagrama de Arquitetura">
+  <img src="assets/img/solucao_v3.png" width="700" alt="Diagrama de Arquitetura">
 </p>
 
 A solução utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o setup via Terraform e o gerenciamento das automações via contrato de dados, que visam simplificar a relação dos serviços com a plataforma e dados, também estão incorporadas nessa solução.
