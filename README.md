@@ -1,6 +1,7 @@
 # Data Master - Douglas Leal
 
 &nbsp;
+
 <p align="center">
   <img src="assets/img/logo.png" width="300" alt="ideacao do projeto">
 </p>
@@ -50,6 +51,10 @@ Este repositório contém o seguinte:
 
 Este projeto visa desenvolver uma solução de engenharia de dados com o principal objetivo de preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. O projeto simula a criação de um ambiente conceitual de dados para um domínio de dados, configurando o ambiente para realizar ações como pipelines de ingestão e exploração de dados.
 
+<p align="center">
+  <img src="assets/img/solucao_ideia.PNG" width="900" alt="ideacao do projeto">
+</p>
+
 ## 2. Arquitetura de Solução
 
 ### 2.1 Visão Geral
@@ -97,7 +102,7 @@ A solução utiliza Azure como provedora de nuvem, Active Directory para gestão
 
 A arquitetura técnica é baseada em uma infraestrutura provisionada via Terraform, com pipelines automatizados usando GitHub Actions, processamento em tempo real no Azure Databricks, e armazenamento seguro de dados no Azure Storage Account.
 
-### 3.2 Ideação do Projeto
+### 3.2 Sobre o projeto
 
 Todo projeto inicia com uma ideia...
 
@@ -106,6 +111,8 @@ Todo projeto inicia com uma ideia...
 </p>
 
 ...que precisa ser organizada.
+
+### 3.3 Ideação do Projeto
 
 Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
 
@@ -119,20 +126,21 @@ Onde RUN é uma referência às execuções de ingestão de dados ou de quality,
 - [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), delivery do pipeline de dados
 - [lealdouglas/carlton](https://github.com/lealdouglas/carlton), framework e acelerador.
 
-### 3.3 Descrição do Fluxo de Dados
+### 3.4 Descrição do Fluxo de Dados
 
-- **Provisionamento de recursos (terraforma)**: A partir da configuracao das variaveis de ambiente, é possível executar a action que faz setup do ambiente.
-- **Ingestão de Dados**: Dados são processados no Databricks e armazenados no Data Lake.
-- **Observabilidade**: Monitoramento contínuo para garantir a integridade do fluxo de dados e detectar anomalias.
-- **Segurança e Mascaramento**: Dados sensíveis são mascarados durante o processamento para cumprir regulamentações de segurança.
+- **Provisionamento de recursos**: O ambiente é provisionado via Terraform.
+- **Configuração**: definicao do contrato de ingestao via .yaml.
+- **Ingestão**: Dados são processados no Databricks e armazenados no Data Lake.
+- **Processamento**: Monitoramento contínuo para garantir a integridade do fluxo de dados e detectar anomalias.
 
 ### 3.4 Tecnologias Utilizadas
 
+- **Terraform**: Para provisionamento de infraestrutura.
+- **Azure Active Directory**: Para gestão de grupos e usuários.
 - **Azure Event Hub**: Para captura de eventos.
 - **Azure Databricks**: Para processamento de dados em escala.
 - **Azure Storage Account**: Para armazenamento seguro.
 - **GitHub Actions**: Para automação CI/CD.
-- **Terraform**: Para provisionamento de infraestrutura.
 
 ### 3.5 Infraestrutura
 
