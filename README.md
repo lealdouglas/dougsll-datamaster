@@ -24,19 +24,10 @@ Este repositório contém o seguinte:
    - [Descrição do Fluxo de Dados](#33-descrição-do-fluxo-de-dados)
    - [Tecnologias Utilizadas](#34-tecnologias-utilizadas)
    - [Infraestrutura](#35-infraestrutura)
-     - [Provisionamento de Recursos (Terraform)](#351-provisionamento-de-recursos-terraform)
-     - [Automação CI/CD (GitHub Actions)](#352-automação-cicd-github-actions)
    - [Processamento de Dados](#36-processamento-de-dados)
-     - [Ingestão de Dados (Event Hub)](#361-ingestão-de-dados-event-hub)
-     - [Processamento de Dados (Databricks)](#362-processamento-de-dados-databricks)
    - [Armazenamento de Dados](#37-armazenamento-de-dados)
-     - [Data Lake (Storage Account)](#371-data-lake-storage-account)
    - [Segurança](#38-segurança)
-     - [Políticas de Acesso e Mascaramento de Dados](#381-políticas-de-acesso-e-mascaramento-de-dados)
-     - [Autenticação e Autorização](#382-autenticação-e-autorização)
    - [Observabilidade e Monitoramento](#39-observabilidade-e-monitoramento)
-     - [Monitoramento de Logs](#391-monitoramento-de-logs)
-     - [Alertas e Notificações](#392-alertas-e-notificações)
 4. [Instruções para Configuração e Execução do Projeto](#4-instruções-para-configuração-e-execução-do-projeto)
    - [Pré-requisitos](#41-pré-requisitos)
    - [Passos de Configuração](#42-passos-de-configuração)
@@ -51,23 +42,23 @@ Este repositório contém o seguinte:
 
 Este projeto visa desenvolver uma solução de engenharia de dados com o principal objetivo de preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. O projeto simula a criação de um ambiente conceitual de dados para um domínio de dados, configurando o ambiente para realizar ações como pipelines de ingestão e exploração de dados.
 
-<p align="center">
-  <img src="assets/img/solucao_ideia.PNG" width="700" alt="ideacao do projeto">
-</p>
-
 ## 2. Arquitetura de Solução
 
 ### 2.1 Visão Geral
 
 A solução é projetada para preparar um ambiente de estudo e exploração de dados baseado em nuvem em poucos minutos. Considere o seguinte cenário: Eu, como engenheiro de dados e/ou ML, a partir de uma subscrição demoninada como "domínio de dados riscos (drisc)" preciso montar o setup do meu ambiente cloud e criar o pipeline de dados, desde a ingestão até a construção de uma smart table. Nesse cenário, preciso considerar a configuração de um ambiente governado, baseado em uma arquitetura de medallion, explorar dados e implantar um motor. A solução deve permitir ao desenvolvedor configurar seu ambiente, simulando uma prateleira de recursos para dados, e, com poucas configurações, definir um fluxo de ingestão e entregar um ambiente para exploração de dados, integrado à jornada de implantação. Toda a jornada apresentada em um só lugar, de maneira básica e bem feita.
 
+<p align="center">
+  <img src="assets/img/solucao_ideia.PNG" width="700" alt="ideacao do projeto">
+</p>
+
 ### 2.2 Diagrama de Arquitetura de Solução
+
+A solução utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o setup via Terraform e o gerenciamento das automações via contrato de dados, que visam simplificar a relação dos serviços com a plataforma e dados, também estão incorporadas nessa solução.
 
 <p align="center">
   <img src="assets/img/solucao_v3.png" width="700" alt="Diagrama de Arquitetura">
 </p>
-
-A solução utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o setup via Terraform e o gerenciamento das automações via contrato de dados, que visam simplificar a relação dos serviços com a plataforma e dados, também estão incorporadas nessa solução.
 
 ### 2.3 Descrição dos Componentes
 
@@ -138,25 +129,29 @@ Onde RUN é uma referência às execuções de ingestão de dados ou de quality,
 - **Terraform**: Para provisionamento de infraestrutura.
 - **Azure Active Directory**: Para gestão de grupos e usuários.
 - **Azure Event Hub**: Para captura de eventos.
-- **Azure Databricks**: Para processamento de dados em escala.
 - **Azure Storage Account**: Para armazenamento seguro.
+- **Databricks**: Para processamento de dados em escala.
+- **Databricks Unity Catalog**: Para gestão de grupos, catalogo, schemas e tabelas.
 - **GitHub Actions**: Para automação CI/CD.
 
-### 3.5 Infraestrutura
+### 3.5 Infraestrutura como Código
 
 #### Provisionamento de Recursos (Terraform)
 
-- **Scripts Terraform**: Utilizamos scripts Terraform para criar recursos como Event Hub, Databricks e Storage Account.
-  - **Event Hub**: Configurado com throughput adequado para suportar o volume de eventos.
-  - **Databricks**: Configurado com clusters de autoescalabilidade para processamento eficiente.
-  - **Storage Account**: Configurado para armazenar dados brutos e processados com redundância geográfica.
+- **Scripts Terraform**: Utilizamos scripts Terraform para criar recursos como Event Hub, Databricks e Storage Account. Além disso, script é responsável por criar usuários e grupos no Azure Active Directory, sincroniza-los no unity catalog, configurar metastore e schemas baseados na arquitetura medallion.
+- **Event Hub**: Provisionado recurso para ingestões em evento.
+- **Unit Catalog**: Configuração de metastore, sincronização de usuários, configuração de schema e tabelas.
+- **Databricks**: Configurado com cluster single node, para uso de experimentação e baixo custo, proporcionando uma experiência imersiva.
+- **Storage Account**: Configurado para armazenar dados brutos (raw), ingeridos (bronze) e processados (silver).
+
+### 3.6 Automações
 
 #### Automação CI/CD (GitHub Actions)
 
 - **Workflows**: O GitHub Actions é configurado para automatizar o deploy da infraestrutura e a execução de jobs no Databricks.
-  - **Build**: Executa scripts de criação de recursos.
-  - **Deploy**: Configura e executa jobs no Databricks.
-  - **Monitoramento**: Configura alertas e captura logs de execução.
+- **Build**: Executa scripts de criação de recursos.
+- **Deploy**: Configura e executa jobs no Databricks.
+- **Monitoramento**: Configura alertas e captura logs de execução.
 
 ### 3.6 Processamento de Dados
 
@@ -239,16 +234,16 @@ Abaixo, compartilho algumas melhorias consideradas para essa solução e ambiç�
 - Escalabilidade: Melhorar o desempenho da ingestão de dados com particionamento de dados.
 - Segurança: Implementar autenticação baseada em tokens para APIs de terceiros.
 - Observabilidade: Adicionar métricas de performance e latência do pipeline.
+- Banco de dados, Parâmetros recuperados via API para gerar uma imersão na experiência poderiam estar configurados em um banco de dados
 
-#### Melhorias de implementação:
+#### Possíveis contribuições técnicas (melhorias):
 
-- montar .yaml para tf e incluir usuario principal, para vincular aos grupos.
-- parametros recuperados via API para gerar uma imersao na experiencia poderiam estar configurados em um banco de dados.
-- Criar classe estruturada para o uso genérico do datacontract, aplicar padroes de SOLID.
+- Montar .yaml para script terraform e incluir usuario principal (conta), para vincular aos grupos.
+- Criar uma classe estruturada para o uso genérico do data contract, aplicando os padrões de SOLID.
 
 ### 5.2 Considerações Finais
 
-Este projeto demonstra uma solução que representa o potencial em definir, configurar ambientes e prepara um pipeline de dados sem levar o desenvolvedor (engenheiro de dados/ml) sair da plataforma do desenv, essa tendo todos os acessos e funcionalidades bem estabalecidas, tem a capacidade/autonomia de servir a jornada completa do desenvolvedor. A solucao tambem aborda uma visao onde, a partir de uma subscricao (exemplo do case dominio drisk) é possivel configurar pequenos projetos (actions com a capacidade de criar resource groups, recursos unitários e cenários pré-moldados) com base na finalidade e configurar ambientes desejados, onde a jornada nasce desde o repositorio. Por fim, uma camada de interface web e algumas API's podem absorver algumas validacoes e steps que via git podem parecer complicadas.
+Este projeto demonstra uma solução que representa o potencial em definir e configurar ambientes, além de preparar um pipeline de dados, sem exigir que o desenvolvedor (engenheiro de dados/ML) saia da plataforma de desenvolvimento (Git). Com todos os acessos e funcionalidades bem estabelecidos (Actions), a solução tem a capacidade e autonomia de servir toda a jornada do desenvolvedor. A solução também aborda uma visão em que, a partir de uma assinatura (exemplo do case domínio Drisk), é possível configurar pequenos projetos (Actions com a capacidade de criar resource groups, recursos unitários e cenários pré-moldados), com base na finalidade e nos ambientes desejados, onde a jornada começa desde o repositório. Por fim, uma camada de interface web e algumas APIs podem absorver validações e etapas que, via Git, podem parecer complicadas.
 
 ## 6. Referências
 
