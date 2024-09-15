@@ -45,7 +45,9 @@ Este repositório contém o seguinte:
 5. [Melhorias e Considerações Finais](#5-melhorias-e-considerações-finais)
    - [Melhorias Futuras](#51-melhorias-futuras)
    - [Considerações Finais](#52-considerações-finais)
-6. [Referências](#6-referências)
+6. [Custos do Projeto](#6-custos-do-projeto)
+7. [Referências](#7-referências)
+
 
 &nbsp;
 
@@ -244,7 +246,7 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
   - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
     Após criar usuário, acesse ao recurso da conta, Microsoft Entra ID, para incluir o usuário a permissão de Global Administrator,
 
-    <EXPLICAR COMO FAZER>
+    ESCREVER!
     
 #### STEP 3. Configure as secrets no GIT 
 Configure as variaveis de ambiente (secrets) em seu repositório Git,
@@ -293,7 +295,7 @@ Este projeto demonstra uma solução que representa o potencial em definir e con
 
 Esse projeto, executado de ponta a ponta, teve um custo de,
 
-<APRESENTAR CUSTO>
+ESCREVER!
 
 ## 7. Referências
 
