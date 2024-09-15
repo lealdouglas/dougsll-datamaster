@@ -129,7 +129,9 @@ Este projeto foi idealizado para que os usuários tenham um ambiente mínimo par
 </p>
 
 Ao Clonar repos template, o usuário deve setar as variaveis de ambiente necessário no git, configurar os arquivos .yaml e iniciar as execuções. 
-Na etapa de ingestão, o job executar acessar o pypi para baixar o framework default da plataforma.
+Na etapa de ingestão, o job executor fará download do pypi para uso do framework padrão da plataforma apresentada.
+
+Repositório adicionais utilizados nesse projeto para experiência imersiva:
 
 - [lealdouglas/strife](https://github.com/lealdouglas/strife), Setup de infraestrutura (recursos).
 - [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), Delivery do pipeline de dados.
@@ -157,11 +159,11 @@ Na etapa de ingestão, o job executar acessar o pypi para baixar o framework def
 
 #### Provisionamento de Recursos (Terraform)
 
-- **Scripts Terraform**: Utilizamos scripts Terraform para criar recursos como Event Hub, Databricks e Storage Account. Além disso, script é responsável por criar usuários e grupos no Azure Active Directory, sincroniza-los no unity catalog, configurar metastore e schemas baseados na arquitetura medalhão.
-- **Event Hub**: Provisionado recurso para ingestões em evento.
-- **Unit Catalog**: Configuração de metastore, sincronização de usuários, configuração de schema e tabelas.
-- **Databricks**: Configurado com cluster single node, para uso de experimentação e baixo custo, proporcionando uma experiência imersiva.
-- **Storage Account**: Configurado para armazenar dados brutos (raw), ingeridos (bronze) e processados (silver).
+- **Scripts Terraform**: Utilizamos scripts Terraform para criar recursos como Event Hub, Databricks e Storage Account. Além disso, script é responsável por criar usuários e grupos no Azure Active Directory, sincroniza-los no unity catalog, configurar metastore e schemas baseados na arquitetura medalhão. Recursos criados via terraform nesse projeto,
+    - **Event Hub**: Provisionado recurso para ingestões em evento.
+    - **Unit Catalog**: Configuração de metastore, sincronização de usuários, configuração de schema e tabelas.
+    - **Databricks**: Configurado com cluster single node, para uso de experimentação e baixo custo, proporcionando uma experiência imersiva.
+    - **Storage Account**: Configurado para armazenar dados brutos (raw), ingeridos (bronze) e processados (silver).
 
 ### 3.6 Automações
 
@@ -181,7 +183,7 @@ Na etapa de ingestão, o job executar acessar o pypi para baixar o framework def
 #### Processamento de Dados (Databricks)
 
 - **Configuração de Clusters**: Clusters autoescaláveis configurados para otimizar o processamento de grandes volumes de dados.
-- **Scripts de Processamento**: Utilizamos PySpark para ler dados do Event Hub, processá-los, e armazená-los no Data Lake.
+- **Scripts de Ingestão e Processamento**: Utilizamos PySpark para ler dados, processá-los, e armazená-los no Data Lake.
   ```python
   # Exemplo de código PySpark
   spark.readStream.format('cloudFiles')
@@ -198,10 +200,12 @@ Na etapa de ingestão, o job executar acessar o pypi para baixar o framework def
 
 #### Data Lake (Storage Account)
 
-Estrutura: Dados organizados em camadas de bronze, silver e gold, seguindo a arquitetura de medalhão.
-Bronze: Dados brutos.
-Silver: Dados processados.
-Gold: Dados prontos para análise.
+- **Estrutura**: Dados organizados em camadas de bronze, silver e gold, seguindo a arquitetura de medalhão.
+    - **Catalogo**: Catalogo de dados para suportar arquitetura medalhão.
+    - **Raw**: landing arquivos.
+    - **Bronze**: Dados brutos.
+    - **Silver**: Dados processados.
+    - **Gold**: Dados prontos para análise.
 
 ## 4. Instruções para Configuração e Execução do Projeto
 
