@@ -210,15 +210,15 @@ Gold: Dados prontos para análise.
 - Conta na Azure
 - Subscrição Azure, preferência sem uso.
 - Usuário de serviço (Service Principal) com as seguintes atribuições:
-  - Owner, para criar e gerenciar recursos da azure.
-  - Global Administrator, para sincronizar grupos e usuários do AAD no unity.
-  - Após provisionar ambiente [Action: 01. Strife - Setup Lakehouse]: account adming, para criar e configurar o metastore do Unity Catalog.
+  - **Owner**, para criar e gerenciar recursos da azure.
+  - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
+  - Após provisionar ambiente [Action: 01. Strife - Setup Lakehouse]: **Account Admin**, para criar e configurar o metastore do Unity Catalog.
 - Definição das variaveis de ambiente:
-  - TF_ARM_TENANT_ID, conta na azure (tenant)
-  - TF_ARM_SUBSCRIPTION_ID, subscrição da conta
-  - TF_ARM_CLIENT_ID, ID do usuário de serviço com permissão para criar recursos e grupos no AAD.
-  - TF_ARM_CLIENT_SECRET, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
-  - ADB_ACCOUNT_ID, ID da console Unity Catalog do Databricks.
+  - **TF_ARM_TENANT_ID**, conta na azure (tenant)
+  - **TF_ARM_SUBSCRIPTION_ID**, subscrição da conta
+  - **TF_ARM_CLIENT_ID**, ID do usuário de serviço com permissão para criar recursos e grupos no AAD.
+  - **TF_ARM_CLIENT_SECRET**, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
+  - **ADB_ACCOUNT_ID**, ID da console Unity Catalog do Databricks.
 
 Utilize o tópico [Passos de Configuração](#42-passos-de-configuração) para dar sequência ao seu projeto.
 
@@ -237,7 +237,7 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
       ```sh
       az ad sp create-for-rbac
       ```
-    Onde, SUBSCRIPTION_ID é o ID da subscrição da sua conta Azure.
+    Onde, **SUBSCRIPTION_ID** é o ID da subscrição da sua conta Azure.
 
   - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
     Após criar usuário, acesse ao recurso da conta, Microsoft Entra ID, para incluir o usuário a permissão de Global Administrator,
@@ -255,11 +255,12 @@ Configure as variaveis de ambiente (secrets) em seu repositório Git,
   
 #### STEP 4. Configure arquivo de Setup Infraestrutura Lakehouse
 #### STEP 5. Execute a action Strife Lakehouse
-#### STEP 6. Execute a action Strife ADB Unity Catalog
-#### STEP 7. Configure arquivo de contrato para ingestão
-#### STEP 8. Execute a action Jarvis Ingestão
-#### STEP 9. Configure seu projeto para explorar dados
-#### STEP 10. Execute a action Jarvis Asset Bundles
+#### STEP 6. Recupere Account ID do Unity Catalog e habilite Account Admin
+#### STEP 7. Execute a action Strife ADB Unity Catalog
+#### STEP 8. Configure arquivo de contrato para ingestão
+#### STEP 9. Execute a action Jarvis Ingestão
+#### STEP 10. Configure seu projeto para explorar dados
+#### STEP 11. Execute a action Jarvis Asset Bundles
 
 ## 5. Melhorias e Considerações Finais
 
