@@ -97,12 +97,10 @@ A solução utiliza Azure como provedora de nuvem, Active Directory para gestão
 
 ### 2.4 Características Essenciais (Case)
 
-- Incluir detalhes da solucao, como metastore e outros
-
-- **Escalabilidade**: A solução é capaz de processar um grande volume de transações simultaneamente, com capacidade de escalonamento horizontal no Event Hub e Databricks.
-- **Resiliência**: O sistema tem tolerância a falhas com mecanismos de failover no Event Hub e recuperação automática no Databricks.
-- **Segurança**: A proteção de dados sensíveis é garantida através de criptografia e mascaramento.
-- **Desempenho**: O pipeline de dados é otimizado para garantir processamento em tempo real, com baixa latência.
+- Seguindo passos desse projeto em: [passos de Configuração](#42-passos-de-configuração), deve-se ter um ambiente onde,
+    - Metastore configurado para uso do catalogo e schemas
+    - Contrato de dados para especificar regras de qualidade, padrões dos dados, TTL da informação.
+    - Cluster dedicado para uso específico (criado de acordo com o custo do projeto)
 
 ## 3. Arquitetura Técnica
 
@@ -122,7 +120,7 @@ Todo projeto inicia com uma ideia...
 
 ### 3.3 Ideação do Projeto
 
-Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente end-to-end. A ideação está organizada da seguinte forma:
+Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente ponta a ponta. A ideação está organizada da seguinte forma:
 
 <p align="center">
   <img src="assets/img/ideacao.PNG" width="900" alt="ideacao do projeto">
@@ -291,7 +289,13 @@ Abaixo, compartilho algumas melhorias consideradas para essa solução e ambiç�
 
 Este projeto demonstra uma solução que representa o potencial em definir e configurar ambientes, além de preparar um pipeline de dados, sem exigir que o desenvolvedor (engenheiro de dados/ML) saia da plataforma de desenvolvimento (Git). Com todos os acessos e funcionalidades bem estabelecidos (Actions), a solução tem a capacidade e autonomia de servir toda a jornada do desenvolvedor. A solução também aborda uma visão em que, a partir de uma assinatura (exemplo do case domínio Drisk), é possível configurar pequenos projetos (Actions com a capacidade de criar resource groups, recursos unitários e cenários pré-moldados), com base na finalidade e nos ambientes desejados, onde a jornada começa desde o repositório. Por fim, uma camada de interface web e algumas APIs podem absorver validações e etapas que, via Git, podem parecer complicadas.
 
-## 6. Referências
+## 6. Custos do projeto
+
+Esse projeto, executado de ponta a ponta, teve um custo de,
+
+<APRESENTAR CUSTO>
+
+## 7. Referências
 
 - [Terraform Documentation](https://www.terraform.io/docs/index.html)
 - [Azure Databricks Documentation](https://learn.microsoft.com/en-us/azure/databricks/)
