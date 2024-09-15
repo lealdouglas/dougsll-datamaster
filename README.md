@@ -42,6 +42,11 @@ Este repositório contém o seguinte:
 
 Este projeto visa desenvolver uma solução de engenharia de dados com o principal objetivo de preparar um ambiente para estudo e exploração de dados baseado em nuvem em poucos minutos. O projeto simula a criação de um ambiente conceitual de dados para um domínio de dados, configurando o ambiente para realizar ações como pipelines de ingestão e exploração de dados.
 
+### Início Rápido
+
+Para provisionar o ambiente e usar a plataforma,
+[Instruções para Configuração e Execução do Projeto](#4-instruções-para-configuração-e-execução-do-projeto)
+
 ## 2. Arquitetura de Solução
 
 ### 2.1 Visão Geral
@@ -191,9 +196,11 @@ Gold: Dados prontos para análise.
 ### 4.1 Pré-requisitos
 
 - Conta na Azure
-- Configuração do GitHub Actions
-- Instalação do Terraform
-- Instalação do Python 3.10 e Poetry
+- Subscrição limpa para uso.
+- Usuário de serviço (Service Principal) com role:
+  Owner, para criar e gerenciar recursos da azure.
+  Global Administrator, para sincronizar grupos e usuários do AAD no unity.
+  Após provisionar ambiente [Action: 01. Strife - Setup Lakehouse]: account adming, para criar e configurar o metastore do Unity Catalog.
 
 ### 4.2 Passos de Configuração
 

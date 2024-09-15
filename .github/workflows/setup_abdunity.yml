@@ -1,4 +1,4 @@
-name: 01. Strife - Setup Lakehouse
+name: 02. Strife - Setup Infra Lakehouse
 
 # Este arquivo de workflow do GitHub Actions é utilizado para configurar e implantar
 # um ambiente de Lakehouse no Azure utilizando Terraform. Ele é composto por quatro jobs principais:
@@ -52,21 +52,26 @@ jobs:
 
       # Faz o upload dos artefatos necessários
       # Upload necessary artifacts
-      - name: Upload Artifacts
+      - name: Upload Artifact Unity
         uses: actions/upload-artifact@v1
         with:
-          name: lakehouse
-          path: ${{ github.workspace }}/azsetup/lakehouse
+          name: lakehouseuc
+          path: ${{ github.workspace }}/azsetup/lakehouse-adbuc
+      - name: Upload Artifact Compute
+        uses: actions/upload-artifact@v1
+        with:
+          name: lakehousecp
+          path: ${{ github.workspace }}/azsetup/lakehouse-adbcompute
 
-  # Job para configurar o ambiente de Lakehouse
-  # Job to set up the Lakehouse environment
-  strife-setup-lakehouse:
-    name: Strife Setup Lakehouse
+  # Job para configurar o Unity Catalog
+  # Job to set up the Unity Catalog
+  strife-setup-unity-catalog:
+    name: Strife Setup Unity Catalog
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: ${{ github.workspace }}/azsetup/lakehouse
+        working-directory: ${{ github.workspace }}/azsetup/lakehouse-adbuc
 
     env:
       ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
@@ -84,8 +89,8 @@ jobs:
       - name: Download Terraform
         uses: actions/download-artifact@v2
         with:
-          name: lakehouse
-          path: ${{ github.workspace }}/azsetup/lakehouse
+          name: lakehouseuc
+          path: ${{ github.workspace }}/azsetup/lakehouse-adbuc
 
       # Configura e inicializa o Terraform
       # Set up and initialize Terraform
@@ -103,7 +108,59 @@ jobs:
       # Gera e aplica o plano de execução do Terraform
       # Generate and apply the Terraform execution plan
       - name: Terraform Plan
-        run: terraform plan -no-color -var "envv=${{vars.ENVV}}"
+        run: terraform plan -no-color -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
+        continue-on-error: true
+      - name: Terraform Apply Target Module
+        run: terraform apply -target='module.metastore_and_users' -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
+
+  # Job para configurar os recursos de computação do ADB
+  # Job to set up ADB compute resources
+  strife-setup-adb-compute:
+    name: Strife Setup ADB Compute
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/azsetup/lakehouse-adbcompute
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
+
+    environment:
+      name: dev
+
+    needs: strife-setup-unity-catalog
+    steps:
+      # Baixa o artefato do Terraform
+      # Download the Terraform artifact
+      - name: Download Terraform
+        uses: actions/download-artifact@v2
+        with:
+          name: lakehousecp
+          path: ${{ github.workspace }}/azsetup/lakehouse-adbcompute
+
+      # Configura e inicializa o Terraform
+      # Set up and initialize Terraform
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+      - name: Terraform Init
+        run: terraform init
+
+      # Valida a configuração do Terraform
+      # Validate the Terraform configuration
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      # Gera e aplica o plano de execução do Terraform
+      # Generate and apply the Terraform execution plan
+      - name: Terraform Plan
+        run: terraform plan -no-color -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
         continue-on-error: true
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var "envv=${{vars.ENVV}}"
+        run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
