@@ -1,4 +1,3 @@
-variable1: dougs
-variable2: value2
-nested_key1: nested_value1
-nested_key2: nested_value2
+domain_name: drisk
+catalog_name: dmasterrisk
+project_name: datamaster
