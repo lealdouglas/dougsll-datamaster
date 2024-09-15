@@ -224,8 +224,7 @@ Utilize o tópico [Passos de Configuração](#42-passos-de-configuração) para 
 
 Para configurar um usuário de serviço, você pode fazer via power shell ou via azure cli, após acessar o terminal, utilize o comando abaixo para criar o usuário:
    ```sh
-   git clone https://github.com/lealdouglas/dougsll-datamaster.git
-   cd dougsll-datamaster
+   az ad sp create-for-rbac
    ```
 Onde, SUBSCRIPTION_ID é o ID da subscrição da sua conta Azure.
  
@@ -275,3 +274,4 @@ Este projeto demonstra uma solução que representa o potencial em definir e con
 - [Data Contract](https://datacontract.com/)
 - [Medallion Architecture](https://www.databricks.com/br/glossary/medallion-architecture)
 - [Creating secrets for a repository](https://docs.github.com/pt/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)
+- [Create an Azure service principal with Azure CLI](https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-1?tabs=bash)
