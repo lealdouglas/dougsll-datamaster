@@ -51,7 +51,7 @@ Para provisionar o ambiente e usar a plataforma,
 
 ### 2.1 Visão Geral
 
-A solução é projetada para preparar um ambiente de estudo e exploração de dados baseado em nuvem em poucos minutos. Considere o seguinte cenário: Eu, como engenheiro de dados e/ou ML, a partir de uma subscrição demoninada como "domínio de dados riscos (drisc)" preciso montar o setup do meu ambiente cloud e criar o pipeline de dados, desde a ingestão até a construção de uma smart table. Nesse cenário, preciso considerar a configuração de um ambiente governado, baseado em uma arquitetura de medallion, explorar dados e implantar um motor. A solução deve permitir ao desenvolvedor configurar seu ambiente, simulando uma prateleira de recursos para dados, e, com poucas configurações, definir um fluxo de ingestão e entregar um ambiente para exploração de dados, integrado à jornada de implantação. Toda a jornada apresentada em um só lugar, de maneira básica e bem feita.
+A solução é projetada para preparar um ambiente de estudo e exploração de dados baseado em nuvem em poucos minutos. Considere o seguinte cenário: Eu, como engenheiro de dados e/ou ML, a partir de uma subscrição demoninada como "domínio de dados riscos (drisc)" preciso montar o setup do meu ambiente cloud e criar o pipeline de dados, desde a ingestão até a construção de uma smart table. Nesse cenário, preciso considerar a configuração de um ambiente governado, baseado em uma arquitetura medalhão, explorar dados e implantar um motor. A solução deve permitir ao desenvolvedor configurar seu ambiente, simulando uma prateleira de recursos para dados, e, com poucas configurações, definir um fluxo de ingestão e entregar um ambiente para exploração de dados, integrado à jornada de implantação. Toda a jornada apresentada em um só lugar, de maneira básica e bem feita.
 
 <p align="center">
   <img src="assets/img/solucao_ideia.PNG" width="700" alt="ideacao do projeto">
@@ -117,11 +117,12 @@ Este projeto foi idealizado para que os usuários tenham um ambiente mínimo par
   <img src="assets/img/ideacao.PNG" width="900" alt="ideacao do projeto">
 </p>
 
-Onde RUN é uma referência às execuções de ingestão de dados ou de quality, que utilizam a biblioteca para o uso de soluções já implementadas
+Ao Clonar repos template, o usuário deve setar as variaveis de ambiente necessário no git, configurar os arquivos .yaml e iniciar as execuções. 
+Na etapa de ingestão, o job executar acessar o pypi para baixar o framework default da plataforma.
 
-- [lealdouglas/strife](https://github.com/lealdouglas/strife), setup de infraestrutura (recursos)
-- [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), delivery do pipeline de dados
-- [lealdouglas/carlton](https://github.com/lealdouglas/carlton), framework e acelerador.
+- [lealdouglas/strife](https://github.com/lealdouglas/strife), Setup de infraestrutura (recursos).
+- [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), Delivery do pipeline de dados.
+- [lealdouglas/carlton](https://github.com/lealdouglas/carlton), SDK comum padrão da plataforma de dados.
 
 ### 3.4 Descrição do Fluxo de Dados
 
@@ -145,7 +146,7 @@ Onde RUN é uma referência às execuções de ingestão de dados ou de quality,
 
 #### Provisionamento de Recursos (Terraform)
 
-- **Scripts Terraform**: Utilizamos scripts Terraform para criar recursos como Event Hub, Databricks e Storage Account. Além disso, script é responsável por criar usuários e grupos no Azure Active Directory, sincroniza-los no unity catalog, configurar metastore e schemas baseados na arquitetura medallion.
+- **Scripts Terraform**: Utilizamos scripts Terraform para criar recursos como Event Hub, Databricks e Storage Account. Além disso, script é responsável por criar usuários e grupos no Azure Active Directory, sincroniza-los no unity catalog, configurar metastore e schemas baseados na arquitetura medalhão.
 - **Event Hub**: Provisionado recurso para ingestões em evento.
 - **Unit Catalog**: Configuração de metastore, sincronização de usuários, configuração de schema e tabelas.
 - **Databricks**: Configurado com cluster single node, para uso de experimentação e baixo custo, proporcionando uma experiência imersiva.
