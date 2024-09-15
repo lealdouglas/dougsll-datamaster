@@ -13,6 +13,7 @@ O repositório "dougsll-datamaster" é uma solução para o programa Data Master
 Este repositório contém o seguinte:
 
 1. [Objetivo do Case](#1-objetivo-do-case)
+   - [Início Rápido](#11-início-rápido)
 2. [Arquitetura de Solução](#2-arquitetura-de-solução)
    - [Visão Geral](#21-visão-geral)
    - [Diagrama de Arquitetura de Solução](#22-diagrama-de-arquitetura-de-solução)
@@ -20,14 +21,14 @@ Este repositório contém o seguinte:
    - [Características Essenciais (Case)](#24-características-essenciais-case)
 3. [Arquitetura Técnica](#3-arquitetura-técnica)
    - [Visão Geral](#31-visão-geral)
-   - [Ideação do Projeto](#32-ideação-do-projeto)
-   - [Descrição do Fluxo de Dados](#33-descrição-do-fluxo-de-dados)
-   - [Tecnologias Utilizadas](#34-tecnologias-utilizadas)
-   - [Infraestrutura](#35-infraestrutura)
-   - [Processamento de Dados](#36-processamento-de-dados)
-   - [Armazenamento de Dados](#37-armazenamento-de-dados)
-   - [Segurança](#38-segurança)
-   - [Observabilidade e Monitoramento](#39-observabilidade-e-monitoramento)
+   - [Sobre o projeto](#32-sobre-o-projeto)
+   - [Ideação do Projeto](#33-ideação-do-projeto)
+   - [Descrição do Fluxo de Dados](#34-descrição-do-fluxo-de-dados)
+   - [Tecnologias Utilizadas](#35-tecnologias-utilizadas)
+   - [Infraestrutura como Código](#36-infraestrutura-como-código)
+   - [Automações](#37-automações)
+   - [Processamento de Dados](#38-processamento-de-dados)
+   - [Armazenamento de Dados](#39-armazenamento-de-dados)
 4. [Instruções para Configuração e Execução do Projeto](#4-instruções-para-configuração-e-execução-do-projeto)
    - [Pré-requisitos](#41-pré-requisitos)
    - [Passos de Configuração](#42-passos-de-configuração)
@@ -213,32 +214,35 @@ Utilize o tópico [Passos de Configuração](#42-passos-de-configuração) para 
 
 ### 4.2 Passos de Configuração
 
-#### 1. Clone o repositório
+#### STEP 1. Clone o repositório
    ```sh
    git clone https://github.com/lealdouglas/dougsll-datamaster.git
    cd dougsll-datamaster
    ```
-#### 2. Criar usuário de serviço (Service Principal) com as seguintes atribuições:
-  - Owner, para criar e gerenciar recursos da azure.
-  - Global Administrator, para sincronizar grupos e usuários do AAD no unity.
+#### STEP 2. Criar usuário de serviço (Service Principal) com as seguintes atribuições:
+  - **Owner**, para criar e gerenciar recursos da azure.
+    Para configurar um usuário de serviço, você pode fazer via power shell ou via azure cli, após acessar o terminal, utilize o comando abaixo para criar o usuário:
+      ```sh
+      az ad sp create-for-rbac
+      ```
+    Onde, SUBSCRIPTION_ID é o ID da subscrição da sua conta Azure.
 
-Para configurar um usuário de serviço, você pode fazer via power shell ou via azure cli, após acessar o terminal, utilize o comando abaixo para criar o usuário:
-   ```sh
-   az ad sp create-for-rbac
-   ```
-Onde, SUBSCRIPTION_ID é o ID da subscrição da sua conta Azure.
- 
-#### 3. Configure as variaveis de ambiente (secrets) em seu repositório Git, 
+  - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
+    Após criar usuário, acesse ao recurso da conta, Microsoft Entra ID, para incluir o usuário a permissão de Global Administrator,
+
+
+#### STEP 3. Configure as variaveis de ambiente (secrets) em seu repositório Git, 
   Para configurar as variáveis, acesse: [Crie secrets para um repositório](https://docs.github.com/pt/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)  
-  - TF_ARM_TENANT_ID, conta na azure (tenant)
-  - TF_ARM_SUBSCRIPTION_ID, subscrição da conta
-  - TF_ARM_CLIENT_ID, ID do usuário de serviço com permissão para criar recursos e grupos no AAD.
-  - TF_ARM_CLIENT_SECRET, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
-  - ADB_ACCOUNT_ID, ID da console Unity Catalog do Databricks.
+  - **TF_ARM_TENANT_ID**, conta na azure (tenant)
+  - **TF_ARM_SUBSCRIPTION_ID**, subscrição da conta
+  - **TF_ARM_CLIENT_ID**, ID do usuário de serviço com permissão para criar recursos e grupos no AAD.
+  - **TF_ARM_CLIENT_SECRET**, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
+  - **ADB_ACCOUNT_ID**, ID da console Unity Catalog do Databricks.
   
-4. Execute as actions do repositório para criar os recursos:
-5. Configure o GitHub Actions para automatizar os jobs no Databricks.
-6. Execute o job no Databricks para processar os dados.
+#### STEP 4. Configurar arquivo .yaml de setup lakehouse
+#### STEP 5. Execute a action do repositório LAKEHOUSE
+#### STEP 6. Execute a action do repositório ADB UNITY
+#### STEP 7. Configure arquivo .yaml de contrato, para fazer primeira ingestão
 
 ## 5. Melhorias e Considerações Finais
 
@@ -254,6 +258,7 @@ Abaixo, compartilho algumas melhorias consideradas para essa solução e ambiç�
 - Segurança: Implementar autenticação baseada em tokens para APIs de terceiros.
 - Observabilidade: Adicionar métricas de performance e latência do pipeline.
 - Banco de dados, Parâmetros recuperados via API para gerar uma imersão na experiência poderiam estar configurados em um banco de dados
+- Implementar mecanimos de multiplas ingestões a partir do contrato.
 
 #### Possíveis contribuições técnicas (melhorias):
 
