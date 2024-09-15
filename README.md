@@ -72,6 +72,7 @@ A solução utiliza Azure como provedora de nuvem, Active Directory para gestão
 
 - Relatório no cost analysis
 - Lifecycle já implementado
+- TTL vinculado ao contrato
 - Bundles Databricks
 
 <p align="center">
@@ -120,9 +121,9 @@ Onde RUN é uma referência às execuções de ingestão de dados ou de quality,
 ### 3.4 Descrição do Fluxo de Dados
 
 - **Provisionamento de recursos**: O ambiente é provisionado via Terraform.
-- **Configuração**: definicao do contrato de ingestao via .yaml.
+- **Configuração**: Definição do contrato de ingestão via .yaml.
 - **Ingestão**: Dados são processados no Databricks e armazenados no Data Lake.
-- **Processamento**: Monitoramento contínuo para garantir a integridade do fluxo de dados e detectar anomalias.
+- **Processamento**: Exploração e processamento dos dados no Databricks.
 
 ### 3.4 Tecnologias Utilizadas
 
@@ -133,6 +134,7 @@ Onde RUN é uma referência às execuções de ingestão de dados ou de quality,
 - **Databricks**: Para processamento de dados em escala.
 - **Databricks Unity Catalog**: Para gestão de grupos, catalogo, schemas e tabelas.
 - **GitHub Actions**: Para automação CI/CD.
+- **SDK in Pyspark**: SDK padrão para ingestao de dados.
 
 ### 3.5 Infraestrutura como Código
 
@@ -151,7 +153,6 @@ Onde RUN é uma referência às execuções de ingestão de dados ou de quality,
 - **Workflows**: O GitHub Actions é configurado para automatizar o deploy da infraestrutura e a execução de jobs no Databricks.
 - **Build**: Executa scripts de criação de recursos.
 - **Deploy**: Configura e executa jobs no Databricks.
-- **Monitoramento**: Configura alertas e captura logs de execução.
 
 ### 3.6 Processamento de Dados
 
@@ -166,9 +167,14 @@ Onde RUN é uma referência às execuções de ingestão de dados ou de quality,
 - **Scripts de Processamento**: Utilizamos PySpark para ler dados do Event Hub, processá-los, e armazená-los no Data Lake.
   ```python
   # Exemplo de código PySpark
-  df = spark.readStream.format("eventhubs").load()
-  processed_df = process_data(df)
-  processed_df.write.mode("append").parquet("path/to/datalake")
+  spark.readStream.format('cloudFiles')
+  .options(**autoloader_config)
+  .load(config_ingest['carlton_file_path'])
+  .select(
+      '*',
+      current_date().alias('carlton_current_date'),
+      col('_metadata').alias('carlton_metadata'),
+  )
   ```
 
 ### 3.7 Armazenamento de Dados
@@ -179,26 +185,6 @@ Estrutura: Dados organizados em camadas de bronze, silver e gold, seguindo a arq
 Bronze: Dados brutos.
 Silver: Dados processados.
 Gold: Dados prontos para análise.
-Segurança: Criptografia em repouso e controle de acesso via IAM configurados.
-
-### 3.8 Segurança
-
-#### Políticas de Acesso e Mascaramento de Dados
-
-IAM: Políticas configuradas para controlar o acesso a diferentes serviços e dados sensíveis.
-Mascaramento de Dados: Dados confidenciais mascarados durante o processamento e armazenamento, usando ferramentas de criptografia nativas.
-Autenticação e Autorização
-Azure AD: Integrado para gerenciar autenticação e autorização de usuários.
-
-### 3.9 Observabilidade e Monitoramento
-
-#### Monitoramento de Logs
-
-Azure Monitor: Configurado para capturar logs de todos os componentes, com dashboards para visualização de métricas.
-Log Analytics: Utilizado para consultas e diagnósticos de problemas.
-Alertas e Notificações
-Alertas: Configurados para monitorar falhas no pipeline e enviar notificações para a equipe.
-Critérios de Alerta: Thresholds configurados para latência e falhas de ingestão/processamento.
 
 ## 4. Instruções para Configuração e Execução do Projeto
 
