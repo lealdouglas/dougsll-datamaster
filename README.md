@@ -54,7 +54,7 @@ Para provisionar o ambiente e usar a plataforma,
 A solução é projetada para preparar um ambiente de estudo e exploração de dados baseado em nuvem em poucos minutos. Considere o seguinte cenário: Eu, como engenheiro de dados e/ou ML, a partir de uma subscrição demoninada como "domínio de dados riscos (drisc)" preciso montar o setup do meu ambiente cloud e criar o pipeline de dados, desde a ingestão até a construção de uma smart table. Nesse cenário, preciso considerar a configuração de um ambiente governado, baseado em uma arquitetura medalhão, explorar dados e implantar um motor. A solução deve permitir ao desenvolvedor configurar seu ambiente, simulando uma prateleira de recursos para dados, e, com poucas configurações, definir um fluxo de ingestão e entregar um ambiente para exploração de dados, integrado à jornada de implantação. Toda a jornada apresentada em um só lugar, de maneira básica e bem feita.
 
 <p align="center">
-  <img src="assets/img/solucao_ideia.PNG" width="700" alt="ideacao do projeto">
+  <img src="assets/img/solucao_ideia.PNG" width="750" alt="ideacao do projeto">
 </p>
 
 ### 2.2 Diagrama de Arquitetura de Solução
@@ -62,7 +62,7 @@ A solução é projetada para preparar um ambiente de estudo e exploração de d
 A solução utiliza Azure como provedora de nuvem, Active Directory para gestão de grupos e usuários, Event Hub para ingestão de dados (opcional), Databricks para processamento e análise, Unity Catalog para governança e gestão dos dados, e Azure Storage para armazenamento seguro. Outras tecnologias, como o setup via Terraform e o gerenciamento das automações via contrato de dados, que visam simplificar a relação dos serviços com a plataforma e dados, também estão incorporadas nessa solução.
 
 <p align="center">
-  <img src="assets/img/solucao_v3.png" width="700" alt="Diagrama de Arquitetura">
+  <img src="assets/img/solucao_v3.png" width="750" alt="Diagrama de Arquitetura">
 </p>
 
 ### 2.3 Descrição dos Componentes
@@ -81,7 +81,7 @@ A solução utiliza Azure como provedora de nuvem, Active Directory para gestão
 - Bundles Databricks
 
 <p align="center">
-  <img src="assets/img/diagrama_tc.PNG" width="700" alt="Diagrama de Arquitetura">
+  <img src="assets/img/diagrama_tc.PNG" width="750" alt="Diagrama de Arquitetura">
 </p>
 
 ### 2.4 Características Essenciais (Case)
@@ -197,23 +197,49 @@ Gold: Dados prontos para análise.
 ### 4.1 Pré-requisitos
 
 - Conta na Azure
-- Subscrição limpa para uso.
-- Usuário de serviço (Service Principal) com role:
+- Subscrição Azure, preferência sem uso.
+- Usuário de serviço (Service Principal) com as seguintes atribuições:
   - Owner, para criar e gerenciar recursos da azure.
   - Global Administrator, para sincronizar grupos e usuários do AAD no unity.
   - Após provisionar ambiente [Action: 01. Strife - Setup Lakehouse]: account adming, para criar e configurar o metastore do Unity Catalog.
+- Definição das variaveis de ambiente:
+  - TF_ARM_TENANT_ID, conta na azure (tenant)
+  - TF_ARM_SUBSCRIPTION_ID, subscrição da conta
+  - TF_ARM_CLIENT_ID, ID do usuário de serviço com permissão para criar recursos e grupos no AAD.
+  - TF_ARM_CLIENT_SECRET, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
+  - ADB_ACCOUNT_ID, ID da console Unity Catalog do Databricks.
+
+Utilize o tópico [Passos de Configuração](#42-passos-de-configuração) para dar sequência ao seu projeto.
 
 ### 4.2 Passos de Configuração
 
-1. Clone o repositório:
+#### 1. Clone o repositório
    ```sh
    git clone https://github.com/lealdouglas/dougsll-datamaster.git
    cd dougsll-datamaster
    ```
-2. Configure suas credenciais da Azure no Terraform.
-3. Execute as actions do repositório para criar os recursos:
-4. Configure o GitHub Actions para automatizar os jobs no Databricks.
-5. Execute o job no Databricks para processar os dados.
+#### 2. Criar usuário de serviço (Service Principal) com as seguintes atribuições:
+  - Owner, para criar e gerenciar recursos da azure.
+  - Global Administrator, para sincronizar grupos e usuários do AAD no unity.
+
+Para configurar um usuário de serviço, você pode fazer via power shell ou via azure cli, após acessar o terminal, utilize o comando abaixo para criar o usuário:
+   ```sh
+   git clone https://github.com/lealdouglas/dougsll-datamaster.git
+   cd dougsll-datamaster
+   ```
+Onde, SUBSCRIPTION_ID é o ID da subscrição da sua conta Azure.
+ 
+#### 3. Configure as variaveis de ambiente (secrets) em seu repositório Git, 
+  Para configurar as variáveis, acesse: [Crie secrets para um repositório](https://docs.github.com/pt/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)  
+  - TF_ARM_TENANT_ID, conta na azure (tenant)
+  - TF_ARM_SUBSCRIPTION_ID, subscrição da conta
+  - TF_ARM_CLIENT_ID, ID do usuário de serviço com permissão para criar recursos e grupos no AAD.
+  - TF_ARM_CLIENT_SECRET, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
+  - ADB_ACCOUNT_ID, ID da console Unity Catalog do Databricks.
+  
+4. Execute as actions do repositório para criar os recursos:
+5. Configure o GitHub Actions para automatizar os jobs no Databricks.
+6. Execute o job no Databricks para processar os dados.
 
 ## 5. Melhorias e Considerações Finais
 
@@ -248,3 +274,4 @@ Este projeto demonstra uma solução que representa o potencial em definir e con
 - [Poetry Documentation](https://python-poetry.org/docs/)
 - [Data Contract](https://datacontract.com/)
 - [Medallion Architecture](https://www.databricks.com/br/glossary/medallion-architecture)
+- [Creating secrets for a repository](https://docs.github.com/pt/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)
