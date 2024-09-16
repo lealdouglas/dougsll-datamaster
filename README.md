@@ -33,7 +33,7 @@ Este repositório contém o seguinte:
    - [Pré-requisitos](#41-pré-requisitos)
    - [Passos de Configuração](#42-passos-de-configuração)
        - [STEP 1. Clone o repositório](#step-1-clone-o-repositório)
-       - [STEP 2. Criar usuário de serviço (Service Principal)](#step-2-criar-usuário-de-serviço-service-principal)
+       - [STEP 2. Configure um usuário de serviço (Service Principal)](#step-2-configure-usuário-de-serviço-service-principal)
        - [STEP 3. Configure as secrets no GIT](#step-3-configure-as-secrets-no-git)
        - [STEP 4. Configure arquivo de Setup Infraestrutura Lakehouse](#step-4-configure-arquivo-de-setup-infraestrutura-lakehouse)
        - [STEP 5. Execute a action Strife Lakehouse](#step-5-execute-a-action-strife-lakehouse)
@@ -233,7 +233,7 @@ Utilize o tópico [Passos de Configuração](#42-passos-de-configuração) para 
    git clone https://github.com/lealdouglas/dougsll-datamaster.git
    cd dougsll-datamaster
    ```
-#### STEP 2. Criar usuário de serviço (Service Principal)
+#### STEP 2. Configure usuário de serviço (Service Principal)
 Crie um usuário de serviço na Azure (Service Principal) com as seguintes atribuições,
     
   - **Owner**, para criar e gerenciar recursos da azure.
