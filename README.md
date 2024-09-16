@@ -125,7 +125,7 @@ Todo projeto inicia com uma ideia...
 Este projeto foi idealizado para que os usuários tenham um ambiente mínimo para explorar dados. Três repositórios foram criados para que, a partir desse git template, seja possível ter um ambiente ponta a ponta. A ideação está organizada da seguinte forma:
 
 <p align="center">
-  <img src="assets/img/ideacao.PNG" width="900" alt="ideacao do projeto">
+  <img src="assets/img/fluxo.png" width="900" alt="ideacao do projeto">
 </p>
 
 Ao Clonar repos template, o usuário deve setar as variaveis de ambiente necessário no git, configurar os arquivos .yaml e iniciar as execuções. 
