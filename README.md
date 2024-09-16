@@ -220,7 +220,7 @@ Repositório adicionais utilizados nesse projeto para experiência imersiva:
 - Definição das variaveis de ambiente:
   - **TF_ARM_TENANT_ID**, conta na azure (tenant)
   - **TF_ARM_SUBSCRIPTION_ID**, subscrição da conta
-  - **TF_ARM_CLIENT_ID**, ID do usuário de serviço com permissão para criar recursos e grupos no AAD.
+  - **TF_ARM_CLIENT_ID**, ID do usuário de serviço com permissão para criar recursos e grupos.
   - **TF_ARM_CLIENT_SECRET**, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
   - **ADB_ACCOUNT_ID**, ID da console Unity Catalog do Databricks.
 
