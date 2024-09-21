@@ -290,6 +290,8 @@ Configure as variaveis de ambiente (secrets) em seu repositório Git,
   
 #### Step 4. Configure arquivo de Setup Infraestrutura Lakehouse
 
+#### Step 5. Execute a action Strife Lakehouse
+
 - Na tela inicial do repos, clique em **Actions**
 - Selecione **01. Strife - Setup Lakehouse**
 - Clique no botão a direita, **Run workflow**
@@ -297,8 +299,6 @@ Configure as variaveis de ambiente (secrets) em seu repositório Git,
 <p align="center">
   <img src="assets/gif/setup.gif" width="900" alt="ideacao do projeto">
 </p>
-
-#### Step 5. Execute a action Strife Lakehouse
 
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 

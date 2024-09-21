@@ -1,0 +1,98 @@
+name: Strife - TESTE Setup Infra teste
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Strife Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out my other private repo
+        uses: actions/checkout@v4
+        with:
+          repository: lealdouglas/strife
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: teste
+          path: ${{ github.workspace }}/azsetup/teste
+
+  strife-setup-teste:
+    name: Strife Setup teste
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/azsetup/teste
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
+
+    environment:
+      name: dev
+
+    needs: build
+    steps:
+      # Faz o checkout do repositório principal
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
+      - name: Download Terraform
+        uses: actions/download-artifact@v2
+        with:
+          name: teste
+          path: ${{ github.workspace }}/azsetup/teste
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Check if YAML file exists
+        run: |
+          if [ ! -f "${{ github.workspace }}/datamaster/strife_env/strife_config.yaml" ]; then
+            echo "YAML file not found!"
+            exit 1
+          fi
+
+      - name: Read YAML file
+        id: read_yaml
+        run: |
+          python -c "
+          import yaml
+          import os
+          with open('../../datamaster/strife_env/strife_config.yaml', 'r') as stream:
+              config = yaml.safe_load(stream)
+              for key, value in config.items():
+                  print(f'::set-output name={key}::{value}')
+          "
+
+      - name: Set environment variables from YAML
+        run: |
+          echo "variable1=${{ steps.read_yaml.outputs.variable1 }}" >> $GITHUB_ENV
+
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        run: terraform plan -no-color -var "variable1=${{ env.variable1 }}"
+        continue-on-error: true
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -var "variable1=${{ env.variable1 }}"
