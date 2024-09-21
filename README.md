@@ -230,6 +230,9 @@ Utilize o tópico [Passos de Configuração](#42-passos-de-configuração) para 
 #### Step 1. Utilize o repos template
 
 A partir desse repos template, crie um novo para seu projeto.
+  - Clique em **Use this template** que está ao topo da tela desse repositório.
+  - Defina um nome para seu projeto
+  - **Create a new repository**
 
 <p align="center">
   <img src="assets/gif/inicio.gif" width="900" alt="ideacao do projeto">
