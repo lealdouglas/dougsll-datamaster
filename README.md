@@ -146,7 +146,7 @@ Repositório adicionais utilizados nesse projeto para experiência imersiva:
 ### 3.4 Tecnologias Utilizadas
 
 - **Terraform**: Para provisionamento de infraestrutura.
-- **Azure Active Directory**: Para gestão de grupos e usuários.
+- **Microsoft Entra ID ou Azure Active Directory**: Para gestão de grupos e usuários.
 - **Azure Event Hub**: Para captura de eventos.
 - **Azure Storage Account**: Para armazenamento seguro.
 - **Databricks**: Para processamento de dados em escala.
@@ -251,12 +251,14 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
   az ad sp create-for-rbac -n spndatamasteradmin --role Owner --scopes /subscriptions/<SUBSCRIPTION_ID>
   ```
 
-  Onde, **SUBSCRIPTION_ID** é o ID da subscrição da sua conta Azure.
+  Onde, **SUBSCRIPTION_ID** é o ID da subscrição da sua conta Azure free (trial $200) ou Pay as You Go.
+  Em caso de duvidas sobre custo desse projeto, saiba mais em [custos do projeto](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#6-custos-do-projeto)
+  O usuário de serviço **spndatamasteradmin** deve ser criado e as variaveis **password** (TF_ARM_CLIENT_SECRET) e **appId** (TF_ARM_CLIENT_ID) serao exibidas, as utilize para [configurar as secrets no git](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-3-configure-as-secrets-no-git)
 
 - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
   Após criar usuário, acesse ao recurso da conta, Microsoft Entra ID, para incluir o usuário a permissão de Global Administrator,
 
-  - Selecione o recurso **diretorio padrao (active directory)**
+  - Selecione o recurso **Microsoft Entra ID**, o Diretório Padrão (Active Directory)
   - Selecione no canto esquerdo, **Roles and administrators**
   - Busque por **"Global Administrator"**
   - Clique em **Add assignments**
