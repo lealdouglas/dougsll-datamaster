@@ -327,7 +327,7 @@ Após execução, os recursos abaixo serão criados
 Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura via terraform.
 
 - Acesse account console, [accounts.azuredatabricks.net/login](https://accounts.azuredatabricks.net/login/).
-- Após copiar account_id no canto superior direito da tela do account, cadastre a secret **ADB_ACCOUNT_ID** no git
+- Após copiar account_id no canto superior direito da tela do account, cadastre a secret **ADB_ACCOUNT_ID**.
 
 <p align="center">
   <img src="assets/gif/account.gif" width="900" alt="ideacao do projeto">

@@ -84,6 +84,10 @@ jobs:
 
     needs: build
     steps:
+      # Faz o checkout do repositório principal
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
       # Baixa o artefato do Terraform
       # Download the Terraform artifact
       - name: Download Terraform
@@ -91,6 +95,39 @@ jobs:
         with:
           name: lakehouseuc
           path: ${{ github.workspace }}/azsetup/lakehouse-adbuc
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Check if YAML file exists
+        run: |
+          if [ ! -f "${{ github.workspace }}/datamaster/strife_env/strife_config.yaml" ]; then
+            echo "YAML file not found!"
+            exit 1
+          fi
+
+      - name: Read YAML file
+        id: read_yaml
+        run: |
+          python -c "
+          import yaml
+          import os
+          with open('../../datamaster/strife_env/strife_config.yaml', 'r') as stream:
+              config = yaml.safe_load(stream)
+              for key, value in config.items():
+                  print(f'::set-output name={key}::{value}')
+          "
+
+      - name: Set environment variables from YAML
+        run: |
+          echo "domain=${{ steps.read_yaml.outputs.domain }}" >> $GITHUB_ENV
+          echo "catalog=${{ steps.read_yaml.outputs.catalog }}" >> $GITHUB_ENV
+          echo "project=${{ steps.read_yaml.outputs.project }}" >> $GITHUB_ENV
 
       # Configura e inicializa o Terraform
       # Set up and initialize Terraform
@@ -108,12 +145,12 @@ jobs:
       # Gera e aplica o plano de execução do Terraform
       # Generate and apply the Terraform execution plan
       - name: Terraform Plan
-        run: terraform plan -no-color -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
+        run: terraform plan -no-color -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
         continue-on-error: true
       - name: Terraform Apply Target Module
-        run: terraform apply -target='module.metastore_and_users' -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
+        run: terraform apply -target='module.metastore_and_users' -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
+        run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
 
   # Job para configurar os recursos de computação do ADB
   # Job to set up ADB compute resources
@@ -136,6 +173,10 @@ jobs:
 
     needs: strife-setup-unity-catalog
     steps:
+      # Faz o checkout do repositório principal
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
       # Baixa o artefato do Terraform
       # Download the Terraform artifact
       - name: Download Terraform
@@ -143,6 +184,39 @@ jobs:
         with:
           name: lakehousecp
           path: ${{ github.workspace }}/azsetup/lakehouse-adbcompute
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Check if YAML file exists
+        run: |
+          if [ ! -f "${{ github.workspace }}/datamaster/strife_env/strife_config.yaml" ]; then
+            echo "YAML file not found!"
+            exit 1
+          fi
+
+      - name: Read YAML file
+        id: read_yaml
+        run: |
+          python -c "
+          import yaml
+          import os
+          with open('../../datamaster/strife_env/strife_config.yaml', 'r') as stream:
+              config = yaml.safe_load(stream)
+              for key, value in config.items():
+                  print(f'::set-output name={key}::{value}')
+          "
+
+      - name: Set environment variables from YAML
+        run: |
+          echo "domain=${{ steps.read_yaml.outputs.domain }}" >> $GITHUB_ENV
+          echo "catalog=${{ steps.read_yaml.outputs.catalog }}" >> $GITHUB_ENV
+          echo "project=${{ steps.read_yaml.outputs.project }}" >> $GITHUB_ENV
 
       # Configura e inicializa o Terraform
       # Set up and initialize Terraform
@@ -160,7 +234,7 @@ jobs:
       # Gera e aplica o plano de execução do Terraform
       # Generate and apply the Terraform execution plan
       - name: Terraform Plan
-        run: terraform plan -no-color -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
+        run: terraform plan -no-color -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
         continue-on-error: true
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}"
+        run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
