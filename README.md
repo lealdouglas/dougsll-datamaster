@@ -290,6 +290,15 @@ Configure as variaveis de ambiente (secrets) em seu repositório Git,
   
 #### Step 4. Configure arquivo de Setup Infraestrutura Lakehouse
 
+Altere os valores para o qual deseja criar os nomes dos recursos e catalogo
+
+- No repos, acesse **datamaster/strife_env**
+  ```yaml
+  domain: drisk #nome do dominio
+  catalog: crisk #nome do catalogo
+  project: datamaster #nome do projeto
+  ```
+
 #### Step 5. Execute a action Strife Lakehouse
 
 - Na tela inicial do repos, clique em **Actions**
