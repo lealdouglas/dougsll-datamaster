@@ -251,12 +251,12 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
 - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
   Após criar usuário, acesse ao recurso da conta, Microsoft Entra ID, para incluir o usuário a permissão de Global Administrator,
 
-  - Selecione o recurso diretorio padrao (active directory)
-  - Selecione no canto esquerdo, Roles and administrators
-  - Busque por "Global Administrator"
-  - Clique em Add assignments
-  - Busque pelo seu usuário de serviço (SPN)
-  - Clique em add
+  - Selecione o recurso **diretorio padrao (active directory)**
+  - Selecione no canto esquerdo, **Roles and administrators**
+  - Busque por **"Global Administrator"**
+  - Clique em **Add assignments**
+  - Busque pelo seu **usuário de serviço** (SPN)
+  - Clique em **add**
 
 <p align="center">
   <img src="assets/gif/globaladmin.gif" width="900" alt="ideacao do projeto">
