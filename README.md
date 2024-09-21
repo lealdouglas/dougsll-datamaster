@@ -368,8 +368,9 @@ Nessa action, será configurado:
 - **Storage Credentials**, para seu metastore e catálogo.
 - **External Locations**, para seu metastore e catálogo.
 - **Sincronização**, de usuários e grupos do AAD para account e workspace.
-- **Cluster single user**, chamado cluster-single-dtm-`domain`, com autoterminate de 10min, uso ao service principal principal. Setup mínimo utilizado para esse projeto: 1 Driver; 8 GB Memory, 4 Cores; Runtime 14.3.x-scala2.12
-- **Catálogo**, chamado c`catalog`
+- **Cluster single user**, chamado cluster-single-dtm-`DOMAIN`, com autoterminate de 10min, uso ao service principal.
+- **Setup do cluster**, mínimo utilizado para esse projeto: _1 Driver; 8 GB Memory, 4 Cores; Runtime 14.3.x-scala2.12_
+- **Catálogo**, chamado c`CATALOG`
 - **Schemas**, bronze, silver e gold.
 - **Permissões**, acesso ao grupo data_engineer aos schemas listados acima.
 
@@ -401,6 +402,7 @@ Abaixo, compartilho algumas melhorias consideradas para essa solução e ambiç�
 - Implementar mecanimos de multiplas ingestões a partir do contrato.
 - Montar .yaml para script terraform e incluir usuario principal (conta), para vincular aos grupos.
 - Criar uma classe estruturada para o uso genérico do data contract, aplicando os padrões de SOLID.
+- Configurar gerenciamento de versão quando aciona outros componentes Strife, Jarvis e Carlton.
 
 ### 5.2 Considerações Finais
 

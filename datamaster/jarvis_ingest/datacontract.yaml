@@ -28,7 +28,7 @@ info:
 
   # Domínio do contrato de dados
   # Domain of the data contract
-  domain: 'strife'
+  domain: 'drisk'
 
   # Contato do proprietário do contrato de dados
   # Contact information for the data contract owner
@@ -56,59 +56,13 @@ servers:
     # Server schema
     schema: bronze
 
-# Termos de uso do contrato de dados
-# Terms of use for the data contract
-terms:
-  # Uso permitido dos dados
-  # Allowed usage of the data
-  usage: >
-    Data can be used for reports, analytics and machine learning use cases.
-
-  # Limitações de uso dos dados
-  # Limitations on the usage of the data
-  limitations: >
-    Not suitable for real-time use cases.
-
-  # Informações de cobrança
-  # Billing information
-  billing: free
-
-# Modelos de dados definidos no contrato
-# Data models defined in the contract
-models:
-  account:
-    # Descrição do modelo de dados
-    # Description of the data model
-    description: 'Delta table for account risk data in the risks domain.'
-
-    # Tipo do modelo de dados
-    # Type of the data model
-    type: table
-
-    # Campos do modelo de dados
-    # Fields of the data model
-    fields:
-      account_id:
-        type: 'string'
-      risk_score:
-        type: 'string'
-      risk_level:
-        type: 'string'
-      assessment_date:
-        type: 'string'
-
 # Níveis de serviço do contrato de dados
 # Service levels for the data contract
 servicelevels:
-  # Disponibilidade dos dados
-  # Data availability
-  availability:
-    percentage: 99.9%
-
   # Retenção dos dados
   # Data retention
   retention:
-    period: 1 year
+    period: 1 day
 
   # Frequência de atualização dos dados
   # Data update frequency
