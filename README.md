@@ -32,7 +32,7 @@ Este repositório contém o seguinte:
 4. [Instruções para Configuração e Execução do Projeto](#4-instruções-para-configuração-e-execução-do-projeto)
    - [Pré-requisitos](#41-pré-requisitos)
    - [Passos de Configuração](#42-passos-de-configuração)
-     - [Step 1. Clone o repositório](#step-1-clone-o-repositório)
+     - [Step 1. Utilize o repos template](#step-1-utilize-o-repos-template)
      - [Step 2. Configure usuário de serviço (Service Principal)](#step-2-configure-usuário-de-serviço-service-principal)
      - [Step 3. Configure as secrets no GIT](#step-3-configure-as-secrets-no-git)
      - [Step 4. Configure arquivo de Setup Infraestrutura Lakehouse](#step-4-configure-arquivo-de-setup-infraestrutura-lakehouse)
@@ -227,12 +227,13 @@ Utilize o tópico [Passos de Configuração](#42-passos-de-configuração) para 
 
 ### 4.2 Passos de Configuração
 
-#### Step 1. Clone o repositório
+#### Step 1. Utilize o repos template
 
-```sh
-git clone https://github.com/lealdouglas/dougsll-datamaster.git
-cd dougsll-datamaster
-```
+A partir desse repos template, crie um novo para seu projeto.
+
+<p align="center">
+  <img src="assets/gif/inicio.gif" width="900" alt="ideacao do projeto">
+</p>
 
 #### Step 2. Configure usuário de serviço (Service Principal)
 
@@ -270,6 +271,10 @@ Configure as variaveis de ambiente (secrets) em seu repositório Git,
   - **TF_ARM_CLIENT_ID**, ID do usuário de serviço com permissão para criar recursos e grupos no AAD.
   - **TF_ARM_CLIENT_SECRET**, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
   - **ADB_ACCOUNT_ID**, ID da console Unity Catalog do Databricks.
+
+<p align="center">
+  <img src="assets/gif/secret.gif" width="900" alt="ideacao do projeto">
+</p> 
   
 #### Step 4. Configure arquivo de Setup Infraestrutura Lakehouse
 #### Step 5. Execute a action Strife Lakehouse
