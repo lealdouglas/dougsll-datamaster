@@ -244,7 +244,7 @@ A partir desse repos template, crie um novo para seu projeto.
 Crie um usuário de serviço na Azure (Service Principal) com as seguintes atribuições,
 
 - **Owner**, para criar e gerenciar recursos da azure.
-  Para configurar um usuário de serviço, você pode fazer via power shell ou via azure cli, após acessar o terminal, utilize o comando abaixo para criar o usuário:
+  Para configurar um usuário de serviço, você pode fazer via power shell ou via [azure cli](https://learn.microsoft.com/pt-br/cli/azure/install-azure-cli), após acessar o terminal, utilize o comando abaixo para criar o usuário:
 
   ```sh
   az login
