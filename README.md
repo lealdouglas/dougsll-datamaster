@@ -411,7 +411,7 @@ Para esse projeto habilitamos os _types_ **eventhub** e **adls**. Utilize,
 - **eventhub** para simular uma ingestão streaming
   - Um tópico é criado com base nos parâmetros informados no contrato.
   - Um job mock pode ser criado caso específique no contrato como teste, ou envie mensagens ao tópico se houver alguma aplicação.
-- **adls**
+- **adls** para repouso dos dados brutos.
   - Caso tenha arquivos no storage/container raw.
 
 #### Step 9. Execute a action Jarvis Ingestão
