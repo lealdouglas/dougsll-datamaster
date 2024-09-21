@@ -250,8 +250,8 @@ Altere os valores para o qual deseja criar os nomes dos recursos e catálogo
 
 - No repos, acesse **datamaster/strife_env**
   ```yaml
-  domain: drisk #nome do dominio
-  catalog: crisk #nome do catalogo
+  domain: risk #nome do dominio
+  catalog: risk #nome do catalogo
   project: datamaster #nome do projeto
   ```
 
@@ -323,6 +323,9 @@ Após execução, os recursos abaixo serão criados
   <img src="assets/img/recursos.png" width="850" alt="ideacao do projeto">
 </p>
 
+> [!Note]
+> Um container chamado ctrd`risk`raw será criado para arquivos brutos de ingestão.
+
 > [!WARNING]
 > Atenção, importante desabilitar o recurso Network Watcher que tem como objetivo monitorar e gerenciar serviços da sua conta. Para esse projeto não há necessidade. Saiba mais em [ativar_desativar_network_watcher](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=portal#disable-network-watcher-for-your-region) e [desative gerenciamento automático](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=cli#opt-out-of-network-watcher-automatic-enablement).
 
@@ -378,6 +381,14 @@ Nessa action, será configurado:
 > Caso não consiga enxergar o catálogo criado, adicione sua conta principal ao grupo **data_engineer** a nível de console e aguarde alguns segundos.
 
 #### Step 8. Configure arquivo de contrato para ingestão
+
+Para esse projeto habilitamos as origens **eventhub** e **adls**. Utilize,
+
+- **eventhub** para simular uma ingestão streaming
+  - Um tópico é criado com base nos parâmetros informados no contrato.
+  - Um job mock pode ser criado caso específique no contrato como teste, ou envie mensagens ao tópico se houver alguma aplicação.
+- **adls**
+  - Caso tenha arquivos no storage/container raw.
 
 #### Step 9. Execute a action Jarvis Ingestão
 
