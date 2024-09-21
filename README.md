@@ -230,10 +230,11 @@ Utilize o tópico [Passos de Configuração](#42-passos-de-configuração) para 
 #### Step 1. Utilize o repos template
 
 A partir desse repos template, crie um novo para seu projeto.
-  - Clique em **Use this template** que está ao topo da tela desse repositório.
-  - Selecione **Create a new repository**
-  - Defina um nome para seu projeto
-  - Conclua em **Create repository**
+
+- Clique em **Use this template** que está ao topo da tela desse repositório.
+- Selecione **Create a new repository**
+- Defina um nome para seu projeto
+- Conclua em **Create repository**
 
 <p align="center">
   <img src="assets/gif/inicio.gif" width="900" alt="ideacao do projeto">
@@ -251,9 +252,10 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
   az ad sp create-for-rbac -n spndatamasteradmin --role Owner --scopes /subscriptions/<SUBSCRIPTION_ID>
   ```
 
-  Onde, **SUBSCRIPTION_ID** é o ID da subscrição da sua conta Azure free (trial $200) ou Pay as You Go.
-  Em caso de duvidas sobre custo desse projeto, saiba mais em [custos do projeto](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#6-custos-do-projeto)
-  O usuário de serviço **spndatamasteradmin** deve ser criado e as variaveis **password** (TF_ARM_CLIENT_SECRET) e **appId** (TF_ARM_CLIENT_ID) serao exibidas, as utilize para [configurar as secrets no git](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-3-configure-as-secrets-no-git)
+  Onde,
+
+  - **SUBSCRIPTION_ID** é o ID da subscrição da sua conta Azure free (trial $200) ou Pay as You Go, em caso de duvidas sobre custo desse projeto, saiba mais em [custos do projeto](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#6-custos-do-projeto)
+  - O usuário de serviço **spndatamasteradmin** deve ser criado e as variáveis **password** (TF_ARM_CLIENT_SECRET) e **appId** (TF_ARM_CLIENT_ID) serão exibidas, as utilize para [configurar as secrets no git](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-3-configure-as-secrets-no-git)
 
 - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
   Após criar usuário, acesse ao recurso da conta, Microsoft Entra ID, para incluir o usuário a permissão de Global Administrator,
@@ -266,7 +268,7 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
   - Clique em **add**
 
 <p align="center">
-  <img src="assets/gif/globaladmin.gif" width="900" alt="ideacao do projeto">
+  <img src="assets/gif/global.gif" width="900" alt="ideacao do projeto">
 </p> 
     
 #### Step 3. Configure as secrets no GIT 
@@ -277,6 +279,10 @@ Configure as variaveis de ambiente (secrets) em seu repositório Git,
   - **TF_ARM_CLIENT_ID**, ID do usuário de serviço com permissão para criar recursos e grupos no AAD.
   - **TF_ARM_CLIENT_SECRET**, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
   - **ADB_ACCOUNT_ID**, ID da console Unity Catalog do Databricks.
+
+<p align="center">
+  <img src="assets/gif/tenant.gif" width="900" alt="ideacao do projeto">
+</p>
 
 <p align="center">
   <img src="assets/gif/secret.gif" width="900" alt="ideacao do projeto">
