@@ -212,7 +212,7 @@ Repositório adicionais utilizados nesse projeto para experiência imersiva:
 
 - Conta na Azure
 - Subscrição Azure, preferência sem uso.
-- Usuário de serviço (Service Principal), conforme [Step 2 - Configure usuário](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-2-configure-usu%C3%A1rio-de-servi%C3%A7o-service-principal) com as seguintes atribuições:
+- Usuário de serviço (Service Principal), conforme [Step 3 - Configure usuário](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-3-configure-usu%C3%A1rio-de-servi%C3%A7o-service-principal) com as seguintes atribuições:
   - **Owner**, para criar e gerenciar recursos da azure.
   - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
   - **Account Admin**, após provisionar ambiente [Step 5 - Setup Lakehouse](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-5-execute-a-action-strife-lakehouse), para configurar Unity Catalog.
@@ -222,6 +222,9 @@ Repositório adicionais utilizados nesse projeto para experiência imersiva:
   - **TF_ARM_CLIENT_ID**, ID do usuário de serviço com permissão para criar recursos e grupos.
   - **TF_ARM_CLIENT_SECRET**, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
   - **ADB_ACCOUNT_ID**, ID da console Unity Catalog do Databricks, saiba mais em [Step 6 - Recupere Account ID](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-6-recupere-account-id-do-unity-catalog-e-habilite-account-admin)
+
+> [!NOTE]
+> Não é possível automatizar a captura do account_id via terraform, por isso, no step 6 apresentamos como recuperar manualmente.
 
 Utilize o tópico [Passos de Configuração](#42-passos-de-configuração) para dar sequência ao seu projeto.
 
