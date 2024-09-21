@@ -322,6 +322,9 @@ Após execução, os recursos abaixo serão criados
   <img src="assets/img/recursos.png" width="850" alt="ideacao do projeto">
 </p>
 
+> [!WARNING]
+> Importante desabilitar o recurso Network Watcher que tem como objetivo monitorar e gerenciar serivcos da sua conta. Para esse projeto não há necessidade. Saiba mais em [ativar_desativar_network_watcher](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=portal#disable-network-watcher-for-your-region) e [desative gerenciamento automático](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=cli#opt-out-of-network-watcher-automatic-enablement).
+
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 
 Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura via terraform.
@@ -350,6 +353,27 @@ Em seguida, **é importante marcar o usuário de serviço como account_admin**, 
 
 #### Step 7. Execute a action Strife ADB Unity Catalog
 
+- Na tela inicial do repos, clique em **Actions**
+- Selecione **02. Strife - Setup Unity Lakehouse**
+- Clique no botão a direita, **Run workflow**
+
+<p align="center">
+  <img src="assets/gif/actions_partII.PNG" width="800" alt="ideacao do projeto">
+</p>
+
+Nessa action, será configurado:
+
+- **metastore**, chamado primary.
+- **Storage Credentials**, para seu metastore e catálogo.
+- **External Locations**, para seu metastore e catálogo.
+- **sincronização**, de usuários e grupos do AAD para account e workspace.
+- **cluster single user**, chamado cluster-single-dtm-<domain>, com autoterminate de 10min (mínimo possível)
+- **catálogo**, chamado c<domain>
+- **schemas**, bronze, silver e gold.
+
+> [!NOTE]
+> Caso não consiga enxergar o catálogo criado, adicione sua conta principal ao grupo **data_engineer** a nível de console e aguarde alguns segundos.
+
 #### Step 8. Configure arquivo de contrato para ingestão
 
 #### Step 9. Execute a action Jarvis Ingestão
@@ -364,18 +388,15 @@ Em seguida, **é importante marcar o usuário de serviço como account_admin**, 
 
 Abaixo, compartilho algumas melhorias consideradas para essa solução e ambições de uma visão completa, considerando que o cenário desenvolvido é apenas um protótipo de uma necessidade maior:
 
-#### Evolução da solução:
+#### Evolução da solução e contribuições técnicas:
 
 - UI e API Services, com serviços integrados e uma interface web configurada, as validações e etapas podem ser orquestradas a partir da interação do usuário com o formulário, onde, a partir das opções, um serviço pode ser acionado ou um repositório/actions pode ser configurado.
-- Configurar um cluster para uso conforme etapas do pipeline.
+- Configurar um cluster para uso conforme etapas do pipeline (job cluster, cluster serveless).
 - Escalabilidade: Melhorar o desempenho da ingestão de dados com particionamento de dados.
 - Segurança: Implementar autenticação baseada em tokens para APIs de terceiros.
 - Observabilidade: Adicionar métricas de performance e latência do pipeline.
 - Banco de dados, Parâmetros recuperados via API para gerar uma imersão na experiência poderiam estar configurados em um banco de dados
 - Implementar mecanimos de multiplas ingestões a partir do contrato.
-
-#### Possíveis contribuições técnicas (melhorias):
-
 - Montar .yaml para script terraform e incluir usuario principal (conta), para vincular aos grupos.
 - Criar uma classe estruturada para o uso genérico do data contract, aplicando os padrões de SOLID.
 
@@ -387,7 +408,8 @@ Este projeto demonstra uma solução que representa o potencial em definir e con
 
 Esse projeto, executado de ponta a ponta, teve um custo de,
 
-ESCREVER!
+> [!NOTE]
+> Devio o tema de custos, não aumentamos a cota da conta, por conta disso apenas um metastore e um cluster single node foi configurado para toda a jornada apresentada.
 
 ## 7. Referências
 
