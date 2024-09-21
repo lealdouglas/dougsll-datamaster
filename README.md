@@ -358,7 +358,7 @@ Em seguida, **é importante marcar o usuário de serviço como account_admin**, 
 - Clique no botão a direita, **Run workflow**
 
 <p align="center">
-  <img src="assets/gif/actions_partII.PNG" width="800" alt="ideacao do projeto">
+  <img src="assets/img/actions_partII.PNG" width="800" alt="ideacao do projeto">
 </p>
 
 Nessa action, será configurado:
