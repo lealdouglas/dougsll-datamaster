@@ -248,7 +248,7 @@ A partir desse repos template, crie um novo para seu projeto.
 
 Altere os valores para o qual deseja criar os nomes dos recursos e catálogo
 
-- No repos, acesse **datamaster/strife_env**
+- No repos, acesse **datamaster/strife_env/strife_config.yaml**
   ```yaml
   domain: risk #nome do domínio
   catalog: risk #nome do catálogo
@@ -382,7 +382,9 @@ Nessa action, será configurado:
 
 #### Step 8. Configure arquivo de contrato para ingestão
 
-Saiba mais sobre o contrato em, <>
+Configure o arquivo .yaml utilizado como referencia para origens de ingestão desse projeto.
+No repos, acesse **datamaster/jarvis_ingest/datacontract.yaml**
+
 Para etapa de ingestão, foque nos principais campos:
 
 ```yaml
@@ -398,6 +400,11 @@ ingest_workflow:  # Configuração do workflow de ingestão de dados
     header: true  # Indica se o arquivo CSV possui cabeçalho
     delimiter: ','  # Delimitador utilizado no arquivo CSV
 ```
+
+Onde model é a tabela/workflow criado para ingestão.
+
+> [!NOTE]
+> Para esse projeto, habilitamos apenas um job, mas uma modelagem proposta é utilizar esse modelo para N tabelas de um mesmo schema.
 
 Para esse projeto habilitamos os _types_ **eventhub** e **adls**. Utilize,
 
@@ -435,6 +442,7 @@ Abaixo, compartilho algumas melhorias consideradas para essa solução e ambiç�
 - Montar .yaml para script terraform e incluir usuario principal (conta), para vincular aos grupos.
 - Criar uma classe estruturada para o uso genérico do data contract, aplicando os padrões de SOLID.
 - Configurar gerenciamento de versão quando aciona outros componentes Strife, Jarvis e Carlton.
+- Configurar a leitura e criacao de ingestao para mais de uma model especificado no contrato de ingestao daquele mesmo schema.
 
 ### 5.2 Considerações Finais
 
