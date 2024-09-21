@@ -213,7 +213,7 @@ Repositório adicionais utilizados nesse projeto para experiência imersiva:
 
 - Conta na Azure
 - Subscrição Azure, preferência sem uso.
-- Usuário de serviço (Service Principal) com as seguintes atribuições:
+- Usuário de serviço (Service Principal), conforme [Step 2 - Configure usuário](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-2-configure-usu%C3%A1rio-de-servi%C3%A7o-service-principal) com as seguintes atribuições:
   - **Owner**, para criar e gerenciar recursos da azure.
   - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
   - **Account Admin**, após provisionar ambiente [Step 5 - Setup Lakehouse](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-5-execute-a-action-strife-lakehouse), para configurar Unity Catalog.
@@ -239,14 +239,20 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
   - **Owner**, para criar e gerenciar recursos da azure.
     Para configurar um usuário de serviço, você pode fazer via power shell ou via azure cli, após acessar o terminal, utilize o comando abaixo para criar o usuário:
       ```sh
-      az ad sp create-for-rbac
+      az ad sp create-for-rbac -n spndatamasteradmin --role Owner --scopes /subscriptions/<SUBSCRIPTION_ID>
       ```
     Onde, **SUBSCRIPTION_ID** é o ID da subscrição da sua conta Azure.
 
   - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
     Após criar usuário, acesse ao recurso da conta, Microsoft Entra ID, para incluir o usuário a permissão de Global Administrator,
 
-    ESCREVER!
+    1 - selecione o recurso, diretorio padrao (active directory) 
+    2 - selecione no canto esquerdo, Roles and administrators 
+    3 - busque por "Global Administrator" 
+    4 - clique em Add assignments 
+    5 - busque pelo seu SPN 
+    6 - clique em add
+
     
 #### Step 3. Configure as secrets no GIT 
 Configure as variaveis de ambiente (secrets) em seu repositório Git,
