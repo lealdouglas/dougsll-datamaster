@@ -250,8 +250,8 @@ Altere os valores para o qual deseja criar os nomes dos recursos e catálogo
 
 - No repos, acesse **datamaster/strife_env**
   ```yaml
-  domain: risk #nome do dominio
-  catalog: risk #nome do catalogo
+  domain: risk #nome do domínio
+  catalog: risk #nome do catálogo
   project: datamaster #nome do projeto
   ```
 
@@ -382,7 +382,24 @@ Nessa action, será configurado:
 
 #### Step 8. Configure arquivo de contrato para ingestão
 
-Para esse projeto habilitamos as origens **eventhub** e **adls**. Utilize,
+Saiba mais sobre o contrato em, <>
+Para etapa de ingestão, foque nos principais campos:
+
+```yaml
+ingest_workflow:  # Configuração do workflow de ingestão de dados
+  model: 'account'  # Modelo de dados a ser utilizado no workflow
+  email_notifications:  # Configuração de notificações por email
+    on_start: ['email']  # Emails a serem notificados no início do workflow
+    on_success: ['email']  # Emails a serem notificados em caso de sucesso do workflow
+    on_failure: ['email']  # Emails a serem notificados em caso de falha do workflow
+  source:  # Configuração da fonte de dados
+    type: 'adls'  # Tipo de fonte de dados (Azure Data Lake Storage)
+    format: 'csv'  # Formato dos dados (CSV)
+    header: true  # Indica se o arquivo CSV possui cabeçalho
+    delimiter: ','  # Delimitador utilizado no arquivo CSV
+```
+
+Para esse projeto habilitamos os _types_ **eventhub** e **adls**. Utilize,
 
 - **eventhub** para simular uma ingestão streaming
   - Um tópico é criado com base nos parâmetros informados no contrato.
@@ -391,6 +408,10 @@ Para esse projeto habilitamos as origens **eventhub** e **adls**. Utilize,
   - Caso tenha arquivos no storage/container raw.
 
 #### Step 9. Execute a action Jarvis Ingestão
+
+- Na tela inicial do repos, clique em **Actions**
+- Selecione **03. Jarvis - Create Workflow Ingest**
+- Clique no botão a direita, **Run workflow**
 
 #### Step 10. Configure seu projeto para explorar dados
 
