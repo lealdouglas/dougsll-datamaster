@@ -53,12 +53,12 @@ jobs:
       # Faz o upload dos artefatos necessários
       # Upload necessary artifacts
       - name: Upload Artifact Unity
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: lakehouseuc
           path: ${{ github.workspace }}/azsetup/lakehouse-adbuc
       - name: Upload Artifact Compute
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: lakehousecp
           path: ${{ github.workspace }}/azsetup/lakehouse-adbcompute

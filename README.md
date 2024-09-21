@@ -289,12 +289,27 @@ Configure as variaveis de ambiente (secrets) em seu repositório Git,
 </p> 
   
 #### Step 4. Configure arquivo de Setup Infraestrutura Lakehouse
+
+- Na tela inicial do repos, clique em **Actions**
+- Selecione **01. Strife - Setup Lakehouse**
+- Clique no botão a direita, **Run workflow**
+
+<p align="center">
+  <img src="assets/gif/setup.gif" width="900" alt="ideacao do projeto">
+</p>
+
 #### Step 5. Execute a action Strife Lakehouse
+
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
+
 #### Step 7. Execute a action Strife ADB Unity Catalog
+
 #### Step 8. Configure arquivo de contrato para ingestão
+
 #### Step 9. Execute a action Jarvis Ingestão
+
 #### Step 10. Configure seu projeto para explorar dados
+
 #### Step 11. Execute a action Jarvis Asset Bundles
 
 ## 5. Melhorias e Considerações Finais
