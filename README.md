@@ -32,16 +32,16 @@ Este repositório contém o seguinte:
 4. [Instruções para Configuração e Execução do Projeto](#4-instruções-para-configuração-e-execução-do-projeto)
    - [Pré-requisitos](#41-pré-requisitos)
    - [Passos de Configuração](#42-passos-de-configuração)
-       - [STEP 1. Clone o repositório](#step-1-clone-o-repositório)
-       - [STEP 2. Configure usuário de serviço (Service Principal)](#step-2-configure-usuário-de-serviço-service-principal)
-       - [STEP 3. Configure as secrets no GIT](#step-3-configure-as-secrets-no-git)
-       - [STEP 4. Configure arquivo de Setup Infraestrutura Lakehouse](#step-4-configure-arquivo-de-setup-infraestrutura-lakehouse)
-       - [STEP 5. Execute a action Strife Lakehouse](#step-5-execute-a-action-strife-lakehouse)
-       - [STEP 6. Execute a action Strife ADB Unity Catalog](#step-6-execute-a-action-strife-adb-unity-catalog)
-       - [STEP 7. Configure arquivo de contrato para ingestão](#step-7-configure-arquivo-de-contrato-para-ingestão)
-       - [STEP 8. Execute a action Jarvis Ingestão](#step-8-execute-a-action-jarvis-ingestão)
-       - [STEP 9. Configure seu projeto para explorar dados](#step-9-configure-seu-projeto-para-explorar-dados)
-       - [STEP 10. Execute a action Jarvis Asset Bundles](#step-10-execute-a-action-jarvis-asset-bundles)
+       - [Step 1. Clone o repositório](#step-1-clone-o-repositório)
+       - [Step 2. Configure usuário de serviço (Service Principal)](#step-2-configure-usuário-de-serviço-service-principal)
+       - [Step 3. Configure as secrets no GIT](#step-3-configure-as-secrets-no-git)
+       - [Step 4. Configure arquivo de Setup Infraestrutura Lakehouse](#step-4-configure-arquivo-de-setup-infraestrutura-lakehouse)
+       - [Step 5. Execute a action Strife Lakehouse](#step-5-execute-a-action-strife-lakehouse)
+       - [Step 6. Execute a action Strife ADB Unity Catalog](#step-6-execute-a-action-strife-adb-unity-catalog)
+       - [Step 7. Configure arquivo de contrato para ingestão](#step-7-configure-arquivo-de-contrato-para-ingestão)
+       - [Step 8. Execute a action Jarvis Ingestão](#step-8-execute-a-action-jarvis-ingestão)
+       - [Step 9. Configure seu projeto para explorar dados](#step-9-configure-seu-projeto-para-explorar-dados)
+       - [Step 10. Execute a action Jarvis Asset Bundles](#step-10-execute-a-action-jarvis-asset-bundles)
 5. [Melhorias e Considerações Finais](#5-melhorias-e-considerações-finais)
    - [Melhorias Futuras](#51-melhorias-futuras)
    - [Considerações Finais](#52-considerações-finais)
@@ -216,24 +216,24 @@ Repositório adicionais utilizados nesse projeto para experiência imersiva:
 - Usuário de serviço (Service Principal) com as seguintes atribuições:
   - **Owner**, para criar e gerenciar recursos da azure.
   - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
-  - **Account Admin**, após provisionar ambiente [Step 5 - Setup Lakehouse](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-5-execute-a-action-strife-lakehouse), para criar e configurar o metastore do Unity Catalog.
+  - **Account Admin**, após provisionar ambiente [Step 5 - Setup Lakehouse](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-5-execute-a-action-strife-lakehouse), para configurar Unity Catalog.
 - Definição das variaveis de ambiente:
   - **TF_ARM_TENANT_ID**, conta na azure (tenant)
   - **TF_ARM_SUBSCRIPTION_ID**, subscrição da conta
   - **TF_ARM_CLIENT_ID**, ID do usuário de serviço com permissão para criar recursos e grupos.
   - **TF_ARM_CLIENT_SECRET**, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
-  - **ADB_ACCOUNT_ID**, ID da console Unity Catalog do Databricks.
+  - **ADB_ACCOUNT_ID**, ID da console Unity Catalog do Databricks, saiba mais em [Step 6](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-6-recupere-account-id-do-unity-catalog-e-habilite-account-admin)
 
 Utilize o tópico [Passos de Configuração](#42-passos-de-configuração) para dar sequência ao seu projeto.
 
 ### 4.2 Passos de Configuração
 
-#### STEP 1. Clone o repositório
+#### Step 1. Clone o repositório
    ```sh
    git clone https://github.com/lealdouglas/dougsll-datamaster.git
    cd dougsll-datamaster
    ```
-#### STEP 2. Configure usuário de serviço (Service Principal)
+#### Step 2. Configure usuário de serviço (Service Principal)
 Crie um usuário de serviço na Azure (Service Principal) com as seguintes atribuições,
     
   - **Owner**, para criar e gerenciar recursos da azure.
@@ -248,7 +248,7 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
 
     ESCREVER!
     
-#### STEP 3. Configure as secrets no GIT 
+#### Step 3. Configure as secrets no GIT 
 Configure as variaveis de ambiente (secrets) em seu repositório Git,
   Para configurar as variáveis, acesse: [Crie secrets para um repositório](https://docs.github.com/pt/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)  
   - **TF_ARM_TENANT_ID**, conta na azure (tenant)
@@ -257,14 +257,14 @@ Configure as variaveis de ambiente (secrets) em seu repositório Git,
   - **TF_ARM_CLIENT_SECRET**, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
   - **ADB_ACCOUNT_ID**, ID da console Unity Catalog do Databricks.
   
-#### STEP 4. Configure arquivo de Setup Infraestrutura Lakehouse
-#### STEP 5. Execute a action Strife Lakehouse
-#### STEP 6. Recupere Account ID do Unity Catalog e habilite Account Admin
-#### STEP 7. Execute a action Strife ADB Unity Catalog
-#### STEP 8. Configure arquivo de contrato para ingestão
-#### STEP 9. Execute a action Jarvis Ingestão
-#### STEP 10. Configure seu projeto para explorar dados
-#### STEP 11. Execute a action Jarvis Asset Bundles
+#### Step 4. Configure arquivo de Setup Infraestrutura Lakehouse
+#### Step 5. Execute a action Strife Lakehouse
+#### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
+#### Step 7. Execute a action Strife ADB Unity Catalog
+#### Step 8. Configure arquivo de contrato para ingestão
+#### Step 9. Execute a action Jarvis Ingestão
+#### Step 10. Configure seu projeto para explorar dados
+#### Step 11. Execute a action Jarvis Asset Bundles
 
 ## 5. Melhorias e Considerações Finais
 
