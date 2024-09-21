@@ -28,7 +28,7 @@ info:
 
   # Domínio do contrato de dados
   # Domain of the data contract
-  domain: 'drisk'
+  domain: 'risk'
 
   # Contato do proprietário do contrato de dados
   # Contact information for the data contract owner

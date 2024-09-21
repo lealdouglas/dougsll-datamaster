@@ -383,9 +383,8 @@ Nessa action, será configurado:
 #### Step 8. Configure arquivo de contrato para ingestão
 
 Configure o arquivo .yaml utilizado como referencia para origens de ingestão desse projeto.
-No repos, acesse **datamaster/jarvis_ingest/datacontract.yaml**
 
-Para etapa de ingestão, foque nos principais campos:
+- No repos, acesse **datamaster/jarvis_ingest/datacontract.yaml**. Para etapa de ingestão, foque nos principais campos:
 
 ```yaml
 ingest_workflow:  # Configuração do workflow de ingestão de dados
@@ -401,10 +400,10 @@ ingest_workflow:  # Configuração do workflow de ingestão de dados
     delimiter: ','  # Delimitador utilizado no arquivo CSV
 ```
 
-Onde model é a tabela/workflow criado para ingestão.
+Onde _model_ é a tabela/workflow criado para ingestão.
 
 > [!NOTE]
-> Para esse projeto, habilitamos apenas um job, mas uma modelagem proposta é utilizar esse modelo para N tabelas de um mesmo schema.
+> Para esse projeto, habilitamos apenas um job, mas uma modelagem proposta é utilizar esse modelo para N models(tabelas) de um mesmo schema.
 
 Para esse projeto habilitamos os _types_ **eventhub** e **adls**. Utilize,
 
