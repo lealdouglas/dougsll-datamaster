@@ -310,15 +310,30 @@ Altere os valores para o qual deseja criar os nomes dos recursos e catalogo
 </p>
 
 <p align="center">
-  <img src="assets/img/actions.PNG" width="700" alt="ideacao do projeto">
+  <img src="assets/img/actions.PNG" width="850" alt="ideacao do projeto">
+</p>
+
+Após execução, os recursos abaixo serão criados
+
+<p align="center">
+  <img src="assets/img/recursos.png" width="850" alt="ideacao do projeto">
 </p>
 
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 
 Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura. Além disso, é importante marcar o usuário de serviço como account_admin,
 
-- Acesse a **workspace Databricks** do recurso **Databricks** criado no step anterior.
-- Ao acessar workspace databricks
+- Acesse account console, [accounts.azuredatabricks.net/login](https://accounts.azuredatabricks.net/login/).
+
+<p align="center">
+  <img src="assets/gif/account.gif" width="900" alt="ideacao do projeto">
+</p>
+
+> [!NOTE]
+> Caso já exista um metastore cadastrado como default, delete para que seja feito um a partir desse projeto.
+
+> [[!NOTE]]
+> Caso sua conta principal não esteja conseguindo logar no account console, utilize o login do campo `User principal name` que encontra-se no perfil da sua conta no AAD.
 
 #### Step 7. Execute a action Strife ADB Unity Catalog
 
