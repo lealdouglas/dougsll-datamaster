@@ -33,9 +33,9 @@ Este repositório contém o seguinte:
    - [Pré-requisitos](#41-pré-requisitos)
    - [Passos de Configuração](#42-passos-de-configuração)
      - [Step 1. Utilize o repos template](#step-1-utilize-o-repos-template)
-     - [Step 2. Configure usuário de serviço (Service Principal)](#step-2-configure-usuário-de-serviço-service-principal)
-     - [Step 3. Configure as secrets no GIT](#step-3-configure-as-secrets-no-git)
-     - [Step 4. Configure arquivo de Setup Infraestrutura Lakehouse](#step-4-configure-arquivo-de-setup-infraestrutura-lakehouse)
+     - [Step 2. Configure arquivo de Setup Infraestrutura Lakehouse](#step-2-configure-arquivo-de-setup-infraestrutura-lakehouse)
+     - [Step 3. Configure usuário de serviço (Service Principal)](#step-3-configure-usuário-de-serviço-service-principal)
+     - [Step 4. Configure as secrets no GIT](#step-4-configure-as-secrets-no-git)
      - [Step 5. Execute a action Strife Lakehouse](#step-5-execute-a-action-strife-lakehouse)
      - [Step 6. Execute a action Strife ADB Unity Catalog](#step-6-execute-a-action-strife-adb-unity-catalog)
      - [Step 7. Configure arquivo de contrato para ingestão](#step-7-configure-arquivo-de-contrato-para-ingestão)
@@ -240,7 +240,18 @@ A partir desse repos template, crie um novo para seu projeto.
   <img src="assets/gif/inicio.gif" width="900" alt="ideacao do projeto">
 </p>
 
-#### Step 2. Configure usuário de serviço (Service Principal)
+#### Step 2. Configure arquivo de Setup Infraestrutura Lakehouse
+
+Altere os valores para o qual deseja criar os nomes dos recursos e catálogo
+
+- No repos, acesse **datamaster/strife_env**
+  ```yaml
+  domain: drisk #nome do dominio
+  catalog: crisk #nome do catalogo
+  project: datamaster #nome do projeto
+  ```
+
+#### Step 3. Configure usuário de serviço (Service Principal)
 
 Crie um usuário de serviço na Azure (Service Principal) com as seguintes atribuições,
 
@@ -271,7 +282,7 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
   <img src="assets/gif/global.gif" width="900" alt="ideacao do projeto">
 </p> 
     
-#### Step 3. Configure as secrets no GIT 
+#### Step 4. Configure as secrets no GIT 
 Configure as variaveis de ambiente (secrets) em seu repositório Git,
   Para configurar as variáveis, acesse: [Crie secrets para um repositório](https://docs.github.com/pt/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)  
   - **TF_ARM_TENANT_ID**, conta na azure (tenant)
@@ -286,18 +297,7 @@ Configure as variaveis de ambiente (secrets) em seu repositório Git,
 
 <p align="center">
   <img src="assets/gif/secret.gif" width="900" alt="ideacao do projeto">
-</p> 
-  
-#### Step 4. Configure arquivo de Setup Infraestrutura Lakehouse
-
-Altere os valores para o qual deseja criar os nomes dos recursos e catalogo
-
-- No repos, acesse **datamaster/strife_env**
-  ```yaml
-  domain: drisk #nome do dominio
-  catalog: crisk #nome do catalogo
-  project: datamaster #nome do projeto
-  ```
+</p>
 
 #### Step 5. Execute a action Strife Lakehouse
 
@@ -330,10 +330,10 @@ Para dar sequencia ao setup, é necessário capturar qual account_id está vincu
 </p>
 
 > [!NOTE]
-> Caso já exista um metastore cadastrado como default, delete para que seja feito um a partir desse projeto.
+> Caso já exista um metastore cadastrado como default, **delete** para que seja feito um a partir desse projeto.
 
-> [[!NOTE]]
-> Caso sua conta principal não esteja conseguindo logar no account console, utilize o login do campo `User principal name` que encontra-se no perfil da sua conta no AAD.
+> [!NOTE]
+> Caso sua conta principal não esteja conseguindo logar no account console, utilize o login do campo **User principal name** que encontra-se no perfil da sua conta no AAD.
 
 #### Step 7. Execute a action Strife ADB Unity Catalog
 
