@@ -311,7 +311,7 @@ Altere os valores para o qual deseja criar os nomes dos recursos e catalogo
 
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 
-Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura. Além disso, é importante marcar o usuário de servico como account_admin
+Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura. Além disso, é importante marcar o usuário de serviço como account_admin,
 
 -
 
