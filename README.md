@@ -310,7 +310,7 @@ Altere os valores para o qual deseja criar os nomes dos recursos e catalogo
 </p>
 
 <p align="center">
-  <img src="assets/img/actions.gif" width="700" alt="ideacao do projeto">
+  <img src="assets/img/actions.PNG" width="700" alt="ideacao do projeto">
 </p>
 
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
