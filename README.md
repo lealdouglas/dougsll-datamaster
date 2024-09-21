@@ -324,7 +324,7 @@ Após execução, os recursos abaixo serão criados
 
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 
-Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura.
+Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura via terraform.
 
 - Acesse account console, [accounts.azuredatabricks.net/login](https://accounts.azuredatabricks.net/login/).
 - Após copiar account_id no canto superior direito da tela do account, cadastre a secret **ADB_ACCOUNT_ID** no git
