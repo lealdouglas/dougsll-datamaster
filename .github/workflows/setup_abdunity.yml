@@ -1,4 +1,4 @@
-name: 02. Strife - Setup Infra Lakehouse
+name: 02. Strife - Setup Unity Lakehouse
 
 # Este arquivo de workflow do GitHub Actions é utilizado para configurar e implantar
 # um ambiente de Lakehouse no Azure utilizando Terraform. Ele é composto por quatro jobs principais:

@@ -309,11 +309,16 @@ Altere os valores para o qual deseja criar os nomes dos recursos e catalogo
   <img src="assets/gif/setup.gif" width="900" alt="ideacao do projeto">
 </p>
 
+<p align="center">
+  <img src="assets/img/actions.gif" width="700" alt="ideacao do projeto">
+</p>
+
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 
 Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura. Além disso, é importante marcar o usuário de serviço como account_admin,
 
--
+- Acesse a **workspace Databricks** do recurso **Databricks** criado no step anterior.
+- Ao acessar workspace databricks
 
 #### Step 7. Execute a action Strife ADB Unity Catalog
 
