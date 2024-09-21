@@ -79,6 +79,10 @@ jobs:
 
     needs: build
     steps:
+      # Faz o checkout do repositório principal
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
       # Baixa o artefato do Terraform
       # Download the Terraform artifact
       - name: Download Terraform
@@ -136,7 +140,7 @@ jobs:
       # Gera e aplica o plano de execução do Terraform
       # Generate and apply the Terraform execution plan
       - name: Terraform Plan
-        run: terraform plan -no-color -var "envv=${{vars.ENVV}}"
+        run: terraform plan -no-color -var "domain=${{env.domain}}" "catalog=${{env.docatalogmain}}" "domain=${{env.project}}"
         continue-on-error: true
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var "envv=${{vars.ENVV}}"
+        run: terraform apply -auto-approve -var "domain=${{env.domain}}" "catalog=${{env.catalog}}" "domain=${{env.project}}"

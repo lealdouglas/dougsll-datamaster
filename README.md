@@ -311,6 +311,10 @@ Altere os valores para o qual deseja criar os nomes dos recursos e catalogo
 
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 
+Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura. Além disso, é importante marcar o usuário de servico como account_admin
+
+-
+
 #### Step 7. Execute a action Strife ADB Unity Catalog
 
 #### Step 8. Configure arquivo de contrato para ingestão
