@@ -87,7 +87,7 @@ jobs:
       # Baixa o artefato do Terraform
       # Download the Terraform artifact
       - name: Download Terraform
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: lakehouseuc
           path: ${{ github.workspace }}/azsetup/lakehouse-adbuc
@@ -139,7 +139,7 @@ jobs:
       # Baixa o artefato do Terraform
       # Download the Terraform artifact
       - name: Download Terraform
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: lakehousecp
           path: ${{ github.workspace }}/azsetup/lakehouse-adbcompute
