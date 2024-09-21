@@ -324,9 +324,10 @@ Após execução, os recursos abaixo serão criados
 
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 
-Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura. Além disso, **é importante marcar o usuário de serviço como account_admin**, para que tenha permissão de criar catálogo, metastore, external metastore, schema, tables e outros.
+Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura.
 
 - Acesse account console, [accounts.azuredatabricks.net/login](https://accounts.azuredatabricks.net/login/).
+- Após copiar account_id no canto superior direito da tela do account, cadastre a secret **ADB_ACCOUNT_ID** no git
 
 <p align="center">
   <img src="assets/gif/account.gif" width="900" alt="ideacao do projeto">
@@ -334,6 +335,15 @@ Para dar sequencia ao setup, é necessário capturar qual account_id está vincu
 
 > [!NOTE]
 > Caso já exista um metastore cadastrado como default, **delete** para que seja feito um a partir desse projeto.
+
+Em seguida, **é importante marcar o usuário de serviço como account_admin**, para que tenha permissão de criar catálogo, metastore, external metastore, schema, tables e outros:
+
+- Clique em **User management** no menu lateral
+- Clique na aba **Service principals**
+- Selecione seu **service principal pelo id**
+- Clique na aba **Roles**
+- Habilite a opção **account Admin**
+- Faça o mesmo para sua conta principal.
 
 > [!NOTE]
 > Caso sua conta principal não esteja conseguindo logar no account console, utilize o login do campo **User principal name** que encontra-se no perfil da sua conta no AAD.
