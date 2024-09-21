@@ -216,7 +216,7 @@ Repositório adicionais utilizados nesse projeto para experiência imersiva:
 - Usuário de serviço (Service Principal) com as seguintes atribuições:
   - **Owner**, para criar e gerenciar recursos da azure.
   - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
-  - Após provisionar ambiente [Action: 01. Strife - Setup Lakehouse]: **Account Admin**, para criar e configurar o metastore do Unity Catalog.
+  - Após provisionar ambiente [step 5 - Setup Lakehouse](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-5-execute-a-action-strife-lakehouse): **Account Admin**, para criar e configurar o metastore do Unity Catalog.
 - Definição das variaveis de ambiente:
   - **TF_ARM_TENANT_ID**, conta na azure (tenant)
   - **TF_ARM_SUBSCRIPTION_ID**, subscrição da conta
