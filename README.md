@@ -242,6 +242,7 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
   Para configurar um usuário de serviço, você pode fazer via power shell ou via azure cli, após acessar o terminal, utilize o comando abaixo para criar o usuário:
 
   ```sh
+  az login
   az ad sp create-for-rbac -n spndatamasteradmin --role Owner --scopes /subscriptions/<SUBSCRIPTION_ID>
   ```
 
@@ -258,7 +259,7 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
   6 - clique em add
 
 <p align="center">
-  <img src="assets/gif/teste.gif" width="900" alt="ideacao do projeto">
+  <img src="assets/gif/globaladmin.gif" width="900" alt="ideacao do projeto">
 </p> 
     
 #### Step 3. Configure as secrets no GIT 
