@@ -265,8 +265,8 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
 
   Onde,
 
-  - **SUBSCRIPTION_ID** é o ID da subscrição da sua conta Azure free (trial $200) ou Pay as You Go, em caso de duvidas sobre custo desse projeto, saiba mais em [custos do projeto](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#6-custos-do-projeto)
-  - O usuário de serviço **spndatamasteradmin** deve ser criado e as variáveis **password** (TF_ARM_CLIENT_SECRET) e **appId** (TF_ARM_CLIENT_ID) serão exibidas, as utilize para [configurar as secrets no git](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-3-configure-as-secrets-no-git)
+  - **SUBSCRIPTION_ID** é o ID da subscrição da sua conta Azure.
+  - O usuário de serviço **spndatamasteradmin** deve ser criado e as variáveis **password** (`TF_ARM_CLIENT_SECRET`) e **appId** (`TF_ARM_CLIENT_ID`) serão exibidas, as utilize-as para [configurar as secrets no git](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-3-configure-as-secrets-no-git).
 
 - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
   Após criar usuário, acesse ao recurso da conta, Microsoft Entra ID, para incluir o usuário a permissão de Global Administrator,
@@ -321,7 +321,7 @@ Após execução, os recursos abaixo serão criados
 
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 
-Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura. Além disso, é importante marcar o usuário de serviço como account_admin,
+Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura. Além disso, **é importante marcar o usuário de serviço como account_admin**, para que tenha permissão de criar catálogo, metastore, external metastore, schema, tables e outros.
 
 - Acesse account console, [accounts.azuredatabricks.net/login](https://accounts.azuredatabricks.net/login/).
 
