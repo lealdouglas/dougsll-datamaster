@@ -323,7 +323,7 @@ Após execução, os recursos abaixo serão criados
 </p>
 
 > [!WARNING]
-> Importante desabilitar o recurso Network Watcher que tem como objetivo monitorar e gerenciar serivcos da sua conta. Para esse projeto não há necessidade. Saiba mais em [ativar_desativar_network_watcher](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=portal#disable-network-watcher-for-your-region) e [desative gerenciamento automático](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=cli#opt-out-of-network-watcher-automatic-enablement).
+> Atenção, importante desabilitar o recurso Network Watcher que tem como objetivo monitorar e gerenciar serviços da sua conta. Para esse projeto não há necessidade. Saiba mais em [ativar_desativar_network_watcher](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=portal#disable-network-watcher-for-your-region) e [desative gerenciamento automático](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=cli#opt-out-of-network-watcher-automatic-enablement).
 
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 
@@ -331,6 +331,9 @@ Para dar sequencia ao setup, é necessário capturar qual account_id está vincu
 
 - Acesse account console, [accounts.azuredatabricks.net/login](https://accounts.azuredatabricks.net/login/).
 - Após copiar account_id no canto superior direito da tela do account, cadastre a secret **ADB_ACCOUNT_ID**.
+
+> [!IMPORTANT]
+> Caso sua conta principal não esteja conseguindo logar no account console, utilize o login do campo **User principal name** que encontra-se no perfil da sua conta no AAD.
 
 <p align="center">
   <img src="assets/gif/account.gif" width="900" alt="ideacao do projeto">
@@ -347,9 +350,6 @@ Em seguida, **é importante marcar o usuário de serviço como account_admin**, 
 - Clique na aba **Roles**
 - Habilite a opção **account Admin**
 - Faça o mesmo para sua conta principal.
-
-> [!NOTE]
-> Caso sua conta principal não esteja conseguindo logar no account console, utilize o login do campo **User principal name** que encontra-se no perfil da sua conta no AAD.
 
 #### Step 7. Execute a action Strife ADB Unity Catalog
 
@@ -402,7 +402,7 @@ Abaixo, compartilho algumas melhorias consideradas para essa solução e ambiç�
 
 ### 5.2 Considerações Finais
 
-Este projeto demonstra uma solução que representa o potencial em definir e configurar ambientes, além de preparar um pipeline de dados, sem exigir que o desenvolvedor (engenheiro de dados/ML) saia da plataforma de desenvolvimento (Git). Com todos os acessos e funcionalidades bem estabelecidos (Actions), a solução tem a capacidade e autonomia de servir toda a jornada do desenvolvedor. A solução também aborda uma visão em que, a partir de uma assinatura (exemplo do case domínio Drisk), é possível configurar pequenos projetos (Actions com a capacidade de criar resource groups, recursos unitários e cenários pré-moldados), com base na finalidade e nos ambientes desejados, onde a jornada começa desde o repositório. Por fim, uma camada de interface web e algumas APIs podem absorver validações e etapas que, via Git, podem parecer complicadas.
+Este projeto demonstra uma solução que representa o potencial em definir e configurar ambientes, além de preparar um pipeline de dados, sem exigir que o desenvolvedor (engenheiro de dados/ML) saia da plataforma de desenvolvimento (selecionado o GitHub e actions para esse projeto). Com todos os acessos e funcionalidades bem estabelecidos, a solução tem a capacidade e autonomia de servir toda a jornada do desenvolvedor (actions). A solução também aborda uma visão em que, a partir de uma assinatura (exemplo do case domínio drisk), é possível configurar pequenos projetos (Actions com a capacidade de criar resource groups, recursos unitários e cenários pré-moldados), com base na finalidade e nos ambientes desejados, onde a jornada começa desde a partir da configuração do seu repos. Por fim, uma camada de interface web e APIs podem escalar a solução apresentada.
 
 ## 6. Custos do projeto
 
