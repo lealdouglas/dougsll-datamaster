@@ -364,13 +364,15 @@ Em seguida, **é importante marcar o usuário de serviço como account_admin**, 
 
 Nessa action, será configurado:
 
-- **metastore**, chamado primary.
+- **Metastore**, chamado primary.
 - **Storage Credentials**, para seu metastore e catálogo.
 - **External Locations**, para seu metastore e catálogo.
-- **sincronização**, de usuários e grupos do AAD para account e workspace.
-- **cluster single user**, chamado cluster-single-dtm-<domain>, com autoterminate de 10min (mínimo possível)
-- **catálogo**, chamado c<domain>
-- **schemas**, bronze, silver e gold.
+- **Sincronização**, de usuários e grupos do AAD para account e workspace.
+- **Cluster single user**, chamado cluster-single-dtm-`domain`, com autoterminate de 10min, uso ao service principal principal.
+  - Configuração: 1 Driver; 8 GB Memory, 4 Cores; Runtime 14.3.x-scala2.12
+- **Catálogo**, chamado c`catalog`
+- **Schemas**, bronze, silver e gold.
+- **Permissões**, acesso ao grupo data_engineer aos schemas listados acima.
 
 > [!NOTE]
 > Caso não consiga enxergar o catálogo criado, adicione sua conta principal ao grupo **data_engineer** a nível de console e aguarde alguns segundos.
