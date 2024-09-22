@@ -419,15 +419,18 @@ Para esse projeto habilitamos os _types_ **eventhub** e **adls**. Utilize,
 - Selecione **03. Jarvis - Create Workflow Ingest**
 - Clique no botão a direita, **Run workflow**
 
-<p align="center">
-  <img src="assets/img/workflow.PNG" width="900" alt="ideacao do projeto">
-</p>
-
 Nessa action, será configurado:
 
 - **Databricks Job**, chamado ingest-risk-account, job de ingestão.
 - **Databricks Job Task**, chamado task-ingest-risk-account, para fazer o processamento dos dados e gerar a tabela na camada bronze.
 - **Topico Event Hub**, _opcional_, caso o _type_ do contrato seja informado eventhub.
+
+<p align="center">
+  <img src="assets/img/workflow.PNG" width="900" alt="ideacao do projeto">
+</p>
+
+> [!NOTE]
+> Orquestração do job configurado com base no contrato, porém pausado para evitar custo inesperado.
 
 #### Step 10. Configure seu projeto para explorar dados
 
