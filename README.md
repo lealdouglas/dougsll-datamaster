@@ -407,10 +407,10 @@ Onde _model_ é a tabela/workflow criado para ingestão.
 
 Para esse projeto habilitamos os _types_ **eventhub** e **adls**. Utilize,
 
-- **eventhub** para simular uma ingestão streaming
+- **eventhub**, para simular uma ingestão streaming
   - Um tópico é criado com base nos parâmetros informados no contrato.
   - Um job mock pode ser criado caso específique no contrato como teste, ou envie mensagens ao tópico se houver alguma aplicação.
-- **adls** para repouso dos dados brutos.
+- **adls**, para repouso dos dados brutos.
   - Caso tenha arquivos no storage/container raw.
 
 #### Step 9. Execute a action Jarvis Ingestão
@@ -418,6 +418,16 @@ Para esse projeto habilitamos os _types_ **eventhub** e **adls**. Utilize,
 - Na tela inicial do repos, clique em **Actions**
 - Selecione **03. Jarvis - Create Workflow Ingest**
 - Clique no botão a direita, **Run workflow**
+
+<p align="center">
+  <img src="assets/img/workflow.PNG" width="900" alt="ideacao do projeto">
+</p>
+
+Nessa action, será configurado:
+
+- **Databricks Job**, chamado ingest-risk-account, job de ingestão.
+- **Databricks Job Task**, chamado task-ingest-risk-account, para fazer o processamento dos dados e gerar a tabela na camada bronze.
+- **Topico Event Hub**, _opcional_, caso o _type_ do contrato seja informado eventhub.
 
 #### Step 10. Configure seu projeto para explorar dados
 
