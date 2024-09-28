@@ -123,6 +123,8 @@ jobs:
           echo "domain=${{ steps.read_yaml.outputs.domain }}" >> $GITHUB_ENV
           echo "catalog=${{ steps.read_yaml.outputs.catalog }}" >> $GITHUB_ENV
           echo "project=${{ steps.read_yaml.outputs.project }}" >> $GITHUB_ENV
+          echo "domain_azure=${{ steps.read_yaml.outputs.domain_azure }}" >> $GITHUB_ENV
+          echo "user_principal_name=${{ steps.read_yaml.outputs.user_principal_name }}" >> $GITHUB_ENV
 
       # Configura e inicializa o Terraform
       # Set up and initialize Terraform
@@ -140,7 +142,7 @@ jobs:
       # Gera e aplica o plano de execução do Terraform
       # Generate and apply the Terraform execution plan
       - name: Terraform Plan
-        run: terraform plan -no-color -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
+        run: terraform plan -no-color -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "user_principal_name=${{env.user_principal_name}}" -var "domain_azure=${{env.domain_azure}}"
         continue-on-error: true
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
+        run: terraform apply -auto-approve -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "user_principal_name=${{env.user_principal_name}}" -var "domain_azure=${{env.domain_azure}}"
