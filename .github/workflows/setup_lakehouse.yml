@@ -131,6 +131,8 @@ jobs:
           echo "domain=${{ steps.read_yaml.outputs.domain }}" >> $GITHUB_ENV
           echo "catalog=${{ steps.read_yaml.outputs.catalog }}" >> $GITHUB_ENV
           echo "project=${{ steps.read_yaml.outputs.project }}" >> $GITHUB_ENV
+          echo "domain_azure=${{ steps.read_yaml.outputs.domain_azure }}" >> $GITHUB_ENV
+          echo "user_principal_name=${{ steps.read_yaml.outputs.user_principal_name }}" >> $GITHUB_ENV
 
       # Configura e inicializa o Terraform
       # Set up and initialize Terraform
