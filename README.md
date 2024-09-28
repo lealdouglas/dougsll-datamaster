@@ -131,7 +131,7 @@ Este projeto foi idealizado para que os usuários tenham um ambiente mínimo par
 Ao Clonar repos template, o usuário deve setar as variaveis de ambiente necessário no git, configurar os arquivos .yaml e iniciar as execuções.
 Na etapa de ingestão, o job executor fará download do pypi para uso do framework padrão da plataforma apresentada.
 
-Repositório adicionais utilizados nesse projeto para experiência imersivaaaa:
+Repositório adicionais utilizados nesse projeto para experiência imersiva:
 
 - [lealdouglas/strife](https://github.com/lealdouglas/strife), Setup de infraestrutura (recursos). Strife é responsável por entregar esse ambiente pronto para exploração e uso.
 - [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), Delivery do pipeline de dados. Jarvis é responsável por facilitar a adoação e automatizar fluxos utilizados nesse case.
