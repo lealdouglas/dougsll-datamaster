@@ -258,7 +258,7 @@ Altere os valores para o qual deseja criar os nomes dos recursos e catálogo
   ```
 
 > [!Note]
-> Para recuperar domínio e usuário principal da conta, acesse **Users**, selecione seu usuário principal e copie o campo **User principal name**. Onde o valor copiado é o `user_principal_name` e após `@` é o domínio.
+> Para recuperar domínio e usuário principal da conta, acesse **Users**, selecione seu usuário principal e copie o campo **User principal name**. Onde o valor copiado é o `user_principal_name` e após `@` é o `domain_azure`.
 
 #### Step 3. Configure usuário de serviço (Service Principal)
 
