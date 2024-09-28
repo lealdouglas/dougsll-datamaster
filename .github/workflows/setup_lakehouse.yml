@@ -68,92 +68,92 @@ jobs:
 
   # Job para configurar o ambiente de Lakehouse
   # Job to set up the Lakehouse environment
-  strife-setup-lakehouse:
-    name: Strife Setup Lakehouse
-    runs-on: ubuntu-latest
+  # strife-setup-lakehouse:
+  #   name: Strife Setup Lakehouse
+  #   runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}/azsetup/lakehouse
+  #   defaults:
+  #     run:
+  #       working-directory: ${{ github.workspace }}/azsetup/lakehouse
 
-    env:
-      ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
+  #   env:
+  #     ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
+  #     ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
+  #     ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+  #     ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
 
-    environment:
-      name: dev
+  #   environment:
+  #     name: dev
 
-    needs: build
-    steps:
-      # Faz o checkout do repositório principal
-      - name: Checkout current repository
-        uses: actions/checkout@v4
+  #   needs: build
+  #   steps:
+  #     # Faz o checkout do repositório principal
+  #     - name: Checkout current repository
+  #       uses: actions/checkout@v4
 
-      # Baixa o artefato do Terraform
-      # Download the Terraform artifact
-      - name: Download Terraform
-        uses: actions/download-artifact@v4
-        with:
-          name: lakehouse
-          path: ${{ github.workspace }}/azsetup/lakehouse
+  #     # Baixa o artefato do Terraform
+  #     # Download the Terraform artifact
+  #     - name: Download Terraform
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: lakehouse
+  #         path: ${{ github.workspace }}/azsetup/lakehouse
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v4
+  #       with:
+  #         python-version: '3.10'
 
-      - name: Install PyYAML
-        run: pip install pyyaml
+  #     - name: Install PyYAML
+  #       run: pip install pyyaml
 
-      - name: Check if YAML file exists
-        run: |
-          if [ ! -f "${{ github.workspace }}/datamaster/strife_env/strife_config.yaml" ]; then
-            echo "YAML file not found!"
-            exit 1
-          fi
+  #     - name: Check if YAML file exists
+  #       run: |
+  #         if [ ! -f "${{ github.workspace }}/datamaster/strife_env/strife_config.yaml" ]; then
+  #           echo "YAML file not found!"
+  #           exit 1
+  #         fi
 
-      - name: Read YAML file
-        id: read_yaml
-        run: |
-          python -c "
-          import yaml
-          import os
-          with open('../../datamaster/strife_env/strife_config.yaml', 'r') as stream:
-              config = yaml.safe_load(stream)
-              for key, value in config.items():
-                  print(f'::set-output name={key}::{value}')
-          "
+  #     - name: Read YAML file
+  #       id: read_yaml
+  #       run: |
+  #         python -c "
+  #         import yaml
+  #         import os
+  #         with open('../../datamaster/strife_env/strife_config.yaml', 'r') as stream:
+  #             config = yaml.safe_load(stream)
+  #             for key, value in config.items():
+  #                 print(f'::set-output name={key}::{value}')
+  #         "
 
-      - name: Set environment variables from YAML
-        run: |
-          echo "domain=${{ steps.read_yaml.outputs.domain }}" >> $GITHUB_ENV
-          echo "catalog=${{ steps.read_yaml.outputs.catalog }}" >> $GITHUB_ENV
-          echo "project=${{ steps.read_yaml.outputs.project }}" >> $GITHUB_ENV
-          echo "domain_azure=${{ steps.read_yaml.outputs.domain_azure }}" >> $GITHUB_ENV
-          echo "user_principal_name=${{ steps.read_yaml.outputs.user_principal_name }}" >> $GITHUB_ENV
+  #     - name: Set environment variables from YAML
+  #       run: |
+  #         echo "domain=${{ steps.read_yaml.outputs.domain }}" >> $GITHUB_ENV
+  #         echo "catalog=${{ steps.read_yaml.outputs.catalog }}" >> $GITHUB_ENV
+  #         echo "project=${{ steps.read_yaml.outputs.project }}" >> $GITHUB_ENV
+  #         echo "domain_azure=${{ steps.read_yaml.outputs.domain_azure }}" >> $GITHUB_ENV
+  #         echo "user_principal_name=${{ steps.read_yaml.outputs.user_principal_name }}" >> $GITHUB_ENV
 
-      # Configura e inicializa o Terraform
-      # Set up and initialize Terraform
-      - uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_wrapper: false
-      - name: Terraform Init
-        run: terraform init
+  #     # Configura e inicializa o Terraform
+  #     # Set up and initialize Terraform
+  #     - uses: hashicorp/setup-terraform@v2
+  #       with:
+  #         terraform_wrapper: false
+  #     - name: Terraform Init
+  #       run: terraform init
 
-      # Valida a configuração do Terraform
-      # Validate the Terraform configuration
-      - name: Terraform Validate
-        run: terraform validate -no-color
+  #     # Valida a configuração do Terraform
+  #     # Validate the Terraform configuration
+  #     - name: Terraform Validate
+  #       run: terraform validate -no-color
 
-      # Gera e aplica o plano de execução do Terraform
-      # Generate and apply the Terraform execution plan
-      - name: Terraform Plan
-        run: terraform plan -no-color -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "user_principal_name=${{env.user_principal_name}}" -var "domain_azure=${{env.domain_azure}}"
-        continue-on-error: true
-      - name: Terraform Apply
-        run: terraform apply -auto-approve -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "user_principal_name=${{env.user_principal_name}}" -var "domain_azure=${{env.domain_azure}}"
+  #     # Gera e aplica o plano de execução do Terraform
+  #     # Generate and apply the Terraform execution plan
+  #     - name: Terraform Plan
+  #       run: terraform plan -no-color -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "user_principal_name=${{env.user_principal_name}}" -var "domain_azure=${{env.domain_azure}}"
+  #       continue-on-error: true
+  #     - name: Terraform Apply
+  #       run: terraform apply -auto-approve -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "user_principal_name=${{env.user_principal_name}}" -var "domain_azure=${{env.domain_azure}}"
 
   # Job para configurar o ambiente de Lakehouse
   # Job to set up the Lakehouse environment
