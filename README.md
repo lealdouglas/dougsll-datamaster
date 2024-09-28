@@ -133,9 +133,9 @@ Na etapa de ingestão, o job executor fará download do pypi para uso do framewo
 
 Repositório adicionais utilizados nesse projeto para experiência imersiva:
 
-- [lealdouglas/strife](https://github.com/lealdouglas/strife), Setup de infraestrutura (recursos).
-- [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), Delivery do pipeline de dados.
-- [lealdouglas/carlton](https://github.com/lealdouglas/carlton), SDK comum padrão da plataforma de dados.
+- [lealdouglas/strife](https://github.com/lealdouglas/strife), Setup de infraestrutura (recursos). Strife é responsável por entregar esse ambiente pronto para exploração e uso.
+- [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), Delivery do pipeline de dados. Jarvis é responsável por facilitar a adoação e automatizar fluxos utilizados nesse case.
+- [lealdouglas/carlton](https://github.com/lealdouglas/carlton), SDK comum padrão da plataforma de dados. Carlton é responsável por padronizar e garantir a qualidade técnica desse case.
 
 ### 3.4 Descrição do Fluxo de Dados
 
