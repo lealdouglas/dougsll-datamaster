@@ -148,10 +148,10 @@ jobs:
       # Gera e aplica o plano de execução do Terraform
       # Generate and apply the Terraform execution plan
       - name: Terraform Plan
-        run: terraform plan -no-color -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
+        run: terraform plan -no-color -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "user_principal_name=${{env.user_principal_name}}" -var "domain_azure=${{env.domain_azure}}"
         continue-on-error: true
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
+        run: terraform apply -auto-approve -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "user_principal_name=${{env.user_principal_name}}" -var "domain_azure=${{env.domain_azure}}"
 
   # Job para configurar o ambiente de Lakehouse
   # Job to set up the Lakehouse environment
