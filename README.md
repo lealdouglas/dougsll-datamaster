@@ -253,8 +253,8 @@ Altere os valores para o qual deseja criar os nomes dos recursos e catálogo
   domain: risk #nome do domínio
   catalog: risk #nome do catálogo
   project: datamaster #nome do projeto
-  user_principal_name: gaby-gouvea_hotmail.com#EXT#@gabygouveahotmail.onmicrosoft.com #usuario principal da conta
-  domain_azure: gabygouveahotmail.onmicrosoft.com #dominio principal da conta, para vincular outros usuarios
+  user_principal_name: account_name#EXT#@mailaccount_name.onmicrosoft.com #usuario principal da conta
+  domain_azure: mailaccount_name.onmicrosoft.com #dominio principal da conta, para vincular outros usuarios
   ```
 
 > [!Note]
