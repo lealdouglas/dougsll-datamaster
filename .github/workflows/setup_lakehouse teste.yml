@@ -60,8 +60,8 @@ jobs:
 
   # Job para configurar o ambiente de Lakehouse
   # Job to set up the Lakehouse environment
-  strife-setup-lakehouse:
-    name: Strife Setup Lakehouse
+  strife-setup-aad_users:
+    name: Strife Setup AAD Groups Users
     runs-on: ubuntu-latest
 
     defaults:
