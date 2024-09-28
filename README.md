@@ -253,7 +253,12 @@ Altere os valores para o qual deseja criar os nomes dos recursos e catálogo
   domain: risk #nome do domínio
   catalog: risk #nome do catálogo
   project: datamaster #nome do projeto
+  user_principal_name: gaby-gouvea_hotmail.com#EXT#@gabygouveahotmail.onmicrosoft.com #usuario principal da conta
+  domain_azure: gabygouveahotmail.onmicrosoft.com #dominio principal da conta, para vincular outros usuarios
   ```
+
+> [!Note]
+> Para recuperar domínio e usuário principal da conta, acesse **Users**, selecione seu usuário principal e copie o campo **User principal name**. Onde o valor copiado é o `user_principal_name` e após `@` é o domínio.
 
 #### Step 3. Configure usuário de serviço (Service Principal)
 
