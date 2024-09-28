@@ -174,7 +174,7 @@ jobs:
     environment:
       name: dev
 
-    needs: strife-setup-lakehouse
+    needs: build
     steps:
       # Faz o checkout do repositório principal
       - name: Checkout current repository
