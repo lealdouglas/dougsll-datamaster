@@ -129,7 +129,6 @@ jobs:
           echo "catalog=${{ steps.read_yaml.outputs.catalog }}" >> $GITHUB_ENV
           echo "project=${{ steps.read_yaml.outputs.project }}" >> $GITHUB_ENV
           echo "domain_azure=${{ steps.read_yaml.outputs.domain_azure }}" >> $GITHUB_ENV
-          echo "user_principal_name=${{ steps.read_yaml.outputs.user_principal_name }}" >> $GITHUB_ENV
 
       # Configura e inicializa o Terraform
       # Set up and initialize Terraform
@@ -147,12 +146,12 @@ jobs:
       # Gera e aplica o plano de execução do Terraform
       # Generate and apply the Terraform execution plan
       - name: Terraform Plan
-        run: terraform plan -no-color -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}" -var "user_principal_name=${{env.user_principal_name}}"
+        run: terraform plan -no-color -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
         continue-on-error: true
       - name: Terraform Apply Target Module
-        run: terraform apply -target='module.metastore_and_users' -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}" -var "user_principal_name=${{env.user_principal_name}}"
+        run: terraform apply -target='module.metastore_and_users' -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}" -var "user_principal_name=${{env.user_principal_name}}"
+        run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
 
   # Job para configurar os recursos de computação do ADB
   # Job to set up ADB compute resources
