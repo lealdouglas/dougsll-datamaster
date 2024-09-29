@@ -2,4 +2,4 @@ domain: risk
 catalog: risk
 project: datamaster
 user_principal_name: gaby-gouvea@hotmail.com
-domain_azure: gabygouveahotmail.onmicrosoft.com
+domain_azure: gaby-gouvea_hotmail.com#ext#@gabygouveahotmail.onmicrosoft.com
