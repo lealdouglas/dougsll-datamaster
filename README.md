@@ -337,6 +337,9 @@ Após execução, os recursos abaixo serão criados
 - Um container chamado ctrd`risk`mtst será criado para gestão do metastore.
 - Um container chamado ctrd`risk`catlog será criado para gestão dos schemas e catalogo.
 
+> [!NOTE]
+> Por default, um metastore é configurado a nível de tenant em sua account console (unity), nos passos seguintes vamos optar por criar nosso metastore
+
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 
 Para dar sequencia ao setup, é necessário capturar qual account_id está vinculado ao console do unity catalog, infelizmente não é possível automatizar essa captura via terraform.
