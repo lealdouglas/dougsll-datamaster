@@ -329,7 +329,10 @@ Após execução, os recursos abaixo serão criados
 </p>
 
 > [!Note]
-> Um container chamado ctrd`risk`raw será criado para arquivos brutos de ingestão.
+> Um grupo chamado **data_engineer** será criado, quatro membros novos serão adicionados a ele.
+
+> [!Note]
+> Um container chamado ctrd`risk`raw será criado para arquivos brutos de ingestão. Um container chamado ctrd`risk`log será criado para arquivos logs e controles. Um container chamado ctrd`risk`mtst será criado para gestão do metastore. Um container chamado ctrd`risk`catlog será criado para gestão dos schemas e catalogo.
 
 > [!WARNING]
 > Atenção, importante desabilitar o recurso Network Watcher que tem como objetivo monitorar e gerenciar serviços da sua conta. Para esse projeto não há necessidade. Saiba mais em [ativar_desativar_network_watcher](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=portal#disable-network-watcher-for-your-region) e [desative gerenciamento automático](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=cli#opt-out-of-network-watcher-automatic-enablement).
