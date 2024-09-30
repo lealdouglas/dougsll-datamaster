@@ -1,0 +1,147 @@
+name: 02. Strife - Setup EXTRA
+
+# Este arquivo de workflow do GitHub Actions é utilizado para configurar e implantar
+# um ambiente de Lakehouse no Azure utilizando Terraform. Ele é composto por quatro jobs principais:
+# 1. build: Faz o checkout de um repositório privado e faz o upload de artefatos necessários.
+# 2. setup-lakehouse: Configura o ambiente de Lakehouse utilizando Terraform.
+# 3. setup-unity-catalog: Configura o Unity Catalog no Azure Databricks utilizando Terraform.
+# 4. setup-adb-compute: Configura os recursos de computação do Azure Databricks utilizando Terraform.
+#
+# O workflow é acionado manualmente através da aba Actions no GitHub.
+# Ele utiliza runners do Ubuntu para executar os jobs e faz uso de variáveis de ambiente
+# e segredos armazenados no GitHub para autenticação e configuração.
+
+# This GitHub Actions workflow file is used to set up and deploy
+# a Lakehouse environment on Azure using Terraform. It consists of four main jobs:
+# 1. build: Checks out a private repository and uploads necessary artifacts.
+# 2. setup-lakehouse: Sets up the Lakehouse environment using Terraform.
+# 3. setup-unity-catalog: Sets up the Unity Catalog on Azure Databricks using Terraform.
+# 4. setup-adb-compute: Sets up the Azure Databricks compute resources using Terraform.
+#
+# The workflow is triggered manually through the Actions tab on GitHub.
+# It uses Ubuntu runners to execute the jobs and utilizes environment variables
+# and secrets stored in GitHub for authentication and configuration.
+
+# Define quando o workflow será executado
+# Define when the workflow will be triggered
+on:
+  # Permite executar este workflow manualmente a partir da aba Actions
+  # Allows this workflow to be triggered manually from the Actions tab
+  workflow_dispatch:
+
+# Define os jobs que serão executados no workflow
+# Define the jobs that will be executed in the workflow
+jobs:
+  # Primeiro job: build
+  # First job: build
+  build:
+    name: Strife Build
+    # Define o tipo de runner que o job será executado
+    # Define the type of runner the job will run on
+    runs-on: ubuntu-latest
+
+    # Define os passos que serão executados no job
+    # Define the steps that will be executed in the job
+    steps:
+      # Faz o checkout de outro repositório privado
+      # Check out another private repository
+      - name: Check out my other private repo
+        uses: actions/checkout@v4
+        with:
+          repository: lealdouglas/strife
+
+      # Faz o upload dos artefatos necessários
+      # Upload necessary artifacts
+      - name: Upload Artifact Unity
+        uses: actions/upload-artifact@v4
+        with:
+          name: lakehouseuc
+          path: ${{ github.workspace }}/azsetup/lakehouse-extra
+
+  # Job para configurar o Unity Catalog
+  # Job to set up the Unity Catalog
+  strife-setup-unity-catalog:
+    name: Strife Setup Unity Catalog
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/azsetup/lakehouse-extra
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
+
+    environment:
+      name: dev
+
+    needs: build
+    steps:
+      # Faz o checkout do repositório principal
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
+      # Baixa o artefato do Terraform
+      # Download the Terraform artifact
+      - name: Download Terraform
+        uses: actions/download-artifact@v4
+        with:
+          name: lakehouseuc
+          path: ${{ github.workspace }}/azsetup/lakehouse-extra
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Check if YAML file exists
+        run: |
+          if [ ! -f "${{ github.workspace }}/datamaster/strife_env/strife_config.yaml" ]; then
+            echo "YAML file not found!"
+            exit 1
+          fi
+
+      - name: Read YAML file
+        id: read_yaml
+        run: |
+          python -c "
+          import yaml
+          import os
+          with open('../../datamaster/strife_env/strife_config.yaml', 'r') as stream:
+              config = yaml.safe_load(stream)
+              for key, value in config.items():
+                  print(f'::set-output name={key}::{value}')
+          "
+
+      - name: Set environment variables from YAML
+        run: |
+          echo "domain=${{ steps.read_yaml.outputs.domain }}" >> $GITHUB_ENV
+          echo "catalog=${{ steps.read_yaml.outputs.catalog }}" >> $GITHUB_ENV
+          echo "project=${{ steps.read_yaml.outputs.project }}" >> $GITHUB_ENV
+          echo "domain_azure=${{ steps.read_yaml.outputs.domain_azure }}" >> $GITHUB_ENV
+
+      # Configura e inicializa o Terraform
+      # Set up and initialize Terraform
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+      - name: Terraform Init
+        run: terraform init
+
+      # Valida a configuração do Terraform
+      # Validate the Terraform configuration
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      # Gera e aplica o plano de execução do Terraform
+      # Generate and apply the Terraform execution plan
+      - name: Terraform Plan
+        run: terraform plan -no-color -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
+        continue-on-error: true
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -var "account_id=${{ secrets.ADB_ACCOUNT_ID}}" -var "azure_client_id=${{ secrets.TF_ARM_CLIENT_ID}}" -var "azure_client_secret=${{ secrets.TF_ARM_CLIENT_SECRET}}" -var "azure_tenant_id=${{ secrets.TF_ARM_TENANT_ID}}" -var "envv=${{vars.ENVV}}" -var "domain=${{env.domain}}" -var "catalog=${{env.catalog}}" -var "project=${{env.project}}"
