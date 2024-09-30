@@ -227,6 +227,9 @@ Repositório adicionais utilizados nesse projeto para experiência imersiva:
 > [!NOTE]
 > Não é possível automatizar a captura do account_id via terraform, por isso, no step 6 apresentamos como recuperar manualmente.
 
+> [!WARNING]
+> Atenção, importante desabilitar o recurso Network Watcher que tem como objetivo monitorar e gerenciar serviços da sua conta. Para esse projeto não há necessidade. Saiba mais em [ativar_desativar_network_watcher](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=portal#disable-network-watcher-for-your-region) e [desative gerenciamento automático](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=cli#opt-out-of-network-watcher-automatic-enablement).
+
 Utilize o tópico [Passos de Configuração](#42-passos-de-configuração) para dar sequência ao seu projeto.
 
 ### 4.2 Passos de Configuração
@@ -333,9 +336,6 @@ Após execução, os recursos abaixo serão criados
 - Um container chamado ctrd`risk`log será criado para arquivos logs e controles.
 - Um container chamado ctrd`risk`mtst será criado para gestão do metastore.
 - Um container chamado ctrd`risk`catlog será criado para gestão dos schemas e catalogo.
-
-> [!WARNING]
-> Atenção, importante desabilitar o recurso Network Watcher que tem como objetivo monitorar e gerenciar serviços da sua conta. Para esse projeto não há necessidade. Saiba mais em [ativar_desativar_network_watcher](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=portal#disable-network-watcher-for-your-region) e [desative gerenciamento automático](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create?wt.mc_id=knwlserapi_inproduct_azportal&tabs=cli#opt-out-of-network-watcher-automatic-enablement).
 
 #### Step 6. Recupere Account ID do Unity Catalog e habilite Account Admin
 
