@@ -251,7 +251,7 @@ A partir desse repos template, crie um novo para seu projeto.
 
 Altere os valores para o qual deseja criar os nomes dos recursos e catálogo
 
-- No repos, acesse **datamaster/strife_env/strife_config.yaml**
+- No repos, acesse **datamaster/strife_env/resource/strife_config.yaml**
   ```yaml
   domain: risk #nome do domínio
   catalog: risk #nome do catálogo
@@ -395,7 +395,7 @@ Nessa action, será configurado:
 
 Configure o arquivo .yaml utilizado como referencia para origens de ingestão desse projeto.
 
-- No repos, acesse **datamaster/jarvis_ingest/datacontract.yaml**. Para etapa de ingestão, foque nos principais campos:
+- No repos, acesse **datamaster/jarvis_ingest/resource/datacontract.yaml**. Para etapa de ingestão, foque nos principais campos:
 
 ```yaml
 ingest_workflow:  # Configuração do workflow de ingestão de dados
