@@ -60,4 +60,6 @@ jobs:
       # Importa o diretório para o workspace do Databricks
       # Import directory to Databricks workspace
       - name: Import directory to Databricks workspace
-        run: databricks workspace import-dir datamaster/jarvis_prep/definition_project/dist/ /Workspace/jarvis/prep/definition_project --debug
+        run: |
+          cd datamaster/jarvis_prep/definition_project/dist/
+          databricks workspace import-dir . /Workspace/jarvis/prep/definition_project --debug
