@@ -55,7 +55,7 @@ jobs:
       # Importa o diretório para o workspace do Databricks
       # Import directory to Databricks workspace
       - name: Import directory to Databricks workspace
-        run: databricks workspace import-dir datamaster/jarvis_prep/resource/datacontract.yaml /Workspace/jarvis/prep/datacontract/datacontract.yaml --overwrite
+        run: databricks workspace import-dir datamaster/jarvis_prep/datacontract.yaml /Workspace/jarvis/prep/datacontract/datacontract.yaml --overwrite
 
       # Importa o diretório para o workspace do Databricks
       # Import directory to Databricks workspace

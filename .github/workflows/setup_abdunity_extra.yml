@@ -101,7 +101,7 @@ jobs:
 
       - name: Check if YAML file exists
         run: |
-          if [ ! -f "${{ github.workspace }}/datamaster/strife_env/resource/strife_config.yaml" ]; then
+          if [ ! -f "${{ github.workspace }}/datamaster/strife_env/strife_config.yaml" ]; then
             echo "YAML file not found!"
             exit 1
           fi
@@ -112,7 +112,7 @@ jobs:
           python -c "
           import yaml
           import os
-          with open('../../datamaster/strife_env/resource/strife_config.yaml', 'r') as stream:
+          with open('../../datamaster/strife_env/strife_config.yaml', 'r') as stream:
               config = yaml.safe_load(stream)
               for key, value in config.items():
                   print(f'::set-output name={key}::{value}')

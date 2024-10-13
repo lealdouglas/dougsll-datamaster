@@ -76,4 +76,4 @@ jobs:
       - name: Run Python script - Jarvis Ingest
         run: |
           cd jarvis-repo/jarvis
-          poetry run python main.py ingest ../../datamaster/jarvis_ingest/resource/datacontract.yaml
+          poetry run python main.py ingest ../../datamaster/jarvis_ingest/datacontract.yaml
