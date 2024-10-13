@@ -48,7 +48,9 @@ jobs:
         uses: databricks/setup-cli@main
 
       - name: create
-        run: databricks workspace mkdirs /Workspace/jarvis/prep/datacontract
+        run: |
+          databricks workspace mkdirs /Workspace/jarvis/prep/datacontract
+          databricks workspace mkdirs /Workspace/jarvis/prep/definition_project
 
       # Importa o diretório para o workspace do Databricks
       # Import directory to Databricks workspace
