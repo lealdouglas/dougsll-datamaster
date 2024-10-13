@@ -26,13 +26,30 @@ jobs:
     name: 'Deploy bundle to DEV'
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: databricks/setup-cli@main
-      - run: databricks workspace import-dir ../../datamaster/jarvis_prep/resource/datacontract.yaml /Workspace/jarvis/prep/
     env:
       ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
       DATABRICKS_HOST: https://adb-223140009464856.16.azuredatabricks.net/?o=223140009464856
+
+    steps:
+      # Faz o checkout do repositório principal
+      # Checkout the current repository
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
+      # Faz o checkout de outro repositório privado
+      # Checkout another private repository
+      - name: Checkout additional repository
+        uses: actions/checkout@v4
+
+      # Configura o CLI do Databricks
+      # Set up Databricks CLI
+      - name: Set up Databricks CLI
+        uses: databricks/setup-cli@main
+
+      # Importa o diretório para o workspace do Databricks
+      # Import directory to Databricks workspace
+      - name: Import directory to Databricks workspace
+        run: databricks workspace import-dir ../../datamaster/jarvis_prep/resource/datacontract.yaml /Workspace/jarvis/prep/
