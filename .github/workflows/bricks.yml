@@ -1,0 +1,32 @@
+name: bricks
+
+# Este workflow do GitHub Actions é utilizado para configurar e executar um script Python
+# que realiza a ingestão de dados utilizando o Jarvis. Ele é composto por várias etapas:
+# 1. Faz o checkout do repositório principal.
+# 2. Faz o checkout de um repositório privado adicional.
+# 3. Configura o ambiente Python.
+# 4. Instala o Poetry, uma ferramenta de gerenciamento de dependências.
+# 5. Instala as dependências do projeto usando o Poetry.
+# 6. Executa o script Python de ingestão de dados, passando o caminho para o arquivo de configuração YAML.
+
+# This GitHub Actions workflow is used to set up and run a Python script
+# that performs data prep using Jarvis. It consists of several steps:
+# 1. Check out the main repository.
+# 2. Check out an additional private repository.
+# 3. Set up the Python environment.
+# 4. Install Poetry, a dependency management tool.
+# 5. Install project dependencies using Poetry.
+# 6. Run the Python data prep script, passing the path to the YAML configuration file.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: 'Deploy bundle to DEV'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: databricks/setup-cli@main
+      - run: databricks workspace import-dir ../../datamaster/jarvis_prep/resource/datacontract.yaml /Workspace/jarvis/prep/
