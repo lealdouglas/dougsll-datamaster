@@ -58,7 +58,7 @@ jobs:
 
       - name: Instalar dependências do projeto
         run: |
-          cd ${{ github.workspace }}/datamaster/jarvis_prep/definition_project
+          cd ${{ github.workspace }}/datamaster/jarvis_prep/definition_project/dist
           ls -la
 
       # Configura o CLI do Databricks
