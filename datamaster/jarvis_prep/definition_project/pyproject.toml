@@ -2,7 +2,7 @@
 name = "definition-project"
 version = "0.1.1"
 description = ""
-authors = ["<insert-name>"]
+authors = ["Seu nome <seunome@example.com>"]
 readme = "README.md"
 packages = [{include = "definition_project"}]
 
