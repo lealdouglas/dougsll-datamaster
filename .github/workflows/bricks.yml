@@ -39,10 +39,8 @@ jobs:
       - name: Checkout current repository
         uses: actions/checkout@v4
 
-      # Faz o checkout de outro repositório privado
-      # Checkout another private repository
-      - name: Checkout additional repository
-        uses: actions/checkout@v4
+      - name: ls
+        run: ls
 
       # Configura o CLI do Databricks
       # Set up Databricks CLI
