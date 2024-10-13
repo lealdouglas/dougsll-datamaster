@@ -22,7 +22,99 @@ on:
   workflow_dispatch:
 
 jobs:
+  task-covv-definition-project:
+    name: 'Task COVV Definition Project'
+    runs-on: ubuntu-latest
+
+    steps:
+      # Faz o checkout do repositório principal
+      # Checkout the current repository
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
+      - name: Instalar o python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Instalar Poetry
+        run: pip install poetry
+
+      - name: Instalar dependências do projeto
+        run: |
+          cd ${{ github.workspace }}/datamaster/jarvis_prep/definition_project
+          poetry install --without doc
+
+      - name: Rodar os testes
+        run: |
+          cd ${{ github.workspace }}/datamaster/jarvis_prep/definition_project
+          poetry run task test --cov-report=xml
+
+  build-definition-project:
+    name: 'Build Definition Project'
+    runs-on: ubuntu-latest
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
+      # DATABRICKS_HOST: https://adb-223140009464856.16.azuredatabricks.net/?o=223140009464856
+
+    needs: task-covv-definition-project
+    steps:
+      # Faz o checkout do repositório principal
+      # Checkout the current repository
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
+      - name: Instalar o python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Instalar Poetry
+        run: pip install poetry
+
+      - name: Instalar dependências do projeto
+        run: |
+          cd ${{ github.workspace }}/datamaster/jarvis_prep/definition_project
+          poetry install --without doc
+          poetry build
+
+      - name: Instalar dependências do projeto
+        run: ls -la
+
+      - name: Instalar dependências do projeto
+        run: |
+          cd ${{ github.workspace }}/datamaster/jarvis_prep/definition_project/dist
+          ls -la
+
+      # Configura o CLI do Databricks
+      # Set up Databricks CLI
+      - name: Set up Databricks CLI
+        uses: databricks/setup-cli@v0.230.0
+
+      - name: create
+        run: |
+          databricks workspace mkdirs /Workspace/jarvis/prep/datacontract
+          databricks workspace mkdirs /Workspace/jarvis/prep/definition_project
+
+      # Importa o diretório para o workspace do Databricks
+      # Import directory to Databricks workspace
+      - name: Import directory to Databricks workspace
+        run: databricks workspace import-dir datamaster/jarvis_prep/datacontract.yaml /Workspace/jarvis/prep/datacontract/datacontract.yaml --overwrite
+
+      # Importa o diretório para o workspace do Databricks
+      # Import directory to Databricks workspace
+      - name: Import directory to Databricks workspace
+        run: |
+          databricks workspace delete /Workspace/jarvis/prep/definition_project/ --recursive
+          cd datamaster/jarvis_prep/definition_project/dist/
+          databricks workspace import-dir . /Workspace/jarvis/prep/definition_project --debug
+
   jarvis-create-workflow-prep:
+    name: 'Create prep Workflow Definition Project'
     runs-on: ubuntu-latest
 
     env:
@@ -31,6 +123,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
 
+    needs: build-definition-project
     steps:
       # Faz o checkout do repositório principal
       # Checkout the current repository

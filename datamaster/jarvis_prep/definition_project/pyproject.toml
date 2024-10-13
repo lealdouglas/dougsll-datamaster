@@ -2,7 +2,7 @@
 name = "definition-project"
 version = "0.1.1"
 description = ""
-authors = ["Leal <douglas.sleal@outlook.com>"]
+authors = ["<insert-name>"]
 readme = "README.md"
 packages = [{include = "definition_project"}]
 
@@ -43,5 +43,5 @@ line_length = 79
 lint = "blue --check --diff . && isort --check --diff ."
 docs = "mkdocs serve"
 pre_test = "task lint"
-test = "pytest -s -x --cov=carlton -vv"
+test = "pytest -s -x --cov=definition_project -vv"
 post_test = "coverage html"

@@ -31,7 +31,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
-      DATABRICKS_HOST: https://adb-223140009464856.16.azuredatabricks.net/?o=223140009464856
+      # DATABRICKS_HOST: https://adb-223140009464856.16.azuredatabricks.net/?o=223140009464856
 
     steps:
       # Faz o checkout do repositório principal
