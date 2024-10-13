@@ -31,6 +31,7 @@ jobs:
       - uses: databricks/setup-cli@main
       - run: databricks workspace import-dir ../../datamaster/jarvis_prep/resource/datacontract.yaml /Workspace/jarvis/prep/
     env:
+      DATABRICKS_ACCOUNT_ID: ${{ secrets.ADB_ACCOUNT_ID }}
       DATABRICKS_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
       DATABRICKS_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
       DATABRICKS_HOST: https://adb-223140009464856.16.azuredatabricks.net/
