@@ -47,7 +47,15 @@ jobs:
       - name: Set up Databricks CLI
         uses: databricks/setup-cli@main
 
+      - name: create
+        run: databricks workspace mkdirs /Workspace/jarvis/prep/datacontract
+
       # Importa o diretório para o workspace do Databricks
       # Import directory to Databricks workspace
       - name: Import directory to Databricks workspace
-        run: databricks workspace import-dir datamaster/jarvis_prep/resource/datacontract.yaml /Workspace/jarvis/prep/datacontract.yaml --overwrite
+        run: databricks workspace import-dir datamaster/jarvis_prep/resource/datacontract.yaml /Workspace/jarvis/prep/datacontract/datacontract.yaml --overwrite
+
+      # Importa o diretório para o workspace do Databricks
+      # Import directory to Databricks workspace
+      - name: Import directory to Databricks workspace
+        run: databricks workspace import-dir datamaster/jarvis_prep/definition_project/dist/ /Workspace/jarvis/prep/definition_project
