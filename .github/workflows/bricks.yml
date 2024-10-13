@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: ls
-        run: ls datamaster/
+        run: ls datamaster/jarvis_prep
 
       # Configura o CLI do Databricks
       # Set up Databricks CLI
@@ -50,4 +50,4 @@ jobs:
       # Importa o diretório para o workspace do Databricks
       # Import directory to Databricks workspace
       - name: Import directory to Databricks workspace
-        run: databricks workspace import-dir /datamaster/jarvis_prep/resource/datacontract.yaml /Workspace/jarvis/prep/
+        run: databricks workspace import-dir datamaster/jarvis_prep/resource/datacontract.yaml /Workspace/jarvis/prep/
