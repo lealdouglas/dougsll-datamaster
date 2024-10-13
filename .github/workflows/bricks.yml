@@ -45,7 +45,7 @@ jobs:
       # Configura o CLI do Databricks
       # Set up Databricks CLI
       - name: Set up Databricks CLI
-        uses: databricks/setup-cli@main
+        uses: databricks/setup-cli@v0.230.0
 
       - name: create
         run: |
