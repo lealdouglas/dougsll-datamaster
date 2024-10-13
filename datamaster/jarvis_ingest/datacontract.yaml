@@ -77,27 +77,11 @@ examples:
   - type: 'csv'
     model: 'account'
     data: |
-      account_id,risk_score,risk_level,assessment_date
-      e5f6g7h8-i9j0-1234-ab56-cd78901234lm,85.3,high,2023-09-01
-      f6g7h8i9-j0k1-2345-ab67-cd89012345no,45.8,medium,2023-09-05
-      g7h8i9j0-k1l2-3456-ab78-cd90123456pq,72.1,high,2023-09-10
-      h8i9j0k1-l2m3-4567-ab89-cd01234567rs,38.9,medium,2023-09-12
-      i9j0k1l2-m3n4-5678-ab90-cd12345678tu,12.5,low,2023-09-15
-      j0k1l2m3-n4o5-6789-ab01-cd23456789vw,95.0,high,2023-09-20
-      k1l2m3n4-o5p6-7890-ab12-cd34567890xy,60.5,medium,2023-09-22
-      l2m3n4o5-p6q7-8901-ab23-cd45678901yz,23.4,low,2023-09-25
-      m3n4o5p6-q7r8-9012-ab34-cd56789012ab,78.0,high,2023-09-28
-      n4o5p6q7-r8s9-0123-ab45-cd67890123cd,50.7,medium,2023-10-01
-      o5p6q7r8-s9t0-1234-ab56-cd78901234ef,31.2,low,2023-10-03
-      p6q7r8s9-t0u1-2345-ab67-cd89012345gh,84.6,high,2023-10-05
-      q7r8s9t0-u1v2-3456-ab78-cd90123456ij,47.3,medium,2023-10-07
-      r8s9t0u1-v2w3-4567-ab89-cd01234567kl,20.8,low,2023-10-10
-      s9t0u1v2-w3x4-5678-ab90-cd12345678mn,92.7,high,2023-10-12
-      t0u1v2w3-x4y5-6789-ab01-cd23456789op,55.5,medium,2023-10-15
-      u1v2w3x4-y5z6-7890-ab12-cd34567890qr,18.4,low,2023-10-17
-      v2w3x4y5-z6a7-8901-ab23-cd45678901st,76.2,high,2023-10-20
-      w3x4y5z6-a7b8-9012-ab34-cd56789012uv,42.0,medium,2023-10-22
-      x4y5z6a7-b8c9-0123-ab45-cd67890123wx,25.6,low,2023-10-25
+      uuid,name,email,city
+      123e4567-e89b-12d3-a456-426614174000,João Silva,joao.silva@example.com,São Paulo
+      987f1234-e21b-34f5-b987-654321098765,Maria Oliveira,maria.oliveira@example.com,Rio de Janeiro
+      25a6d63b-123a-4b6c-a64a-7c18b912345a,Carlos Souza,carlos.souza@example.com,Brasília
+      16e5c33f-9b0d-4c2f-a56a-d94b6cd74312,Ana Santos,ana.santos@example.com,Belo Horizonte
 
 # Regras de qualidade dos dados
 # Data quality rules
