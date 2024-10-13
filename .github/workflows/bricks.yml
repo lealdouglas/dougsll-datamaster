@@ -51,12 +51,15 @@ jobs:
         run: |
           cd ${{ github.workspace }}/datamaster/jarvis_prep/definition_project
           poetry install --without doc
-
-      - name: Instalar dependências do projeto
-        run: poetry build
+          poetry build
 
       - name: Instalar dependências do projeto
         run: ls -la
+
+      - name: Instalar dependências do projeto
+        run: |
+          cd ${{ github.workspace }}/datamaster/jarvis_prep/definition_project
+          ls -la
 
       # Configura o CLI do Databricks
       # Set up Databricks CLI
