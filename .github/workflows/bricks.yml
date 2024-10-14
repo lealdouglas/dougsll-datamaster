@@ -32,8 +32,8 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
       DATABRICKS_HOST: ${{ secrets.ADB_ACCOUNT_HOST }}
-      DATACONTRACT_DATABRICKS_HTTP_PATH: sql/protocolv1/o/223140009464856/1012-172122-droivmyc
-      DATACONTRACT_DATABRICKS_TOKEN: dapiec59586597b017cf247cc947285e9bbc
+      DATACONTRACT_DATABRICKS_HTTP_PATH: c
+      DATACONTRACT_DATABRICKS_TOKEN: c
 
     steps:
       # Faz o checkout do repositório principal
