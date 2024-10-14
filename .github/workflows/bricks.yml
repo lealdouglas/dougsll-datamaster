@@ -36,6 +36,10 @@ jobs:
       DATACONTRACT_DATABRICKS_TOKEN: xx
 
     steps:
+      # Faz o checkout do repositório principal
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
