@@ -47,5 +47,5 @@ jobs:
 
       - name: Import directory to Databricks workspace
         run: |
-          cd datamaster/jarvis_prep/datacontract.yaml
+          cd datamaster/jarvis_prep/
           datacontract test datacontract.yaml
