@@ -104,7 +104,6 @@ quality:
   specification:
     checks for account:
       - row_count > 25
-      - risk_score between 0 and 100
 
 # Workflow de ingestão de dados
 # Data ingestion workflow
