@@ -42,7 +42,7 @@ Este repositório contém o seguinte:
      - [Step 8. Configure arquivo de contrato para ingestão](#step-8-configure-arquivo-de-contrato-para-ingestão)
      - [Step 9. Execute a action Jarvis Ingestão](#step-9-execute-a-action-jarvis-ingestão)
      - [Step 10. Configure seu projeto para explorar dados](#step-10-configure-seu-projeto-para-explorar-dados)
-     - [Step 11. Execute a action Jarvis Asset Bundles](#step-11-execute-a-action-jarvis-asset-bundles)
+     - [Step 11. Execute a action Jarvis Prep](#step-11-execute-a-action-jarvis-prep)
 5. [Melhorias e Considerações Finais](#5-melhorias-e-considerações-finais)
    - [Melhorias Futuras](#51-melhorias-futuras)
    - [Considerações Finais](#52-considerações-finais)
@@ -398,7 +398,7 @@ Configure o arquivo .yaml utilizado como referencia para origens de ingestão de
 - No repos, acesse **datamaster/jarvis_ingest/datacontract.yaml**. Para etapa de ingestão, foque nos principais campos:
 
 ```yaml
-ingest_workflow:  # Configuração do workflow de ingestão de dados
+workflow:  # Configuração do workflow de ingestão de dados
   model: 'account'  # Modelo de dados a ser utilizado no workflow
   email_notifications:  # Configuração de notificações por email
     on_start: ['email']  # Emails a serem notificados no início do workflow
@@ -453,7 +453,7 @@ Nessa action, será configurado:
 
 Abaixo, compartilho algumas melhorias consideradas para essa solução e ambições de uma visão completa, considerando que o cenário desenvolvido é apenas um protótipo de uma necessidade maior:
 
-#### Evolução da solução e contribuições técnicas:
+#### Evolução da solução e ambições futuras (contribuição):
 
 - UI e API Services, com serviços integrados e uma interface web configurada, as validações e etapas podem ser orquestradas a partir da interação do usuário com o formulário, onde, a partir das opções, um serviço pode ser acionado ou um repositório/actions pode ser configurado.
 - Configurar um cluster para uso conforme etapas do pipeline (job cluster, cluster serveless).
@@ -466,6 +466,7 @@ Abaixo, compartilho algumas melhorias consideradas para essa solução e ambiç�
 - Criar uma classe estruturada para o uso genérico do data contract, aplicando os padrões de SOLID.
 - Configurar gerenciamento de versão quando aciona outros componentes Strife, Jarvis e Carlton.
 - Configurar a leitura e criacao de ingestao para mais de uma model especificado no contrato de ingestao daquele mesmo schema.
+- Quality implementado com modelo de contrato, após implantação do projeto, job de quality integrado, assim como para ingestão.
 
 ### 5.2 Considerações Finais
 
