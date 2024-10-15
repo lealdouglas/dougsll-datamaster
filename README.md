@@ -387,6 +387,7 @@ Nessa action, será configurado:
 - **Catálogo**, chamado c`CATALOG`
 - **Schemas**, bronze, silver e gold.
 - **Permissões**, acesso ao grupo data_engineer aos schemas listados acima.
+- **Volumes e External Storage**, para iteração com recursos externos (raw) e gerenciamento de arquivos (bronze - checkpoint)
 
 > [!NOTE]
 > Caso não consiga enxergar o catálogo criado, adicione sua conta principal ao grupo **data_engineer** a nível de console e aguarde alguns segundos.
