@@ -43,6 +43,7 @@ Este repositório contém o seguinte:
      - [Step 9. Execute a action Jarvis Ingestão](#step-9-execute-a-action-jarvis-ingestão)
      - [Step 10. Configure seu projeto para explorar dados](#step-10-configure-seu-projeto-para-explorar-dados)
      - [Step 11. Execute a action Jarvis Prep](#step-11-execute-a-action-jarvis-prep)
+     - [Step 11. Execute a action Jarvis Prep](#step-11-execute-a-action-jarvis-prep)
 5. [Melhorias e Considerações Finais](#5-melhorias-e-considerações-finais)
    - [Melhorias Futuras](#51-melhorias-futuras)
    - [Considerações Finais](#52-considerações-finais)
@@ -386,6 +387,7 @@ Nessa action, será configurado:
 - **Catálogo**, chamado c`CATALOG`
 - **Schemas**, bronze, silver e gold.
 - **Permissões**, acesso ao grupo data_engineer aos schemas listados acima.
+- **Volumes e External Storage**, para iteração com recursos externos (raw) e gerenciamento de arquivos (bronze - checkpoint)
 
 > [!NOTE]
 > Caso não consiga enxergar o catálogo criado, adicione sua conta principal ao grupo **data_engineer** a nível de console e aguarde alguns segundos.
@@ -397,7 +399,7 @@ Configure o arquivo .yaml utilizado como referencia para origens de ingestão de
 - No repos, acesse **datamaster/jarvis_ingest/datacontract.yaml**. Para etapa de ingestão, foque nos principais campos:
 
 ```yaml
-ingest_workflow:  # Configuração do workflow de ingestão de dados
+workflow:  # Configuração do workflow de ingestão de dados
   model: 'account'  # Modelo de dados a ser utilizado no workflow
   email_notifications:  # Configuração de notificações por email
     on_start: ['email']  # Emails a serem notificados no início do workflow
@@ -408,6 +410,7 @@ ingest_workflow:  # Configuração do workflow de ingestão de dados
     format: 'csv'  # Formato dos dados (CSV)
     header: true  # Indica se o arquivo CSV possui cabeçalho
     delimiter: ','  # Delimitador utilizado no arquivo CSV
+    job_mock: false #para uso eventhub, job simulador
 ```
 
 Onde _model_ é a tabela/workflow criado para ingestão.
@@ -417,7 +420,7 @@ Onde _model_ é a tabela/workflow criado para ingestão.
 
 Para esse projeto habilitamos os _types_ **eventhub** e **adls**. Utilize,
 
-- **eventhub**, para simular uma ingestão streaming
+- **eventhub**, para simular uma ingestão streaming, habilite `job_mock:true`
   - Um tópico é criado com base nos parâmetros informados no contrato.
   - Um job mock pode ser criado caso específique no contrato como teste, ou envie mensagens ao tópico se houver alguma aplicação.
 - **adls**, para repouso dos dados brutos.
@@ -476,7 +479,7 @@ Pipeline finalizado.
 
 Abaixo, compartilho algumas melhorias consideradas para essa solução e ambições de uma visão completa, considerando que o cenário desenvolvido é apenas um protótipo de uma necessidade maior:
 
-#### Evolução da solução e contribuições técnicas:
+#### Evolução da solução e ambições futuras (contribuição):
 
 - Implementar uma CLI para a configuração do repositório e criação do projeto, utilizando o input para configurar todos os parâmetros internos (não secretos) utilizados no projeto.
 - UI e API Services, com serviços integrados e uma interface web configurada. As validações e etapas podem ser orquestradas a partir da interação do usuário com o formulário, onde, com base nas opções, um serviço pode ser acionado ou um repositório/actions pode ser configurado.
