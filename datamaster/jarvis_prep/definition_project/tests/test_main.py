@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from definition_project.main import main, merge_silver, process_args
+from definition_project.main import main, merge_silver
 
 
 @patch('definition_project.main.DeltaTable')
