@@ -506,8 +506,8 @@ Pipeline finalizado.
 
 Configure as variáveis de ambiente listadas abaixo,
 
-- **DATACONTRACT_DATABRICKS_HTTP_PATH**, http_path do cluster clone utilizado para exploração.
-- **DATACONTRACT_DATABRICKS_TOKEN**, token pessoal do usuário.
+- **DATABRICKS_HTTP_PATH**, http_path do cluster clone utilizado para exploração.
+- **DATABRICKS_TOKEN**, token pessoal do usuário.
 
 Com base nas regras de qualidade informadas no contrato, a action será responsável pela validação,
 

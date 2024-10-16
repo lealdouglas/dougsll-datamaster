@@ -16,8 +16,8 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
       DATABRICKS_HOST: ${{ secrets.ADB_ACCOUNT_HOST }}
-      DATACONTRACT_DATABRICKS_HTTP_PATH: ${{ secrets.ADB_COMPUTE_HTTP_PATH }}
-      DATACONTRACT_DATABRICKS_TOKEN: ${{ secrets.ADB_USER_TOKEN }}
+      DATABRICKS_HTTP_PATH: ${{ secrets.ADB_COMPUTE_HTTP_PATH }}
+      DATABRICKS_TOKEN: ${{ secrets.ADB_USER_TOKEN }}
 
     steps:
       # Faz o checkout do repositório principal
