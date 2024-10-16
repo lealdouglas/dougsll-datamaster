@@ -1,4 +1,6 @@
-name: bricks
+name: 99. Action BONUS Project Quality
+
+# Action utiliza do cluster usuario principal + token para validar dado gerado.
 
 on:
   workflow_dispatch:
@@ -14,8 +16,8 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
       DATABRICKS_HOST: ${{ secrets.ADB_ACCOUNT_HOST }}
-      DATACONTRACT_DATABRICKS_HTTP_PATH: c
-      DATACONTRACT_DATABRICKS_TOKEN: c
+      DATACONTRACT_DATABRICKS_HTTP_PATH: ${{ secrets.ADB_COMPUTE_HTTP_PATH }}
+      DATACONTRACT_DATABRICKS_TOKEN: ${{ secrets.ADB_USER_TOKEN }}
 
     steps:
       # Faz o checkout do repositório principal
