@@ -505,7 +505,7 @@ Esse projeto, executado de ponta a ponta (considerando desenvolvimento e testes)
 </p>
 
 > [!NOTE]
-> Devio o tema de custos, não aumentamos a cota da conta, por conta disso apenas um metastore e um cluster single node foi configurado para toda a jornada apresentada.
+> Devido o tema de custos, não aumentamos a cota da conta, por conta disso apenas um metastore e um cluster single node foi configurado para toda a jornada apresentada.
 
 ## 7. Referências
 
