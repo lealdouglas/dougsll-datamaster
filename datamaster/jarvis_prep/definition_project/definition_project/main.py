@@ -4,10 +4,7 @@ from delta.tables import DeltaTable
 from pyspark.sql import SparkSession
 
 
-def merge_silver(spark, new_df):
-
-    # Nome da tabela Delta
-    table_name = 'crisk.silver.account'
+def merge_silver(spark, new_df, table_name):
 
     # Carrega a tabela Delta
     delta_table = DeltaTable.forName(spark, table_name)
@@ -31,38 +28,9 @@ def merge_silver(spark, new_df):
     ).execute()
 
 
-def process_args(args):
-    """
-    Processa os argumentos passados para a função.\n
-    Processes the arguments passed to the function.
+def main():
 
-    Args:
-        args (list): Lista de argumentos.
-                     List of arguments.
-
-    Returns:
-        dict: Dicionário de propriedades raiz.
-              Dictionary of root properties.
-    """
-    root_properties = {}
-    for i, arg in enumerate(args):
-        if arg.startswith('-'):
-            root_properties[arg.replace('-', '')] = args[i + 1]
-    return root_properties
-
-
-def main(args=sys.argv[1:]):
-
-    # Processa os argumentos
-    # Process the arguments
-    root_properties = process_args(args)
-
-    # Imprime as propriedades raiz
-    # Print the root properties
-    for p in root_properties:
-        log_info(f'{p}: {root_properties[p]}')
-
-    table_name = root_properties['table_name']
+    table_name = 'crisk.silver.account'
 
     # Inicializa a SparkSession com suporte ao Delta Lake
     spark = SparkSession.builder.getOrCreate()
@@ -71,7 +39,7 @@ def main(args=sys.argv[1:]):
     new_df = spark.read.format('delta').table('crisk.bronze.account')
 
     # merge bronze com dados existentes na tabela silver
-    merge_silver(spark, new_df)
+    merge_silver(spark, new_df, table_name)
 
     # Exibe os dados atualizados
     updated_df = spark.table(table_name).filter('user_id = 1234567890')
