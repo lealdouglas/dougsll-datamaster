@@ -1,3 +1,5 @@
+import sys
+
 from delta.tables import DeltaTable
 from pyspark.sql import SparkSession
 
@@ -29,7 +31,38 @@ def merge_silver(spark, new_df):
     ).execute()
 
 
-def main():
+def process_args(args):
+    """
+    Processa os argumentos passados para a função.\n
+    Processes the arguments passed to the function.
+
+    Args:
+        args (list): Lista de argumentos.
+                     List of arguments.
+
+    Returns:
+        dict: Dicionário de propriedades raiz.
+              Dictionary of root properties.
+    """
+    root_properties = {}
+    for i, arg in enumerate(args):
+        if arg.startswith('-'):
+            root_properties[arg.replace('-', '')] = args[i + 1]
+    return root_properties
+
+
+def main(args=sys.argv[1:]):
+
+    # Processa os argumentos
+    # Process the arguments
+    root_properties = process_args(args)
+
+    # Imprime as propriedades raiz
+    # Print the root properties
+    for p in root_properties:
+        log_info(f'{p}: {root_properties[p]}')
+
+    table_name = root_properties['table_name']
 
     # Inicializa a SparkSession com suporte ao Delta Lake
     spark = SparkSession.builder.getOrCreate()
@@ -47,3 +80,7 @@ def main():
 
 def hello_world():
     print('hello world')
+
+
+if __name__ == '__main__':
+    main()
