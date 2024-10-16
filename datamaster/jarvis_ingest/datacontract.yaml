@@ -77,11 +77,15 @@ examples:
   - type: 'csv'
     model: 'account'
     data: |
-      uuid,name,email,city
-      123e4567-e89b-12d3-a456-426614174000,João Silva,joao.silva@example.com,São Paulo
-      987f1234-e21b-34f5-b987-654321098765,Maria Oliveira,maria.oliveira@example.com,Rio de Janeiro
-      25a6d63b-123a-4b6c-a64a-7c18b912345a,Carlos Souza,carlos.souza@example.com,Brasília
-      16e5c33f-9b0d-4c2f-a56a-d94b6cd74312,Ana Santos,ana.santos@example.com,Belo Horizonte
+      user_id,name,email,city
+      1234567890,João Silva,joao.silva@example.com,São Paulo
+      0987654321,Maria Oliveira,maria.oliveira@example.com,Rio de Janeiro
+      2345678901,Carlos Souza,carlos.souza@example.com,Brasília
+      3456789012,Ana Santos,ana.santos@example.com,Belo Horizonte
+      4567890123,Pedro Costa,pedro.costa@example.com,Salvador
+      5678901234,Juliana Lima,juliana.lima@example.com,Fortaleza
+      6789012345,Lucas Pereira,lucas.pereira@example.com,Curitiba
+      7890123456,Fernanda Araújo,fernanda.araujo@example.com,Recife
 
 # Regras de qualidade dos dados
 # Data quality rules

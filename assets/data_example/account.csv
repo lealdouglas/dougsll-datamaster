@@ -1,0 +1,52 @@
+user_id,name,email,city
+1234567890,João Silva,joao.silva@example.com,São Paulo
+0987654321,Maria Oliveira,maria.oliveira@example.com,Rio de Janeiro
+2345678901,Carlos Souza,carlos.souza@example.com,Brasília
+3456789012,Ana Santos,ana.santos@example.com,Belo Horizonte
+4567890123,Pedro Costa,pedro.costa@example.com,Salvador
+5678901234,Juliana Lima,juliana.lima@example.com,Fortaleza
+6789012345,Lucas Pereira,lucas.pereira@example.com,Curitiba
+7890123456,Fernanda Araújo,fernanda.araujo@example.com,Recife
+8901234567,Ricardo Almeida,ricardo.almeida@example.com,Porto Alegre
+9012345678,Paula Fernandes,paula.fernandes@example.com,Campinas
+0123456789,Rafael Teixeira,rafael.teixeira@example.com,Florianópolis
+1123456789,Beatriz Carvalho,beatriz.carvalho@example.com,São Luís
+1223456789,Gabriel Ramos,gabriel.ramos@example.com,Natal
+1323456789,Marcelo Martins,marcelo.martins@example.com,Goiânia
+1423456789,Luana Rocha,luana.rocha@example.com,Maceió
+1523456789,Bruno Melo,bruno.melo@example.com,Cuiabá
+1623456789,Larissa Gomes,larissa.gomes@example.com,João Pessoa
+1723456789,Thiago Barbosa,thiago.barbosa@example.com,Teresina
+1823456789,Sofia Pinto,sofia.pinto@example.com,Aracaju
+1923456789,Guilherme Reis,guilherme.reis@example.com,Belém
+2023456789,Vivian Morais,vivian.morais@example.com,Campo Grande
+2123456789,Fábio Cardoso,fabio.cardoso@example.com,Vila Velha
+2223456789,André Nunes,andre.nunes@example.com,Londrina
+2323456789,Camila Silva,camila.silva@example.com,Santos
+2423456789,Felipe Moura,felipe.moura@example.com,Blumenau
+2523456789,Aline Ribeiro,aline.ribeiro@example.com,Ribeirão Preto
+2623456789,Rodrigo Lima,rodrigo.lima@example.com,Uberlândia
+2723456789,Mariana Alves,mariana.alves@example.com,Sorocaba
+2823456789,Caio Castro,caio.castro@example.com,Jundiaí
+2923456789,Renata Dias,renata.dias@example.com,Maringá
+3023456789,Lucas Martins,lucas.martins@example.com,Boa Vista
+3123456789,Patrícia Silva,patricia.silva@example.com,Caxias do Sul
+3223456789,Diego Freitas,diego.freitas@example.com,Petrópolis
+3323456789,Roberta Melo,roberta.melo@example.com,Foz do Iguaçu
+3423456789,Daniel Ribeiro,daniel.ribeiro@example.com,Juiz de Fora
+3523456789,Marcela Alves,marcela.alves@example.com,Niterói
+3623456789,Paulo Farias,paulo.farias@example.com,Praia Grande
+3723456789,Jorge Nascimento,jorge.nascimento@example.com,Montes Claros
+3823456789,Clarissa Souza,clarissa.souza@example.com,Caruaru
+3923456789,Samuel Rocha,samuel.rocha@example.com,Vitória
+4023456789,Manuela Barros,manuela.barros@example.com,Pelotas
+4123456789,Anderson Souza,anderson.souza@example.com,Macapá
+4223456789,Carla Ribeiro,carla.ribeiro@example.com,Joinville
+4323456789,Mário Gomes,mario.gomes@example.com,Franca
+4423456789,Fernando Rocha,fernando.rocha@example.com,Itajaí
+4523456789,Sandra Cardoso,sandra.cardoso@example.com,São José dos Campos
+4623456789,Luiz Oliveira,luiz.oliveira@example.com,Marabá
+4723456789,Célia Nunes,celia.nunes@example.com,Barueri
+4823456789,Ronaldo Teixeira,ronaldo.teixeira@example.com,Lajeado
+4923456789,Lívia Santos,livia.santos@example.com,São Carlos
+5023456789,Cláudio Lima,claudio.lima@example.com,Chapecó

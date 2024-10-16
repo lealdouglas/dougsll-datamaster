@@ -450,6 +450,16 @@ Nessa action, será configurado:
 #### Step 10. Configure seu projeto para explorar dados
 
 - No repos, acesse **datamaster/jarvis_prep**.
+- Em **jarvis_prep/datacontract.yaml**, altere endereco de url do HOST Databricks conforme o uso.
+
+```yaml
+servers:
+  development:
+    type: databricks
+    host: https://HOST.azuredatabricks.net # Host utilizado da workspace Databricks.
+    catalog: crisk
+    schema: silver
+```
 
 <p align="center">
   <img src="assets/img/estrutura.PNG" width="900" alt="ideacao do projeto">
@@ -459,6 +469,8 @@ A estrutura eh separada em duas partes,
 
 - **definition_project**, onde deve conter a configuracao principal do seu projeto
 - **exploration**, onde deve conter os notebooks de exploracao de dados.
+
+Em definition_project, estruture como deseja configurar seu projeto, por definicao entregamos uma estrutura como exemplo.
 
 > [!NOTE]
 > Vincule esse projeto ao Databricks via **Git Repos**. Utilize a pasta exploration para estudar o ambiente e os dados.
