@@ -1,5 +1,5 @@
-from pyspark.sql import SparkSession
 from delta.tables import DeltaTable
+from pyspark.sql import SparkSession
 
 
 def merge_silver(spark, new_df):
