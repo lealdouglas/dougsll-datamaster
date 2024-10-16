@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "definition-project"
-version = "0.1.1"
+version = "0.1.0"
 description = ""
 authors = ["Seu nome <seunome@example.com>"]
 readme = "README.md"
