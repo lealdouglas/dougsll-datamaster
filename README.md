@@ -464,7 +464,7 @@ servers:
 ```
 
 <p align="center">
-  <img src="assets/img/estrutura.PNG" width="900" alt="ideacao do projeto">
+  <img src="assets/img/estrutura.PNG" width="500" alt="ideacao do projeto">
 </p>
 
 A estrutura eh separada em duas partes,
@@ -478,11 +478,23 @@ Em definition_project, estruture como deseja configurar seu projeto, por definic
 > Vincule esse projeto ao Databricks via **Git Repos**. Utilize a pasta exploration para estudar o ambiente e os dados.
 > **Clone** cluster como single user para sua conta principal, para que voce possa explorar o ambiente.
 
+<p align="center">
+  <img src="assets/gif/clone.gif" width="900" alt="ideacao do projeto">
+</p>
+
 #### Step 11. Execute a action Jarvis Prep
 
 - Na tela inicial do repos, clique em **Actions**
 - Selecione **03. Jarvis - Create Workflow Prep**
 - Clique no botão a direita, **Run workflow**
+
+A action fara o build do projeto, alem de criar um job com duas tasks,
+
+<p align="center">
+  <img src="assets/img/workflow_prep.PNG" width="900" alt="ideacao do projeto">
+</p>
+
+onde a task inicial configura a tabela, conforme contrato.
 
 Pipeline finalizado.
 
