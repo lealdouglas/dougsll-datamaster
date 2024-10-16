@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: 'Deploy bundle to DEV'
+    name: 'Quality Contract Check'
     runs-on: ubuntu-latest
 
     env:

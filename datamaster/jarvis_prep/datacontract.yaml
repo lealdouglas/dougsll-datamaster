@@ -108,7 +108,7 @@ quality:
   type: SodaCL
   specification:
     checks for account:
-      - row_count > 25
+      - row_count < 25
 
 # Workflow de ingestão de dados
 # Data ingestion workflow
