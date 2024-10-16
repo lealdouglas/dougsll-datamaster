@@ -506,7 +506,7 @@ Abaixo, compartilho algumas melhorias consideradas para essa solução e ambiç�
 
 #### Evolução da solução e ambições futuras (contribuição):
 
-- Implementar uma CLI para a configuração do repositório e criação do projeto, utilizando o input para configurar todos os parâmetros internos (não secretos) utilizados no projeto.
+- Implementar uma CLI para a configuração do repositório e criação do projeto, utilizando o input para configurar todos os parâmetros internos (não secrets) utilizados no projeto.
 - UI e API Services, com serviços integrados e uma interface web configurada. As validações e etapas podem ser orquestradas a partir da interação do usuário com o formulário, onde, com base nas opções, um serviço pode ser acionado ou um repositório/actions pode ser configurado.
 - Implementar lifecycle durante a configuração do storage.
 - Configurar um cluster para uso conforme as etapas do pipeline (job cluster, cluster serverless).

@@ -33,8 +33,8 @@ info:
   # Contato do proprietário do contrato de dados
   # Contact information for the data contract owner
   contact:
-    name: Douglas Leal
-    url: https://www.linkedin.com/in/douglasleall/
+    name: Nome Autor
+    url: https://www.linkedin.com/in/nomeautor/
 
 # Informações sobre os servidores
 # Information about the servers
@@ -57,7 +57,7 @@ models:
         primary: true
         unique: true
         required: true
-        example: '123e4567-e89b-12d3-a456-426614174000'
+        example: '0987654321'
       name:
         description: name of client
         type: string
@@ -115,9 +115,9 @@ quality:
 workflow:
   model: 'account'
   email_notifications:
-    on_start: ['douglas.sleal@outlook.com']
-    on_success: ['douglas.sleal@outlook.com']
-    on_failure: ['douglas.sleal@outlook.com']
+    on_start: ['nomeautor@example']
+    on_success: ['nomeautor@example']
+    on_failure: ['nomeautor@example']
   tasks:
     - task_key: main_task
       python_wheel_task:
