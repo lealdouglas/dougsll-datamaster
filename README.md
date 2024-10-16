@@ -42,7 +42,7 @@ Este repositório contém o seguinte:
      - [Step 8. Configure arquivo de contrato para ingestão](#step-8-configure-arquivo-de-contrato-para-ingestão)
      - [Step 9. Execute a action Jarvis Ingestão](#step-9-execute-a-action-jarvis-ingestão)
      - [Step 10. Configure seu projeto para explorar dados](#step-10-configure-seu-projeto-para-explorar-dados)
-     - [Step 11. Execute a action Jarvis Asset Bundles](#step-11-execute-a-action-jarvis-asset-bundles)
+     - [Step 11. Execute a action Jarvis Prep](#step-11-execute-a-action-jarvis-prep)
 5. [Melhorias e Considerações Finais](#5-melhorias-e-considerações-finais)
    - [Melhorias Futuras](#51-melhorias-futuras)
    - [Considerações Finais](#52-considerações-finais)
@@ -81,14 +81,13 @@ A solução utiliza Azure como provedora de nuvem, Active Directory para gestão
 ### 2.3 Descrição dos Componentes
 
 - **Event Hub (opcional)**: Captura dados de transações em tempo real de várias fontes, como sistemas de pagamento e bancos.
-- **Azure Databricks**: Processa os dados capturados, executa algoritmos de detecção de fraudes e prepara os dados para armazenamento.
-- **Azure Storage Account**: Armazena dados brutos e processados em camadas organizadas, conforme a arquitetura de medalhão (bronze, silver, gold).
-- **Segurança**: Implementa políticas de mascaramento de dados e criptografia para proteger informações sensíveis.
+- **Azure Databricks notebook**: Para exploração dos dados.
+- **Azure Databricks workflows**: Para processamento dos dados.
+- **Azure Storage Account**: Armazena dados brutos e processados em camadas organizadas, conforme a arquitetura de medalhão (bronze e silver priorizados nesse projeto, gold).
 - **Observabilidade**: Utiliza monitoramento contínuo para garantir o funcionamento correto do sistema, com alertas configurados para falhas e anomalias.
 
 ##### Ambição (AVALIAR DEPOIS):
 
-- Relatório no cost analysis
 - Lifecycle já implementado
 - TTL vinculado ao contrato
 - Bundles Databricks
@@ -256,7 +255,6 @@ Altere os valores para o qual deseja criar os nomes dos recursos e catálogo
   domain: risk #nome do domínio
   catalog: risk #nome do catálogo
   project: datamaster #nome do projeto
-  user_principal_name: account_name#EXT#@mailaccount_name.onmicrosoft.com #usuario principal da conta
   domain_azure: mailaccount_name.onmicrosoft.com #dominio principal da conta, para vincular outros usuarios
   ```
 
@@ -278,7 +276,7 @@ Crie um usuário de serviço na Azure (Service Principal) com as seguintes atrib
   Onde,
 
   - **SUBSCRIPTION_ID** é o ID da subscrição da sua conta Azure.
-  - O usuário de serviço **spndatamasteradmin** deve ser criado e as variáveis **password** (`TF_ARM_CLIENT_SECRET`) e **appId** (`TF_ARM_CLIENT_ID`) serão exibidas, as utilize-as para [configurar as secrets no git](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-3-configure-as-secrets-no-git).
+  - O usuário de serviço **spndatamasteradmin** deve ser criado e as variáveis **password** (`TF_ARM_CLIENT_SECRET`) e **appId** (`TF_ARM_CLIENT_ID`) serão exibidas, as utilize-as para [configurar as secrets no git](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-4-configure-as-secrets-no-git).
 
 - **Global Administrator**, para sincronizar grupos e usuários do AAD no unity.
   Após criar usuário, acesse ao recurso da conta, Microsoft Entra ID, para incluir o usuário a permissão de Global Administrator,
@@ -301,7 +299,8 @@ Configure as variaveis de ambiente (secrets) em seu repositório Git,
   - **TF_ARM_SUBSCRIPTION_ID**, subscrição da conta
   - **TF_ARM_CLIENT_ID**, ID do usuário de serviço com permissão para criar recursos e grupos no AAD.
   - **TF_ARM_CLIENT_SECRET**, Secret do usuário de serviço com permissão para criar recursos e grupos no AAD.
-  - **ADB_ACCOUNT_ID**, ID da console Unity Catalog do Databricks.
+  - **ADB_ACCOUNT_ID**, ID da console Unity Catalog do Databricks. Recupere apos executar [action lakehouse](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-5-execute-a-action-strife-lakehouse)
+  - **ADB_ACCOUNT_HOST**, url Workspace Databricks. Recupere apos executar [action lakehouse](https://github.com/lealdouglas/dougsll-datamaster?tab=readme-ov-file#step-5-execute-a-action-strife-lakehouse)
 
 <p align="center">
   <img src="assets/gif/tenant.gif" width="900" alt="ideacao do projeto">
@@ -325,7 +324,7 @@ Configure as variaveis de ambiente (secrets) em seu repositório Git,
   <img src="assets/img/actions.PNG" width="850" alt="ideacao do projeto">
 </p>
 
-Após execução, os recursos abaixo serão criados
+Após execução, os recursos abaixo serão criados,
 
 <p align="center">
   <img src="assets/img/recursos.png" width="850" alt="ideacao do projeto">
@@ -430,11 +429,14 @@ Para esse projeto habilitamos os _types_ **eventhub** e **adls**. Utilize,
 - Selecione **03. Jarvis - Create Workflow Ingest**
 - Clique no botão a direita, **Run workflow**
 
+> [!NOTE]
+> Lembre-se, por ser um projeto piloto, utilize .
+
 Nessa action, será configurado:
 
 - **Databricks Job**, chamado ingest-risk-account, job de ingestão.
 - **Databricks Job Task**, chamado task-ingest-risk-account, para fazer o processamento dos dados e gerar a tabela na camada bronze.
-- **Topico Event Hub**, _opcional_, caso o _type_ do contrato seja informado eventhub.
+- **Topico Event Hub**, _opcional_, caso o **job_mock** do contrato seja informado eventhub.
 
 <p align="center">
   <img src="assets/img/workflow.PNG" width="900" alt="ideacao do projeto">
@@ -445,7 +447,28 @@ Nessa action, será configurado:
 
 #### Step 10. Configure seu projeto para explorar dados
 
-#### Step 11. Execute a action Jarvis Asset Bundles
+- No repos, acesse **datamaster/jarvis_prep**.
+
+<p align="center">
+  <img src="assets/img/custo.PNG" width="900" alt="ideacao do projeto">
+</p>
+
+A estrutura eh separada em duas partes,
+
+- **definition_project**, onde deve conter a configuracao principal do seu projeto
+- **exploration**, onde deve conter os notebooks de exploracao de dados.
+
+> [!NOTE]
+> Vincule esse projeto ao Databricks via **Git Repos**. Utilize a pasta exploration para estudar o ambiente e os dados.
+> **Clone** cluster como single user para sua conta principal, para que voce possa explorar o ambiente.
+
+#### Step 11. Execute a action Jarvis Prep
+
+- Na tela inicial do repos, clique em **Actions**
+- Selecione **03. Jarvis - Create Workflow Prep**
+- Clique no botão a direita, **Run workflow**
+
+Pipeline finalizado.
 
 ## 5. Melhorias e Considerações Finais
 
@@ -455,17 +478,17 @@ Abaixo, compartilho algumas melhorias consideradas para essa solução e ambiç�
 
 #### Evolução da solução e contribuições técnicas:
 
-- UI e API Services, com serviços integrados e uma interface web configurada, as validações e etapas podem ser orquestradas a partir da interação do usuário com o formulário, onde, a partir das opções, um serviço pode ser acionado ou um repositório/actions pode ser configurado.
-- Configurar um cluster para uso conforme etapas do pipeline (job cluster, cluster serveless).
-- Escalabilidade: Melhorar o desempenho da ingestão de dados com particionamento de dados.
-- Segurança: Implementar autenticação baseada em tokens para APIs de terceiros.
-- Observabilidade: Adicionar métricas de performance e latência do pipeline.
-- Banco de dados, Parâmetros recuperados via API para gerar uma imersão na experiência poderiam estar configurados em um banco de dados
-- Implementar mecanimos de multiplas ingestões a partir do contrato.
-- Montar .yaml para script terraform e incluir usuario principal (conta), para vincular aos grupos.
-- Criar uma classe estruturada para o uso genérico do data contract, aplicando os padrões de SOLID.
-- Configurar gerenciamento de versão quando aciona outros componentes Strife, Jarvis e Carlton.
-- Configurar a leitura e criacao de ingestao para mais de uma model especificado no contrato de ingestao daquele mesmo schema.
+- Implementar uma CLI para a configuração do repositório e criação do projeto, utilizando o input para configurar todos os parâmetros internos (não secretos) utilizados no projeto.
+- UI e API Services, com serviços integrados e uma interface web configurada. As validações e etapas podem ser orquestradas a partir da interação do usuário com o formulário, onde, com base nas opções, um serviço pode ser acionado ou um repositório/actions pode ser configurado.
+- Implementar lifecycle durante a configuração do storage.
+- Configurar um cluster para uso conforme as etapas do pipeline (job cluster, cluster serverless).
+- Banco de dados: Parâmetros recuperados via API para gerar uma imersão na experiência poderiam estar configurados em um banco de dados
+- Implementar mecanismos para múltiplas ingestões a partir do contrato.
+- Montar um arquivo .yaml para o script Terraform e incluir o usuário principal (conta), vinculando-o aos grupos.
+- Criar uma classe estruturada para o uso genérico do data contract, aplicando os princípios do SOLID.
+- Configurar o gerenciamento de versões ao acionar outros componentes, como Strife, Jarvis e Carlton.
+- Configurar a leitura e criação de ingestões para mais de um modelo especificado no contrato de ingestão daquele mesmo schema.
+- Compilar o padrão de YAML para o datacontract, utilizando o CLI para configurar com uma conta de e-mail já personalizada para o usuário.
 
 ### 5.2 Considerações Finais
 
@@ -473,7 +496,11 @@ Este projeto demonstra uma solução que representa o potencial em definir e con
 
 ## 6. Custos do projeto
 
-Esse projeto, executado de ponta a ponta, teve um custo de,
+Esse projeto, executado de ponta a ponta (considerando desenvolvimento e testes), teve um custo de,
+
+<p align="center">
+  <img src="assets/img/custo.PNG" width="900" alt="ideacao do projeto">
+</p>
 
 > [!NOTE]
 > Devio o tema de custos, não aumentamos a cota da conta, por conta disso apenas um metastore e um cluster single node foi configurado para toda a jornada apresentada.
