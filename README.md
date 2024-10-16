@@ -43,7 +43,6 @@ Este repositório contém o seguinte:
      - [Step 9. Execute a action Jarvis Ingestão](#step-9-execute-a-action-jarvis-ingestão)
      - [Step 10. Configure seu projeto para explorar dados](#step-10-configure-seu-projeto-para-explorar-dados)
      - [Step 11. Execute a action Jarvis Prep](#step-11-execute-a-action-jarvis-prep)
-     - [Step 11. Execute a action Jarvis Prep](#step-11-execute-a-action-jarvis-prep)
 5. [Melhorias e Considerações Finais](#5-melhorias-e-considerações-finais)
    - [Melhorias Futuras](#51-melhorias-futuras)
    - [Considerações Finais](#52-considerações-finais)
