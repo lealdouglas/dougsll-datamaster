@@ -453,7 +453,7 @@ Nessa action, será configurado:
 - No repos, acesse **datamaster/jarvis_prep**.
 
 <p align="center">
-  <img src="assets/img/custo.PNG" width="900" alt="ideacao do projeto">
+  <img src="assets/img/estrutura.PNG" width="900" alt="ideacao do projeto">
 </p>
 
 A estrutura eh separada em duas partes,
