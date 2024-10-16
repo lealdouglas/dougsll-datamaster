@@ -498,6 +498,23 @@ onde a task inicial configura a tabela, conforme contrato.
 
 Pipeline finalizado.
 
+#### Step Bonus. Execute a action Project Quality
+
+- Na tela inicial do repos, clique em **Actions**
+- Selecione **99. Action BONUS Project Quality**
+- Clique no botão a direita, **Run workflow**
+
+Configure as variáveis de ambiente listadas abaixo,
+
+- **DATACONTRACT_DATABRICKS_HTTP_PATH**, http_path do cluster clone utilizado para exploração.
+- **DATACONTRACT_DATABRICKS_TOKEN**, token pessoal do usuário.
+
+Com base nas regras de qualidade informadas no contrato, a action será responsável pela validação,
+
+<p align="center">
+  <img src="assets/img/quality.PNG" width="900" alt="ideacao do projeto">
+</p>
+
 ## 5. Melhorias e Considerações Finais
 
 ### 5.1 Melhorias Futuras

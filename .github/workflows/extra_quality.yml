@@ -29,15 +29,11 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Import directory to Databricks workspace
+      - name: download datacontract-cli
         run: |
           python3 -m pip install datacontract-cli[all]
 
-      - name: Import directory to Databricks workspace
-        run: |
-          ls -la
-
-      - name: Import directory to Databricks workspace
+      - name: run quality test datacontract
         run: |
           cd datamaster/jarvis_prep/
           datacontract test datacontract.yaml
