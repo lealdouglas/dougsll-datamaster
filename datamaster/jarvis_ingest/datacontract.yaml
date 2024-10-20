@@ -104,8 +104,8 @@ workflow:
     on_success: ['nomeautor@example.com']
     on_failure: ['nomeautor@example.com']
   source:
-    type: 'adls'
+    type: 'eventhub'
     format: 'csv'
     header: true
     delimiter: ','
-    job_mock: false
+    job_mock: true
