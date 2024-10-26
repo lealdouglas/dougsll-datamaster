@@ -102,7 +102,7 @@ workflow:
     on_failure: ['nomeautor@example.com']
   source:
     type: 'eventhub'
-    format: 'csv'
+    format: 'avro'
     header: true
     delimiter: ','
     job_mock: true
