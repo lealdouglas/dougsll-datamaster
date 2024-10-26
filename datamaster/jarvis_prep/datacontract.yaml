@@ -4,14 +4,14 @@ dataContractSpecification: 0.9.3
 
 # Identificador único do contrato de dados
 # Unique identifier for the data contract
-id: urn:datacontract:datamaster:jarvis:prep:account
+id: urn:datacontract:datamaster:jarvis:prep:consents
 
 # Informações sobre o contrato de dados
 # Information about the data contract
 info:
   # Título do contrato de dados
   # Title of the data contract
-  title: Jarvis Prep Account
+  title: Jarvis Prep consents
 
   # Versão do contrato de dados
   # Version of the data contract
@@ -46,30 +46,46 @@ servers:
     schema: silver
 
 models:
-  account:
-    description: client table
-    type: table
-    fields:
-      user_id:
-        description: unique ID
-        type: string
-        length: 10
-        primary: true
-        unique: true
-        required: true
-        example: '0987654321'
-      name:
-        description: name of client
-        type: string
-        required: true
-      email:
-        description: e-mail of client
-        type: string
-        required: true
-      city:
-        description: city of client
-        type: string
-        required: true
+  user_id:
+    type: integer
+    nullable: false
+    description: Identificador do usuário que deu o consentimento.
+    examples:
+      - 10001
+      - 10010
+  tipo_id:
+    type: integer
+    nullable: false
+    description: Identificador do tipo do dado que deu o consentimento.
+    examples:
+      - 001
+      - 002
+  tipo_dados:
+    type: string
+    max_length: 100
+    nullable: false
+    description: Tipo de dados consentidos, como "Dados Financeiros" ou "Dados de Crédito".
+    examples:
+      - Dados Financeiros
+      - Dados de Crédito
+  status:
+    type: enum
+    values:
+      - Ativo
+      - Revogado
+    nullable: false
+    description: Indica o estado do consentimento.
+    examples:
+      - Ativo
+      - Revogado
+  plataforma_origem:
+    type: string
+    max_length: 50
+    nullable: true
+    description: Origem do consentimento.
+    examples:
+      - Web
+      - Mobile
 
 # Níveis de serviço do contrato de dados
 # Service levels for the data contract
@@ -90,30 +106,28 @@ servicelevels:
 # Data examples for the data model
 examples:
   - type: 'csv'
-    model: 'account'
+    model: 'consents'
     data: |
-      user_id,name,email,city
-      1234567890,João Silva,joao.silva@example.com,São Paulo
-      0987654321,Maria Oliveira,maria.oliveira@example.com,Rio de Janeiro
-      2345678901,Carlos Souza,carlos.souza@example.com,Brasília
-      3456789012,Ana Santos,ana.santos@example.com,Belo Horizonte
-      4567890123,Pedro Costa,pedro.costa@example.com,Salvador
-      5678901234,Juliana Lima,juliana.lima@example.com,Fortaleza
-      6789012345,Lucas Pereira,lucas.pereira@example.com,Curitiba
-      7890123456,Fernanda Araújo,fernanda.araujo@example.com,Recife
+      user_id,tipo_id,tipo_dados,status
+      10004,001,Dados de Publicidade,Ativo
+      10004,002,Dados de Histórico de Navegação,Ativo
+      10002,002,Dados de Histórico de Navegação,Revogado
+      10008,003,Dados de Crédito,Revogado
+      10005,004,Dados de Localização,Ativo
+      10008,005,Dados de Navegação,Ativo
 
 # Regras de qualidade dos dados
 # Data quality rules
 quality:
   type: SodaCL
   specification:
-    checks for account:
+    checks for consents:
       - row_count < 25
 
 # Workflow de ingestão de dados
 # Data ingestion workflow
 workflow:
-  model: 'account'
+  model: 'consents'
   email_notifications:
     on_start: ['nomeautor@example']
     on_success: ['nomeautor@example']

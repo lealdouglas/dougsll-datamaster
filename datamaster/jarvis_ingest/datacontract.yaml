@@ -4,14 +4,14 @@ dataContractSpecification: 0.9.3
 
 # Identificador único do contrato de dados
 # Unique identifier for the data contract
-id: urn:datacontract:datamaster:jarvis:ingest:account
+id: urn:datacontract:datamaster:jarvis:ingest:consents
 
 # Informações sobre o contrato de dados
 # Information about the data contract
 info:
   # Título do contrato de dados
   # Title of the data contract
-  title: Jarvis Ingest Account
+  title: Jarvis Ingest consents
 
   # Versão do contrato de dados
   # Version of the data contract
@@ -46,7 +46,7 @@ servers:
 
     # Host do servidor
     # Server host
-    host: https://adb-2215575611652383.3.azuredatabricks.net/
+    host: https://HOST.azuredatabricks.net/
 
     # Catálogo do servidor
     # Server catalog
@@ -75,30 +75,27 @@ servicelevels:
 # Data examples for the data model
 examples:
   - type: 'csv'
-    model: 'account'
+    model: 'consents'
     data: |
-      user_id,name,email,city
-      1234567890,João Silva,joao.silva@example.com,São Paulo
-      0987654321,Maria Oliveira,maria.oliveira@example.com,Rio de Janeiro
-      2345678901,Carlos Souza,carlos.souza@example.com,Brasília
-      3456789012,Ana Santos,ana.santos@example.com,Belo Horizonte
-      4567890123,Pedro Costa,pedro.costa@example.com,Salvador
-      5678901234,Juliana Lima,juliana.lima@example.com,Fortaleza
-      6789012345,Lucas Pereira,lucas.pereira@example.com,Curitiba
-      7890123456,Fernanda Araújo,fernanda.araujo@example.com,Recife
+      consent_id,user_id,data_inicio,data_fim,tipo_dados,tipo_id,status,plataforma_origem
+      1001,10004,2023-03-05,2023-12-16,Dados de Publicidade,001,Ativo,Web
+      1002,10002,2023-11-29,2024-08-06,Dados de Histórico de Navegação,002,Revogado,API
+      1003,10008,2024-06-07,2024-10-03,Dados de Crédito,003,Revogado,API
+      1004,10005,2024-05-05,2024-12-04,Dados de Localização,004,Ativo,Mobile
+      1005,10008,2024-03-04,2024-03-30,Dados de Navegação,005,Ativo,Mobile
 
 # Regras de qualidade dos dados
 # Data quality rules
 quality:
   type: SodaCL
   specification:
-    checks for account:
+    checks for consents:
       - row_count > 25
 
 # Workflow de ingestão de dados
 # Data ingestion workflow
 workflow:
-  model: 'account'
+  model: 'consents'
   email_notifications:
     on_start: ['nomeautor@example.com']
     on_success: ['nomeautor@example.com']

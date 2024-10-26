@@ -84,13 +84,7 @@ A solução utiliza Azure como provedora de nuvem, Active Directory para gestão
 - **Azure Databricks notebook**: Para exploração dos dados.
 - **Azure Databricks workflows**: Para processamento dos dados.
 - **Azure Storage Account**: Armazena dados brutos e processados em camadas organizadas, conforme a arquitetura de medalhão (bronze e silver priorizados nesse projeto, gold).
-- **Observabilidade**: Utiliza monitoramento contínuo para garantir o funcionamento correto do sistema, com alertas configurados para falhas e anomalias.
-
-##### Ambição (AVALIAR DEPOIS):
-
-- Lifecycle já implementado
-- TTL vinculado ao contrato
-- Bundles Databricks
+- **Observabilidade**: sistema de alertas configurados para falhas na aplicação e pipeline action.
 
 <p align="center">
   <img src="assets/img/diagrama_tc.PNG" width="750" alt="Diagrama de Arquitetura">
