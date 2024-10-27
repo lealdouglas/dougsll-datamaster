@@ -2,6 +2,14 @@ import sys
 
 from delta.tables import DeltaTable
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import cast, col, explode, from_json
+from pyspark.sql.types import (
+    StructType,
+    StructField,
+    IntegerType,
+    StringType,
+    DateType,
+)
 
 
 def merge_silver(spark, new_df, table_name):
@@ -11,39 +19,75 @@ def merge_silver(spark, new_df, table_name):
 
     # Realiza o merge (upsert) dos dados novos na tabela Delta
     delta_table.alias('target').merge(
-        new_df.alias('source'), 'target.user_id = source.user_id'
+        new_df.alias('source'),
+        'target.user_id = source.user_id and target.tipo_id = source.tipo_id',
     ).whenMatchedUpdate(
         set={
-            'name': 'source.name',
-            'email': 'source.email',
-            'city': 'source.city',
+            'status': 'source.status',
+            'plataforma_origem': 'source.plataforma_origem',
         }
     ).whenNotMatchedInsert(
         values={
             'user_id': 'source.user_id',
-            'name': 'source.name',
-            'email': 'source.email',
-            'city': 'source.city',
+            'tipo_id': 'source.tipo_id',
+            'tipo_dados': 'source.tipo_dados',
+            'status': 'source.status',
+            'plataforma_origem': 'source.plataforma_origem',
         }
     ).execute()
 
 
 def main():
 
-    table_name = 'crisk.silver.account'
+    schema = StructType(
+        [
+            StructField(
+                'user_id',
+                IntegerType(),
+                nullable=False,
+            ),
+            StructField(
+                'tipo_id',
+                StringType(),
+                nullable=False,
+            ),
+            StructField(
+                'tipo_dados',
+                StringType(),
+                nullable=False,
+            ),
+            StructField(
+                'status',
+                StringType(),
+                nullable=False,
+            ),
+            StructField('plataforma_origem', StringType(), nullable=True),
+        ]
+    )
+
+    table_name = 'crisk.silver.consents'
 
     # Inicializa a SparkSession com suporte ao Delta Lake
     spark = SparkSession.builder.getOrCreate()
 
     # Leitura dos dados em modo batch
-    new_df = spark.read.format('delta').table('crisk.bronze.account')
+    new_df = (
+        spark.read.format('delta')
+        .table('crisk.bronze.consents')
+        .select(
+            from_json(col('body').cast(StringType()), schema).alias('test')
+        )
+        .select(
+            col('test.user_id').alias('user_id'),
+            col('test.tipo_id').alias('tipo_id'),
+            col('test.tipo_dados').alias('tipo_dados'),
+            col('test.status').alias('status'),
+            col('test.plataforma_origem').alias('plataforma_origem'),
+        )
+    )
 
     # merge bronze com dados existentes na tabela silver
     merge_silver(spark, new_df, table_name)
-
-    # Exibe os dados atualizados
-    updated_df = spark.table(table_name).filter('user_id = 1234567890')
-    updated_df.show()
 
 
 def hello_world():
