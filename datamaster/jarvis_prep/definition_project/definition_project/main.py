@@ -3,13 +3,7 @@ import sys
 from delta.tables import DeltaTable
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import cast, col, explode, from_json
-from pyspark.sql.types import (
-    StructType,
-    StructField,
-    IntegerType,
-    StringType,
-    DateType,
-)
+from pyspark.sql.types import IntegerType, StringType, StructField, StructType
 
 
 def merge_silver(spark, new_df, table_name):
