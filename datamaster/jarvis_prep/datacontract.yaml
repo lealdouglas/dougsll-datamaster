@@ -108,13 +108,13 @@ examples:
   - type: 'csv'
     model: 'consents'
     data: |
-      user_id,tipo_id,tipo_dados,status
-      10004,001,Dados de Publicidade,Ativo
-      10004,002,Dados de Histórico de Navegação,Ativo
-      10002,002,Dados de Histórico de Navegação,Revogado
-      10008,003,Dados de Crédito,Revogado
-      10005,004,Dados de Localização,Ativo
-      10008,005,Dados de Navegação,Ativo
+      user_id,tipo_id,tipo_dados,status,plataforma_origem
+      10004,001,Dados de Publicidade,Ativo,Mobile
+      10004,002,Dados de Histórico de Navegação,Ativo,Mobile
+      10002,002,Dados de Histórico de Navegação,Revogado,Mobile
+      10008,003,Dados de Crédito,Revogado,Mobile
+      10005,004,Dados de Localização,Ativo,Mobile
+      10008,005,Dados de Navegação,Ativo,Mobile
 
 # Regras de qualidade dos dados
 # Data quality rules
