@@ -419,7 +419,7 @@ Onde _model_ é a tabela/workflow criado para ingestão.
 
 Para esse projeto habilitamos os _types_ **eventhub** e **adls**. Utilize,
 
-- **eventhub**, para simular uma ingestão streaming altere `type_run`
+- **eventhub**,
   - Um tópico é criado com base nos parâmetros informados no contrato.
   - Habilite `job_mock:true` job mock pode ser criado caso específique no contrato como teste, ou envie mensagens ao tópico se houver alguma aplicação.
 - **adls**, para repouso dos dados brutos.
