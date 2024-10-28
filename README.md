@@ -352,6 +352,10 @@ Para dar sequencia ao setup, é necessário capturar qual account_id está vincu
 > [!NOTE]
 > Caso já exista um metastore cadastrado como default (metastore_azure_brazilsouth), **delete** para que seja feito um a partir desse projeto.
 
+<p align="center">
+  <img src="assets/gif/metastore.gif" width="900" alt="ideacao do projeto">
+</p>
+
 Em seguida, **é importante marcar o usuário de serviço como account_admin**, para que tenha permissão de criar catálogo, metastore, external metastore, schema, tables e outros:
 
 - Clique em **User management** no menu lateral
