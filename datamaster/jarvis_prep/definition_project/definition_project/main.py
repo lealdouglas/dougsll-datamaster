@@ -30,6 +30,8 @@ def merge_silver(spark, new_df, table_name):
         }
     ).execute()
 
+    print("Merge realizado com sucesso!")
+
 
 def main():
 
@@ -82,6 +84,8 @@ def main():
 
     # merge bronze com dados existentes na tabela silver
     merge_silver(spark, new_df, table_name)
+
+    print("Processo finalizado com sucesso!")
 
 
 def hello_world():

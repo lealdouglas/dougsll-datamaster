@@ -46,46 +46,47 @@ servers:
     schema: silver
 
 models:
-  user_id:
-    type: integer
-    nullable: false
-    description: Identificador do usuário que deu o consentimento.
-    examples:
-      - 10001
-      - 10010
-  tipo_id:
-    type: integer
-    nullable: false
-    description: Identificador do tipo do dado que deu o consentimento.
-    examples:
-      - 001
-      - 002
-  tipo_dados:
-    type: string
-    max_length: 100
-    nullable: false
-    description: Tipo de dados consentidos, como "Dados Financeiros" ou "Dados de Crédito".
-    examples:
-      - Dados Financeiros
-      - Dados de Crédito
-  status:
-    type: enum
-    values:
-      - Ativo
-      - Revogado
-    nullable: false
-    description: Indica o estado do consentimento.
-    examples:
-      - Ativo
-      - Revogado
-  plataforma_origem:
-    type: string
-    max_length: 50
-    nullable: true
-    description: Origem do consentimento.
-    examples:
-      - Web
-      - Mobile
+  consents:
+    description: Table Consents of Open Finance.
+    type: table
+    fields:
+      user_id:
+        type: integer
+        nullable: false
+        description: Identificador do usuário que deu o consentimento.
+        examples:
+          - 10001
+          - 10010
+      tipo_id:
+        type: integer
+        nullable: false
+        description: Identificador do tipo do dado que deu o consentimento.
+        examples:
+          - 001
+          - 002
+      tipo_dados:
+        type: string
+        max_length: 100
+        nullable: false
+        description: Tipo de dados consentidos, como "Dados Financeiros" ou "Dados de Crédito".
+        examples:
+          - Dados Financeiros
+          - Dados de Crédito
+      status:
+        type: string
+        nullable: false
+        description: Indica o estado do consentimento.
+        examples:
+          - Ativo
+          - Revogado
+      plataforma_origem:
+        type: string
+        max_length: 50
+        nullable: true
+        description: Origem do consentimento.
+        examples:
+          - Web
+          - Mobile
 
 # Níveis de serviço do contrato de dados
 # Service levels for the data contract
@@ -122,7 +123,7 @@ quality:
   type: SodaCL
   specification:
     checks for consents:
-      - row_count < 25
+      - row_count > 25
 
 # Workflow de ingestão de dados
 # Data ingestion workflow

@@ -528,6 +528,7 @@ Abaixo, compartilho algumas melhorias consideradas para essa solução e ambiç�
 - Configurar o gerenciamento de versões ao acionar outros componentes, como Strife, Jarvis e Carlton.
 - Configurar a leitura e criação de ingestões para mais de um modelo especificado no contrato de ingestão daquele mesmo schema.
 - Compilar o padrão de YAML para o datacontract, utilizando o CLI para configurar com uma conta de e-mail já personalizada para o usuário.
+- Implementar o comando terraform destroy. Como a proposta era uma imersão sem a criação inicial de recursos, o Terraform apresentado não configura o .tfstate. Para isso, é necessário ter um storage pré-configurado, que será utilizado como backup do arquivo.
 
 ### 5.2 Considerações Finais
 
@@ -540,6 +541,8 @@ Esse projeto, executado de ponta a ponta (considerando desenvolvimento e testes)
 <p align="center">
   <img src="assets/img/custo.PNG" width="900" alt="ideacao do projeto">
 </p>
+
+Onde R$30,00 de fato e o custo gasto executando o processo ponta a ponta.
 
 > [!NOTE]
 > Devido o tema de custos, não aumentamos a cota da conta, por conta disso apenas um metastore e um cluster single node foi configurado para toda a jornada apresentada.
