@@ -2,8 +2,16 @@ import sys
 
 from delta.tables import DeltaTable
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import cast, col, explode, from_json
+from pyspark.sql.functions import (
+    cast,
+    col,
+    desc,
+    explode,
+    from_json,
+    row_number,
+)
 from pyspark.sql.types import IntegerType, StringType, StructField, StructType
+from pyspark.sql.window import Window
 
 
 def merge_silver(spark, new_df, table_name):
@@ -35,30 +43,32 @@ def merge_silver(spark, new_df, table_name):
 
 def main():
 
-    schema = StructType(
-        [
-            StructField(
-                'user_id',
-                IntegerType(),
-                nullable=False,
-            ),
-            StructField(
-                'tipo_id',
-                StringType(),
-                nullable=False,
-            ),
-            StructField(
-                'tipo_dados',
-                StringType(),
-                nullable=False,
-            ),
-            StructField(
-                'status',
-                StringType(),
-                nullable=False,
-            ),
-            StructField('plataforma_origem', StringType(), nullable=True),
-        ]
+    schema = ArrayType(
+        StructType(
+            [
+                StructField(
+                    'user_id',
+                    IntegerType(),
+                    nullable=False,
+                ),
+                StructField(
+                    'tipo_id',
+                    StringType(),
+                    nullable=False,
+                ),
+                StructField(
+                    'tipo_dados',
+                    StringType(),
+                    nullable=False,
+                ),
+                StructField(
+                    'status',
+                    StringType(),
+                    nullable=False,
+                ),
+                StructField('plataforma_origem', StringType(), nullable=True),
+            ]
+        )
     )
 
     table_name = 'crisk.silver.consents'
@@ -66,12 +76,19 @@ def main():
     # Inicializa a SparkSession com suporte ao Delta Lake
     spark = SparkSession.builder.getOrCreate()
 
+    windowSpec = Window.partitionBy('user_id', 'tipo_id').orderBy(
+        desc('EnqueuedTimeUtc')
+    )
+
     # Leitura dos dados em modo batch
     new_df = (
         spark.read.format('delta')
         .table('crisk.bronze.consents')
         .select(
-            from_json(col('body').cast(StringType()), schema).alias('test')
+            explode(from_json(col('body').cast(StringType()), schema_t)).alias(
+                'test'
+            ),
+            col('EnqueuedTimeUtc'),
         )
         .select(
             col('test.user_id').alias('user_id'),
@@ -79,7 +96,10 @@ def main():
             col('test.tipo_dados').alias('tipo_dados'),
             col('test.status').alias('status'),
             col('test.plataforma_origem').alias('plataforma_origem'),
+            col('EnqueuedTimeUtc'),
         )
+        .withColumn('RN', row_number().over(windowSpec))
+        .where('RN == 1')
     )
 
     # merge bronze com dados existentes na tabela silver
