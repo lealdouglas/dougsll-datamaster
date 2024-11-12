@@ -10,7 +10,13 @@ from pyspark.sql.functions import (
     from_json,
     row_number,
 )
-from pyspark.sql.types import IntegerType, StringType, StructField, StructType
+from pyspark.sql.types import (
+    ArrayType,
+    IntegerType,
+    StringType,
+    StructField,
+    StructType,
+)
 from pyspark.sql.window import Window
 
 
