@@ -381,7 +381,7 @@ Nessa action, será configurado:
 - **External Locations**, para seu metastore e catálogo.
 - **Sincronização**, de usuários e grupos do AAD para account e workspace.
 - **Cluster single user**, chamado cluster-single-dtm-`DOMAIN`, com autoterminate de 10min, uso ao service principal.
-- **Setup do cluster**, mínimo utilizado para esse projeto: _1 Driver; 8 GB Memory, 4 Cores; Runtime 14.3.x-scala2.12_
+- **Setup do cluster**, mínimo utilizado para esse projeto: _1 Driver; 8 GB Memory, 4 Cores; Runtime 15.4.x-scala2.12_
 - **Catálogo**, chamado c`CATALOG`
 - **Schemas**, bronze, silver e gold.
 - **Permissões**, acesso ao grupo data_engineer aos schemas listados acima.
