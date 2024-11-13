@@ -29,8 +29,23 @@ def foreach_batch_function(ds, batch_id):
     )
 
     # Seleciona a linha mais recente para cada combinação de user_id e tipo_id
-    new_df = ds.withColumn('RN', row_number().over(windowSpec)).where(
-        'RN == 1'
+    new_df = (
+        ds.select(
+            explode(from_json(col('body').cast(StringType()), schema)).alias(
+                'test'
+            ),
+            col('EnqueuedTimeUtc'),
+        )
+        .select(
+            col('test.user_id').alias('user_id'),
+            col('test.tipo_id').alias('tipo_id'),
+            col('test.tipo_dados').alias('tipo_dados'),
+            col('test.status').alias('status'),
+            col('test.plataforma_origem').alias('plataforma_origem'),
+            col('EnqueuedTimeUtc'),
+        )
+        .withColumn('RN', row_number().over(windowSpec))
+        .where('RN == 1')
     )
 
     table_name = 'crisk.silver.consents'
@@ -91,20 +106,6 @@ def main():
         .readStream.format('delta')
         # .option('ignoreChanges', 'true')
         .table('crisk.bronze.consents')
-        .select(
-            explode(from_json(col('body').cast(StringType()), schema)).alias(
-                'test'
-            ),
-            col('EnqueuedTimeUtc'),
-        )
-        .select(
-            col('test.user_id').alias('user_id'),
-            col('test.tipo_id').alias('tipo_id'),
-            col('test.tipo_dados').alias('tipo_dados'),
-            col('test.status').alias('status'),
-            col('test.plataforma_origem').alias('plataforma_origem'),
-            col('EnqueuedTimeUtc'),
-        )
         .writeStream.trigger(availableNow=True)
         .option('checkpointLocation', logins_checkpoint)
         .foreachBatch(foreach_batch_function)
