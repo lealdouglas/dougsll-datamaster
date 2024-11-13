@@ -89,7 +89,7 @@ def main():
     (
         SparkSession.builder.getOrCreate()
         .readStream.format('delta')
-        .option('ignoreChanges', 'true')
+        # .option('ignoreChanges', 'true')
         .table('crisk.bronze.consents')
         .select(
             explode(from_json(col('body').cast(StringType()), schema)).alias(
