@@ -28,6 +28,18 @@ def foreach_batch_function(ds, batch_id):
         desc('EnqueuedTimeUtc')
     )
 
+    schema = ArrayType(
+        StructType(
+            [
+                StructField('user_id', IntegerType(), nullable=False),
+                StructField('tipo_id', StringType(), nullable=False),
+                StructField('tipo_dados', StringType(), nullable=False),
+                StructField('status', StringType(), nullable=False),
+                StructField('plataforma_origem', StringType(), nullable=True),
+            ]
+        )
+    )
+
     # Seleciona a linha mais recente para cada combinação de user_id e tipo_id
     new_df = (
         ds.select(
@@ -81,17 +93,17 @@ def main():
     print('Starting the data processing job')
 
     # Define o esquema dos dados
-    schema = ArrayType(
-        StructType(
-            [
-                StructField('user_id', IntegerType(), nullable=False),
-                StructField('tipo_id', StringType(), nullable=False),
-                StructField('tipo_dados', StringType(), nullable=False),
-                StructField('status', StringType(), nullable=False),
-                StructField('plataforma_origem', StringType(), nullable=True),
-            ]
-        )
-    )
+    # schema = ArrayType(
+    #     StructType(
+    #         [
+    #             StructField('user_id', IntegerType(), nullable=False),
+    #             StructField('tipo_id', StringType(), nullable=False),
+    #             StructField('tipo_dados', StringType(), nullable=False),
+    #             StructField('status', StringType(), nullable=False),
+    #             StructField('plataforma_origem', StringType(), nullable=True),
+    #         ]
+    #     )
+    # )
 
     table_name = 'crisk.silver.consents'
     logins_checkpoint = (
