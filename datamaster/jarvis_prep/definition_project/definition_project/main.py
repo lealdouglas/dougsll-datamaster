@@ -72,6 +72,7 @@ def foreach_batch_function(ds, batch_id):
         new_df.alias('source'),
         'target.user_id = source.user_id and target.tipo_id = source.tipo_id',
     ).whenMatchedUpdate(
+        condition="target.user_id = source.user_id and target.tipo_id = source.tipo_id",
         set={
             'status': 'source.status',
             'plataforma_origem': 'source.plataforma_origem',
