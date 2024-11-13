@@ -5,6 +5,8 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
     cast,
     col,
+    current_date,
+    date_sub,
     desc,
     explode,
     from_json,
@@ -20,8 +22,8 @@ from pyspark.sql.types import (
 from pyspark.sql.window import Window
 
 
-def foreach_batch_function(ds, batch_id):
-    print(f'Processing batch {batch_id}')
+def batch_function(ds):
+    print(f'Processing batch')
 
     # Define a janela de partição para ordenar os dados
     windowSpec = Window.partitionBy('user_id', 'tipo_id').orderBy(
@@ -65,7 +67,7 @@ def foreach_batch_function(ds, batch_id):
         SparkSession.builder.getOrCreate(), table_name
     )
 
-    print(f'Performing merge (upsert) for batch {batch_id}')
+    print(f'Performing merge (upsert) for batch')
 
     # Realiza o merge (upsert) dos dados novos na tabela Delta
     delta_table.alias('target').merge(
@@ -87,7 +89,7 @@ def foreach_batch_function(ds, batch_id):
         }
     ).execute()
 
-    print(f'Batch {batch_id} processed successfully')
+    print(f'Batch processed successfully')
 
 
 def main():
@@ -114,17 +116,19 @@ def main():
     print('Reading data from the source table')
 
     # Leitura dos dados em modo batch
-    (
+    df = (
         SparkSession.builder.getOrCreate()
-        .readStream.format('delta')
+        .read.format('delta')
         # .option('ignoreChanges', 'true')
         .table('crisk.bronze.consents')
-        .writeStream.trigger(availableNow=True)
-        .option('checkpointLocation', logins_checkpoint)
-        .foreachBatch(foreach_batch_function)
-        .start()
-        .awaitTermination()
+        .withColumn(
+            'EnqueuedDate',
+            to_date(substring(col('EnqueuedTimeUtc'), 0, 10), 'MM/dd/yyyy'),
+        )
+        .filter(col('EnqueuedDate') >= date_sub(current_date(), 1))
     )
+
+    batch_function(df)
 
     print('Data processing job completed successfully')
     print('Merge operation completed successfully')
