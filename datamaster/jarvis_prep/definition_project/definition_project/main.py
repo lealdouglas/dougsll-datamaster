@@ -76,7 +76,7 @@ def foreach_batch_function(ds, batch_id):
         set={
             'status': 'source.status',
             'plataforma_origem': 'source.plataforma_origem',
-        }
+        },
     ).whenNotMatchedInsert(
         values={
             'user_id': 'source.user_id',
