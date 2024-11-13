@@ -11,6 +11,8 @@ from pyspark.sql.functions import (
     explode,
     from_json,
     row_number,
+    substring,
+    to_date,
 )
 from pyspark.sql.types import (
     ArrayType,
