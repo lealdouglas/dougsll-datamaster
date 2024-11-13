@@ -20,10 +20,25 @@ from pyspark.sql.types import (
 from pyspark.sql.window import Window
 
 
-def merge_silver(spark, new_df, table_name):
+def foreach_batch_function(ds, batch_id):
+    print(f'Processing batch {batch_id}')
 
-    # Carrega a tabela Delta
-    delta_table = DeltaTable.forName(spark, table_name)
+    # Define a janela de partição para ordenar os dados
+    windowSpec = Window.partitionBy('user_id', 'tipo_id').orderBy(
+        desc('EnqueuedTimeUtc')
+    )
+
+    # Seleciona a linha mais recente para cada combinação de user_id e tipo_id
+    new_df = ds.withColumn('RN', row_number().over(windowSpec)).where(
+        'RN == 1'
+    )
+
+    table_name = 'crisk.silver.consents'
+    delta_table = DeltaTable.forName(
+        SparkSession.builder.getOrCreate(), table_name
+    )
+
+    print(f'Performing merge (upsert) for batch {batch_id}')
 
     # Realiza o merge (upsert) dos dados novos na tabela Delta
     delta_table.alias('target').merge(
@@ -44,54 +59,40 @@ def merge_silver(spark, new_df, table_name):
         }
     ).execute()
 
-    print('Merge realizado com sucesso!')
+    print(f'Batch {batch_id} processed successfully')
 
 
 def main():
+    print('Starting the data processing job')
 
+    # Define o esquema dos dados
     schema = ArrayType(
         StructType(
             [
-                StructField(
-                    'user_id',
-                    IntegerType(),
-                    nullable=False,
-                ),
-                StructField(
-                    'tipo_id',
-                    StringType(),
-                    nullable=False,
-                ),
-                StructField(
-                    'tipo_dados',
-                    StringType(),
-                    nullable=False,
-                ),
-                StructField(
-                    'status',
-                    StringType(),
-                    nullable=False,
-                ),
+                StructField('user_id', IntegerType(), nullable=False),
+                StructField('tipo_id', StringType(), nullable=False),
+                StructField('tipo_dados', StringType(), nullable=False),
+                StructField('status', StringType(), nullable=False),
                 StructField('plataforma_origem', StringType(), nullable=True),
             ]
         )
     )
 
     table_name = 'crisk.silver.consents'
-
-    # Inicializa a SparkSession com suporte ao Delta Lake
-    spark = SparkSession.builder.getOrCreate()
-
-    windowSpec = Window.partitionBy('user_id', 'tipo_id').orderBy(
-        desc('EnqueuedTimeUtc')
+    logins_checkpoint = (
+        '/Volumes/crisk/silver/volume_checkpoint_locations_silver/consents'
     )
 
+    print('Reading data from the source table')
+
     # Leitura dos dados em modo batch
-    new_df = (
-        spark.read.format('delta')
+    (
+        SparkSession.builder.getOrCreate()
+        .readStream.format('delta')
+        .option('ignoreChanges', 'true')
         .table('crisk.bronze.consents')
         .select(
-            explode(from_json(col('body').cast(StringType()), schema_t)).alias(
+            explode(from_json(col('body').cast(StringType()), schema)).alias(
                 'test'
             ),
             col('EnqueuedTimeUtc'),
@@ -104,14 +105,15 @@ def main():
             col('test.plataforma_origem').alias('plataforma_origem'),
             col('EnqueuedTimeUtc'),
         )
-        .withColumn('RN', row_number().over(windowSpec))
-        .where('RN == 1')
+        .writeStream.trigger(availableNow=True)
+        .option('checkpointLocation', logins_checkpoint)
+        .foreachBatch(foreach_batch_function)
+        .start()
+        .awaitTermination()
     )
 
-    # merge bronze com dados existentes na tabela silver
-    merge_silver(spark, new_df, table_name)
-
-    print('Processo finalizado com sucesso!')
+    print('Data processing job completed successfully')
+    print('Merge operation completed successfully')
 
 
 def hello_world():

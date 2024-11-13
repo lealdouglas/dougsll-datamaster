@@ -128,7 +128,7 @@ Repositório adicionais utilizados nesse projeto para experiência imersiva:
 
 - [lealdouglas/strife](https://github.com/lealdouglas/strife), Setup de infraestrutura (recursos). Strife é responsável por entregar esse ambiente pronto para exploração e uso.
 - [lealdouglas/jarvis](https://github.com/lealdouglas/jarvis), Delivery do pipeline de dados. Jarvis é responsável por facilitar a adoação e automatizar fluxos utilizados nesse case.
-- [lealdouglas/carlton](https://github.com/lealdouglas/carlton), SDK comum padrão da plataforma de dados. Carlton é responsável por padronizar e garantir a qualidade técnica desse case.
+- [lealdouglas/carlton](https://github.com/lealdouglas/carlton), SDK comum padrão da plataforma de dados. Carlton é responsável por padronizar e garantir a qualidade técnica desse case. Saiba mais em: https://pypi.org/project/carlton/
 
 ### 3.4 Descrição do Fluxo de Dados
 
@@ -532,6 +532,8 @@ Abaixo, compartilho algumas melhorias consideradas para essa solução e ambiç�
 - Configurar a leitura e criação de ingestões para mais de um modelo especificado no contrato de ingestão daquele mesmo schema.
 - Compilar o padrão de YAML para o datacontract, utilizando o CLI para configurar com uma conta de e-mail já personalizada para o usuário.
 - Implementar o comando terraform destroy. Como a proposta era uma imersão sem a criação inicial de recursos, o Terraform apresentado não configura o .tfstate. Para isso, é necessário ter um storage pré-configurado, que será utilizado como backup do arquivo.
+- Implementar controle retenção do dado de acordo com contrato. Definir TTL.
+- Implementar Delete do TF.
 
 ### 5.2 Considerações Finais
 
